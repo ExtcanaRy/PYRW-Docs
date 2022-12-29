@@ -2,6 +2,7 @@
 sort: 2
 ---
 # Backups
+
 # Introduction
 
 This plugin is used to automate hot backups, supports scheduled tasks and specified directories, and can copy maps to specified directories at specified times
@@ -22,19 +23,19 @@ The configuration file is generated when the plugin is loaded for the first time
 
 `scheduled_jobs`: scheduled backup task, multiple tasks can be defined here, be sure to follow the json syntax when writing!
 
-    `name`: the name of the scheduled task, can be arbitrary
+`name`: the name of the scheduled task, can be arbitrary
 
-    `type`: task type, default is `cron`.
+`type`: task type, default is `cron`.
 
-    The following timer parameters, you can specify the execution of the task at a certain time, if not used, fill in`null`, you can also fill in the configuration file in the shape of the following. For example, `backup_task` means the task will be executed at 12:0 on the 1st, 3rd and 5th of each month. And `another_task` means that the task will be executed at the 30th minute of each hour from 0800 to 2000 every day, that is, the task will be executed 13 times a day.
+The following timer parameters, you can specify the execution of the task at a certain time, if not used, fill in `null`, you can also fill in the configuration file in the shape of the following. For example, `backup_task` means the task will be executed at 12:0 on the 1st, 3rd and 5th of each month. And `another_task` means that the task will be executed at the 30th minute of each hour from 0800 to 2000 every day, that is, the task will be executed 13 times a day.
 
-    `month`: month
+`month`: month
 
-    `day`: day
+`day`: day
 
-    `hour`: hour
+`hour`: hour
 
-    `minute`: seconds
+`minute`: seconds
 
 ```json
 {
