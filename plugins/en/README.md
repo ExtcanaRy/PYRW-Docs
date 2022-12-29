@@ -1,4 +1,6 @@
-# Plugins that have been adapted for `BDSpyrunnerW` are included here
+# List of Plugins
+
+Plugins that have been adapted for `BDSpyrunnerW` are included here
 
 # Install plugin dependencies
 
