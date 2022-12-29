@@ -1,3 +1,7 @@
+---
+sort: 2
+---
+# Backups
 # Introduction
 
 This plugin is used to automate hot backups, supports scheduled tasks and specified directories, and can copy maps to specified directories at specified times

@@ -1,3 +1,7 @@
+---
+sort: 3
+---
+# API
 # Function description format.
 
 ```

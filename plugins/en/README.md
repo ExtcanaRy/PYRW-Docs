@@ -1,3 +1,6 @@
+---
+sort: 1
+---
 # List of Plugins
 
 Plugins that have been adapted for `BDSpyrunnerW` are included here
