@@ -68,8 +68,8 @@ Actually `player` is an object of Entity class, `name` and `pos` are its propert
 
 In addition to the above example, we provide a rich set of other interfaces.
 
-* [API](https://github.com/twoone-3/BDSpyrunner/wiki/API)
-* [Listener](https://github.com/twoone-3/BDSpyrunner/wiki/Listener)
+* [API](API.md)
+* [Listener](Listener.md)
 
 ## End
 
