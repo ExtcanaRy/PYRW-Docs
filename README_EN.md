@@ -22,4 +22,4 @@ Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/B
 
 # Plugin list
 
-[co↑co↓](plugins/zh_CN/README.md "here")
+[co↑co↓](plugins/en/ "here")

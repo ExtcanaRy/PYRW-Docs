@@ -22,4 +22,4 @@ sort: 1
 
 # 插件列表
 
-[co↑co↓](plugins/zh_CN/README.md "这里")
+[co↑co↓](plugins/zh_CN/ "这里")
