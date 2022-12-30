@@ -6,7 +6,7 @@
 
 # 开发文档
 
-[开始阅读](docs/zh_CN/README.md)
+[开始阅读](docs/zh_Hans/README.md)
 
 # 如何使用
 
@@ -19,4 +19,4 @@
 
 # 插件列表
 
-[co↑co↓](plugins/zh_CN/ "这里")
+[co↑co↓](plugins/zh_Hans/README.md "这里")
