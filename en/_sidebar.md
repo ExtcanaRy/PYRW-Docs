@@ -1,3 +1,2 @@
 - [简体中文](/README.md)
-
-- [English](/README_EN.md)
+- [English](/en/README.md)
