@@ -9,13 +9,13 @@ For the dependencies mentioned in the plugin introduction page, please follow th
 1. Open your favorite terminal, such as cmd or Powershell
 2. [optional/one-time] Using the official pip source in China is very slow, here we recommend using the Tsinghua source to improve the download speed, type
 
-```shell
+```powershell
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 3.[optional/one-time] To upgrade your pip, type
 
-```shell
+```powershell
 python.exe -m pip install --upgrade pip
 ```
 
