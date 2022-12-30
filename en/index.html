@@ -2,18 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>BDSpyrunnerW</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="https://unpkg.com/docsify/lib/themes/vue.css" class="theme-css">
-    <link rel="stylesheet" href="https://unpkg.com/docsify-sidebar-collapse/dist/sidebar.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-dark-mode@latest/dist/style.min.css" />
+  <meta charset="UTF-8">
+  <title>BDSpyrunnerW</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/docsify/lib/themes/vue.css" class="theme-css">
+  <link rel="stylesheet" href="https://unpkg.com/docsify-sidebar-collapse/dist/sidebar.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-dark-mode@latest/dist/style.min.css" />
 </head>
 
 <body>
   <div id="app">Loading...</div>
-
   <script>
     window.$docsify = {
       name: 'BDSpyrunnerW',
@@ -22,10 +21,12 @@
       loadSidebar: true,
       subMaxLevel: 2,
       auto2top: true,
-      coverpage: false,
-
       search: {
-          namespace: 'en'
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: 'Search',
+        noData: 'Result not found',
+        depth: 6,
       },
       pagination: {
           crossChapter: true,
@@ -64,5 +65,4 @@
   <script src="https://unpkg.com/prismjs/components/prism-python.min.js"></script>
 
 </body>
-
 </html>
