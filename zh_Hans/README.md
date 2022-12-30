@@ -1,8 +1,8 @@
-# BDSpyrunnerW
+# BDSpyrunnerW(轻量级python插件平台)
 
 [简体中文](/) | [English](https://pyr.jfishing.love/en/)
 
-这里是 [BDSpyrunnerW](https://github.com/WillowSauceR/BDSpyrunner/ "Github页面") 的官方网站，我们在原本名字 `BDSpyrunner`后加上 `W`以区分使用 [LiteLoaderAPI](https://github.com/LiteLDev/LiteLoaderBDS/) 的主分支版本。此分支版本基于主分支 [Release1.8.7](https://github.com/twoone-3/BDSpyrunner/tree/f7645c3e69bf505d4207f76932c28665fff576fe "Github页面") 开发而成，这是BDSpyrunner转为使用 `LiteLoaderAPI`前的最后一个提交版本。本分支注重于稳定性，故API和监听器都没有主分支丰富，使用时请注意您的插件使用的监听器和API版本
+这里是 [BDSpyrunnerW](https://github.com/WillowSauceR/BDSpyrunner/ "Github页面") 的官方网站，BDSpyrunnerW是BDSpyrunner的一个分支，因为原项目选择依赖LL的更加丰富API而放弃了自主独立开发，该分支的定位是轻量级，满足生存服微改要求（玩法建议以addons为主），保持项目的独立继续维护的分支，API不多，但我们会尽量保证插件的高性能和稳定性。我们在原本名字 `BDSpyrunner`后加上 `W`以区分使用 [LiteLoaderAPI](https://github.com/LiteLDev/LiteLoaderBDS/) 的主分支版本。此分支版本基于主分支 [Release1.8.7](https://github.com/twoone-3/BDSpyrunner/tree/f7645c3e69bf505d4207f76932c28665fff576fe "Github页面") 开发而成，这是BDSpyrunner转为使用 `LiteLoaderAPI`前的最后一个提交版本。本分支注重于稳定性，故API和监听器都没有主分支丰富，使用时请注意您的插件使用的监听器和API版本
 
 # 开发文档
 
