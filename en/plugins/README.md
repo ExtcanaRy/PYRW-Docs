@@ -23,4 +23,4 @@ python.exe -m pip install --upgrade pip
 
 # List of plugins
 
-[Backups](/plugins//Backups.md)
+[Backups](Backups.md)

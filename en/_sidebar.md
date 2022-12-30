@@ -1,2 +1,2 @@
 - [简体中文](https://pyr.jfishing.love/zh_Hans/)
-- [English](https://pyr.jfishing.love/en/)
+- [English](/)

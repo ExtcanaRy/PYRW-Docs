@@ -6,7 +6,7 @@ Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/B
 
 # Development Documentation
 
-[Start reading](/docs/README.md)
+[Start reading](docs/README.md)
 
 # How to use
 
@@ -19,4 +19,4 @@ Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/B
 
 # Plugin list
 
-[co↑co↓](/plugins/README.md "here")
+[co↑co↓](plugins/README.md "here")

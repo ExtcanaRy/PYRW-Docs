@@ -24,4 +24,4 @@ python.exe -m pip install --upgrade pip
 
 # 插件列表
 
-[Backups](plugins/Backups.md)
+[Backups](Backups.md)

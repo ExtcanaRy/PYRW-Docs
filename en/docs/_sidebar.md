@@ -1,4 +1,4 @@
-* [Home](/docs/README.md)
+* [Home](README.md)
 
-- [Listener](/docs/Listener.md)
-- [API](/docs/API.md)
+- [Listener](Listener.md)
+- [API](API.md)

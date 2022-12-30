@@ -6,7 +6,7 @@
 
 # 开发文档
 
-[开始阅读](/docs/README.md)
+[开始阅读](docs/README.md)
 
 # 如何使用
 
@@ -19,4 +19,4 @@
 
 # 插件列表
 
-[co↑co↓](/plugins/README.md "这里")
+[co↑co↓](plugins/README.md "这里")
