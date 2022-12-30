@@ -1,6 +1,6 @@
 # pland
 
-# pland
+# Introduction
 
 1. Compatible with old territorial data
 2. Support all dimensions
@@ -89,17 +89,17 @@ Record data, do not modify it!
 
 ##### 1. In-game
 
-| Commands | Explanation |
-| ------------ | ---------------------- |
-| /pland | Open menu |
+| Commands     | Explanation                                        |
+| ------------ | -------------------------------------------------- |
+| /pland       | Open menu                                          |
 | /plandremove | Force territory removal by territory administrator |
 
 ##### 2. Server Console
 
-| Command | Explanation
-| ------------- | ---------------------------------------------------------------------------- |
-| plandreload | Reload the configuration file |
-| oldlandreload | Convert the old territory data to the new version, the old territory is: land-g7.dll, do not delete the land folder when converting. | oldlandreload
+| Command       | Explanation                                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| plandreload   | Reload the configuration file                                                                                                        |
+| oldlandreload | Convert the old territory data to the new version, the old territory is: land-g7.dll, do not delete the land folder when converting. |
 
 # Call the interface
 
