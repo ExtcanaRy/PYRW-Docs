@@ -1,4 +1,4 @@
-# BDSpyrunnerW(轻量级python插件平台)
+# BDSpyrunnerW(轻量级Python插件平台)
 
 [简体中文](/) | [English](https://pyr.jfishing.love/en/)
 
