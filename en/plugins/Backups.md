@@ -63,3 +63,12 @@ The following timer parameters, you can specify the execution of the task at a c
 	]
 }
 ```
+
+
+# Available Commands
+
+The following commands can be executed from the server console and within the game
+
+| Command | Explanation |
+| ---- | ---------------- |
+| /bak | Make a backup immediately |

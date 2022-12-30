@@ -113,6 +113,22 @@ def onConsoleOutput(e):
         return False
 
 
+def onPlayerCmd(e):
+    player = e['player']
+    if e['cmd'] == "/bak":
+        if player.perm < 2:
+            player.sendTextPacket("You are not an admin!")
+            return False
+        if not start_flag:
+            threading.Thread(target=start_bak, daemon=True).start()
+            player.sendTextPacket("Backing up task started!")
+            return False
+        else:
+            player.sendTextPacket("Backing up now!")
+            return False
+
+
 mc.setListener("onConsoleInput", onConsoleInput)
 mc.setListener("onConsoleOutput", onConsoleOutput)
+mc.setListener("onPlayerCmd", onPlayerCmd)
 threading.Thread(target=auto_del, daemon=True).start()
