@@ -1,2 +1,2 @@
-- [简体中文](/README.md)
-- [English](/en/README.md)
+- [简体中文](https://pyr.jfishing.love/zh_Hans/README.md)
+- [English](https://pyr.jfishing.love/en/README.md)

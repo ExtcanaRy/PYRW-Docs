@@ -67,8 +67,8 @@ Actually `player` is an object of Entity class, `name` and `pos` are its propert
 
 In addition to the above example, we provide a rich set of other interfaces.
 
-* [API](/docs/en/API.md)
-* [Listener](/docs/en/Listener.md)
+* [API](/docs/API.md)
+* [Listener](/docs/Listener.md)
 
 ## End
 

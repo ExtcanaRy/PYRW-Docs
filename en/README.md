@@ -1,12 +1,12 @@
 # BDSpyrunnerW
 
-[简体中文](/zh_Hans/README.md) | [English](/en/README.md)
+[简体中文](https://pyr.jfishing.love/zh_Hans/README.md) | [English](https://pyr.jfishing.love/en/README.md)
 
 Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/BDSpyrunner/ "Github page"), we add `W` after the original name `BDSpyrunner` to distinguish the main branch version that uses [LiteLoaderAPI](https://github.com/LiteLDev/LiteLoaderBDS/). This branch version is based on the main branch [Release1.8.7](https://github.com/twoone-3/BDSpyrunner/tree/f7645c3e69bf505d4207f76932c28665fff576fe "Github page"), which was the last commit before BDSpyrunner switched to using `LiteLoaderAPI`. This branch focuses on stability, so the API and listeners are not as rich as the main branch, so please pay attention to the listener and API versions used by your plugin when using it
 
 # Development Documentation
 
-[Start reading](/docs/en/README.md)
+[Start reading](/docs/README.md)
 
 # How to use
 
@@ -19,4 +19,4 @@ Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/B
 
 # Plugin list
 
-[co↑co↓](/plugins/en/README.md "here")
+[co↑co↓](/plugins/README.md "here")
