@@ -19,4 +19,4 @@
 
 # 插件列表
 
-[co↑co↓](/plugins/zh_Hans/README.md "这里")
+[co↑co↓](/plugins/README.md "这里")
