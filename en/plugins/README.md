@@ -21,6 +21,14 @@ python.exe -m pip install --upgrade pip
 
 4. To install dependency modules, type ``pip install <dependency>`, e.g. if I want to install ``numpy ` and ``chardet` dependencies, then use the command ``pip install numpy chardet``
 
-# List of plugins
+# Plugin List
 
-[Backups](Backups.md)
+| Name | Description | Original Author | Author | Details |
+| --------------- | ------------ | ------- | ----- | ------------------------------- |
+| teleport | teleport plugin | twoone3 | wsr | [View Details](teleport.md "here") |
+| Backups | Map Backups plugin | / | wsr | [View Details](backups.md "here") |
+| Blockstatistics | Mining Statistics Plugin | twoone3 | wsr | [View Details](Blockstatistics.md "here") |
+| ban | Blacklist Plugin | / | wsr | [View Details](ban.md "here") |
+| BehaviorLog | BehaviorLog plugin | / | wsr | [View Details](BehaviorLog.md "here") |
+| pland | Territory plugin | / | 05007 | [View Details](pland.md "here") |
+| votekick | Votekick plugin | / | wsr | [View Details](votekick.md "here") |
