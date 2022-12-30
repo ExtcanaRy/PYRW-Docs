@@ -24,4 +24,12 @@ python.exe -m pip install --upgrade pip
 
 # 插件列表
 
-[Backups](Backups.md)
+| 名称            | 描述         | 原作者  | 作者  | 详情                            |
+| --------------- | ------------ | ------- | ----- | ------------------------------- |
+| teleport        | 传送插件     | twoone3 | wsr   | [查看详情](teleport.md "这里")        |
+| Backups         | 地图备份插件 | /       | wsr   | [查看详情](Backups.md "这里")         |
+| Blockstatistics | 挖掘统计插件 | twoone3 | wsr   | [查看详情](Blockstatistics.md "这里") |
+| ban             | 黑名单插件   | /       | wsr   | [查看详情](ban.md "这里")             |
+| BehaviorLog     | 行为日志插件 | /       | wsr   | [查看详情](BehaviorLog.md "这里")     |
+| pland           | 领地插件     | /       | 05007 | [查看详情](pland.md "这里")           |
+| votekick        | 投票踢出插件 | /       | wsr   | [查看详情](votekick.md "这里")        |
