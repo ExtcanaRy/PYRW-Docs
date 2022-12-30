@@ -10,12 +10,11 @@ Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/B
 
 # How to use
 
-1. Download `BDSpyrunner.dll`, `mc.py` and `BDSpyrunner.pdb` from `Release`. pdb files are not required, but are useful for feedback in case of crashes.
+1. Download `BDSpyrunner.dll`, `mc.py` and `BDSpyrunner.pdb` from [Release](https://github.com/WillowSauceR/BDSpyrunner/releases). pdb files are not required, but are useful for feedback in case of crashes.
 2. Make sure you have [LiteLoader](https://github.com/LiteLDev/LiteLoaderBDS) or [BDXCore](https://github.com/jfishing/BDXCore) installed
 3. Download and install [Python3.7.9](https://www.python.org/ftp/python/3.7.9/python-3.7.9-amd64.exe), check `Add Python to Path` when installing
 4. Put `BDSpyrunner.dll` and `BDSpyrunner.pdb` into the folders you use to store your plugins, such as `plugins`, `bdxcore_mod`
 5. Put `mc.py` into `./plugins/py` folder
-6. Find the Python installation directory and copy the Dlls and Lib folders to the `./plugins/py` folder
 
 # Plugin list
 
