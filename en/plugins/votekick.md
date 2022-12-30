@@ -10,13 +10,13 @@ Let players vote to kick out players when the administrator is not online
 
 # Configuration file
 
-The configuration file is located in `plugins/py/report/report.json`
+The configuration file is located in `plugins/py/votekick/votekick.json`
 
-| Configuration Items | Explanation |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| tax | The ratio of votes to the total number of players online, 0.333 means one-third, which means a player will be kicked out when the number of votes cast reaches one-third of the total number of players currently online. Reference: 0.666 (two-thirds) 0.5 (one-half)
-| resetTime | The duration of each vote, after which time the player is not kicked out, the voting data is reset, in seconds.
-| banTime | The time when the kicked player is forbidden to enter the server again, equivalent to ban for a period of time, unit:sec |
+| Configuration Items | Explanation                                                                                                                                                                                                                                                            |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tax                 | The ratio of votes to the total number of players online, 0.333 means one-third, which means a player will be kicked out when the number of votes cast reaches one-third of the total number of players currently online. Reference: 0.666 (two-thirds) 0.5 (one-half) |
+| resetTime           | The duration of each vote, after which time the player is not kicked out, the voting data is reset, in seconds.                                                                                                                                                        |
+| banTime             | The time when the kicked player is forbidden to enter the server again, equivalent to ban for a period of time, unit:sec                                                                                                                                               |
 
 # Default configuration file
 
@@ -30,7 +30,7 @@ The configuration file is located in `plugins/py/report/report.json`
 
 # Available commands
 
-| command | explanation |
-| ------- | ----------------------------------------- |
-| /vk | Vote kickout, votes will be kicked out when it reaches xx% of the number of people online |
-| /vklist | View the players who have voted |
+| command | explanation                                                                               |
+| ------- | ----------------------------------------------------------------------------------------- |
+| /vk     | Vote kickout, votes will be kicked out when it reaches xx% of the number of people online |
+| /vklist | View the players who have voted                                                           |
