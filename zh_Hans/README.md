@@ -18,5 +18,13 @@
 6. 找到Python的安装目录，将Dlls和Lib文件夹复制到 `./plugins/py`文件夹
 
 # 插件列表
+|  名称   | 描述  | 作者  |  详情  |
+|  ----  | ----  | ----  | ----  |
+| teleport  | 传送插件 |  wsr  | [查看详情](plugins/teleport.md "这里") |
+| backup  | 地图备份插件 |  wsr  | [查看详情](plugins/backup.md "这里") |
+| chatlog  | 聊天打印插件 |  wsr  | [查看详情](plugins/chatlog.md "这里") |
+| ban  | 黑名单插件 |  wsr  | [查看详情](plugins/ban.md "这里") |
+| BehaviorLog  | 行为日志插件 |  wsr  | [查看详情](plugins/BehaviorLog.md "这里") |
+| pland  | 领地插件 |  05007  | [查看详情](plugins/pland.md "这里") |
 
 [co↑co↓](plugins/README.md "这里")
