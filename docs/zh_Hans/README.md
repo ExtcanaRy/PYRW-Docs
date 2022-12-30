@@ -67,8 +67,8 @@ mc.setListener('onUseItem', onUseItem)
 
 除了上面的例子外，我们还提供了丰富的其他接口：
 
-* [API](API.md)
-* [Listener](Listener.md)
+* [API](/docs/zh_Hans/API.md)
+* [Listener](/docs/zh_Hans/Listener.md)
 
 ## 结束
 

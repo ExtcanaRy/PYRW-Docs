@@ -24,4 +24,4 @@ python.exe -m pip install --upgrade pip
 
 # 插件列表
 
-[Backups](Backups.md)
+[Backups](plugins/zh_Hans/Backups.md)

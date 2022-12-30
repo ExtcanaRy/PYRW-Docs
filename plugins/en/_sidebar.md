@@ -1,3 +1,3 @@
-* [List of Plugins](/README.md)
+* [List of Plugins](/plugins/en/README.md)
 
-- [Backups](/Backups.md)
+- [Backups](/plugins/en/Backups.md)

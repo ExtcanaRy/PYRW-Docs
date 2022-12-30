@@ -1,3 +1,3 @@
-* [插件列表](https://file+.vscode-resource.vscode-cdn.net/README.md)
+* [插件列表](/plugins/en/README.md)
 
-- [Backups](/Backups.md)
+- [Backups](/plugins/zh_Hans/Backups.md)
