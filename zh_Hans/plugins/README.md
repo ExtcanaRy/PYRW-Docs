@@ -22,6 +22,10 @@ python.exe -m pip install --upgrade pip
 
 4.安装依赖模块，键入 `pip install <依赖>`，如我要安装 `numpy`和 `chardet`依赖，则使用命令 `pip install numpy chardet`
 
+# 下载插件
+
+如果在点击下载链接后您的浏览器直接打开了该文件而不是下载。您可以在打开文件的页面`右键`，点击`另存为`来保存文件
+
 # 插件列表
 
 | 名称            | 描述         | 原作者  | 作者  | 详情                            |

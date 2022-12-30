@@ -4,6 +4,10 @@
 
 This plugin is used to automate hot backups, supports scheduled tasks and specified directories, and can copy maps to specified directories at specified times
 
+# Download
+
+[here](https://pyr.jfishing.love/plugins/Backups.py "click me to download")
+
 # Dependency modules
 
 `apscheduler`: built-in task manager dependency, optional. Not used: configure `use_internel_task_manager` item to `false` in the configuration file

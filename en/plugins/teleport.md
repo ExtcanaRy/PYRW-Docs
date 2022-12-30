@@ -1,6 +1,12 @@
+# teleport
+
 # Introduction
 
 This plugin is a teleport family bucket, providing home, tpa, tpah, warp and other functions
+
+# Download
+
+[here](https://pyr.jfishing.love/plugins/teleport.py "click me to download")
 
 # configuration file
 
