@@ -1,6 +1,3 @@
----
-sort: 1
----
 # BDSpyrunnerW 文档
 
 欢迎来到 `BDSpyrunnerW Docs`！

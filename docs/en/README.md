@@ -1,7 +1,4 @@
-﻿---
-sort: 1
----
-# BDSpyrunnerW Docs
+﻿# BDSpyrunnerW Docs
 
 Welcome to the `BDSpyrunnerW Docs`!
 This document will help you develop plugins for BDSpyrunnerW.

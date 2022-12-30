@@ -1,6 +1,3 @@
----
-sort: 2
----
 # Backups
 
 # Introduction

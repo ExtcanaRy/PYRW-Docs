@@ -1,6 +1,3 @@
----
-sort: 2
----
 # Listener
 Event description format.
 
