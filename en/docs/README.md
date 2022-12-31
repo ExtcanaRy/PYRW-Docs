@@ -67,6 +67,8 @@ Actually `player` is an object of Entity class, `name` and `pos` are its propert
 
 In addition to the above example, we provide a rich set of other interfaces.
 
+* [mc.py](mc.py.md "file module")
+
 * [API](API.md)
 * [Listener](Listener.md)
 

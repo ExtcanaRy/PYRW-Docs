@@ -38,7 +38,7 @@ def onUseItem(e):
 mc.setListener('onUseItem',onUseItem)
 ```
 
-保存并启动BDS，进入服务器，
+保存并启动BDS，进入服务器。
 当你使用物品时，一些相关的数据就会打印的控制台上。
 
 ### 3. 获取实体数据
@@ -67,8 +67,10 @@ mc.setListener('onUseItem', onUseItem)
 
 除了上面的例子外，我们还提供了丰富的其他接口：
 
-* [API](API.md)
-* [Listener](Listener.md)
+* [mc.py](mc.py.md "文件模块")
+
+* [API](API.md "接口")
+* [Listener](Listener.md "监听器")
 
 ## 结束
 
