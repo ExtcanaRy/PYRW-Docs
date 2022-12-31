@@ -30,7 +30,7 @@ If after clicking on the download link your browser opens the file directly inst
 | Name            | Description                                                                     | Original Author | Author | Details                             |
 | --------------- | ------------------------------------------------------------------------------- | --------------- | ------ | ----------------------------------- |
 | teleport        | teleport plugin                                                                 | twoone3         | wsr    | [View Details](teleport.md "here")        |
-| Backups         | Map Backups plugin                                                              | /               | wsr    | [View Details](backups.md "here")         |
+| Backups         | Map Backups plugin                                                              | /               | wsr    | [View Details](Backups.md "here")         |
 | Blockstatistics | Mining Statistics Plugin                                                        | twoone3         | wsr    | [View Details](Blockstatistics.md "here") |
 | ban             | Blacklist Plugin                                                                | /               | wsr    | [View Details](ban.md "here")             |
 | BehaviorLog     | BehaviorLog plugin                                                              | /               | wsr    | [View Details](BehaviorLog.md "here")     |
