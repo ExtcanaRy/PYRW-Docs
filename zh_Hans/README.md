@@ -10,7 +10,7 @@
 
 # 如何使用
 
-1. 下载 [Release](https://github.com/WillowSauceR/BDSpyrunner/releases/latest) 中的 `BDSpyrunner.dll`、`mc.py`和 `BDSpyrunner.pdb`，pdb文件不是必须的，但是在崩溃时用于反馈会给我们带来很大便利
+1. 下载 [Release](https://github.com/WillowSauceR/BDSpyrunner/releases/latest) 中的 `BDSpyrunner.dll`、`mc.py`和 `BDSpyrunner.pdb`，pdb文件不是必须的，但是在崩溃时用于反馈会给我们带来很大便利。如果你因为网络问题打不开Release页面，可以尝试由 `fgit.ml`提供的加速镜像站（[链接](https://hub.fgit.ml/WillowSauceR/BDSpyrunner/releases/latest "点我转跳")），内容是一致的，感谢他们做出的贡献！
 2. 确保您已经安装了[LiteLoader](https://github.com/LiteLDev/LiteLoaderBDS)或[BDXCore](https://github.com/jfishing/BDXCore)
 3. 下载安装[Python3.7.9](https://www.python.org/ftp/python/3.7.9/python-3.7.9-amd64.exe)，安装时勾选 `Add Python to Path`
 4. 将 `BDSpyrunner.dll`和 `BDSpyrunner.pdb`放入您用于存放插件的文件夹，如 `plugins`、`bdxcore_mod`
