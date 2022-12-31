@@ -8,3 +8,4 @@
 * [BehaviorLog](BehaviorLog.md "行为日志插件")
 * [pland](pland.md "领地插件")
 * [votekick](votekick.md "投票踢出插件")
+* [chatlog](chatlog.md "聊天输出插件")
