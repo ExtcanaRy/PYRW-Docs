@@ -28,6 +28,7 @@
       auto2top: true,
       relativePath: true,
       externalLinkTarget: '_self',
+      formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}',
       darkMode: {
         dark: {
           background: "#363636",
@@ -58,13 +59,13 @@
             var url =
               'https://github.com/WillowSauceR/willowsaucer.github.io/blob/main/en/' +
               vm.route.file;
-            var editHtml = '[📝 VIEW DOCUMENT ON GITHUB](' + url + ')\n';
+            var viewHtml = '[📝 VIEW DOCUMENT ON GITHUB](' + url + ')\n';
             return (
-              editHtml +
+              'Last modified {docsify-updated} \n' +
+              '\n----\n' +
               html +
               '\n----\n' +
-              'Last modified {docsify-updated} ' +
-              editHtml
+              viewHtml
             );
           });
         },

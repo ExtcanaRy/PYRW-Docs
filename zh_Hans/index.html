@@ -59,13 +59,13 @@
             var url =
               'https://github.com/WillowSauceR/willowsaucer.github.io/blob/main/zh_Hans/' +
               vm.route.file;
-            var editHtml = '[📝 在GITHUB上查看文档](' + url + ')\n';
+            var viewHtml = '[📝 在GITHUB上查看文档](' + url + ')\n';
             return (
-              editHtml +
+              '最后编辑于 {docsify-updated} \n' +
+              '\n----\n' +
               html +
               '\n----\n' +
-              '最后编辑于 {docsify-updated} ' +
-              editHtml
+              viewHtml
             );
           });
         },
