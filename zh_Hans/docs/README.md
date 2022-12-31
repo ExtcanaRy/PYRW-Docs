@@ -15,7 +15,9 @@
 
 ### 1. 创建新文件
 
-在plugins/py目录下创建myplugin.py，键入以下内容:
+注意：你所创建的任何 `Python`文件都要使用 `UTF-8`编码，否则在加载时可能会出现错误，其他文件如`json`，我们也推荐使用`UTF-8`编码
+
+在`plugins/py`目录下创建`myplugin.py`，键入以下内容:
 
 ```py
 import mc
@@ -35,7 +37,7 @@ import mc
 
 def onUseItem(e):
 	print(e)
-mc.setListener('onUseItem',onUseItem)
+mc.setListener('onUseItem', onUseItem)
 ```
 
 保存并启动BDS，进入服务器。
@@ -60,15 +62,31 @@ mc.setListener('onUseItem', onUseItem)
 
 将文件保存为 `UTF-8`格式以支持中文
 启动BDS，进入游戏使用物品，你将在控制台看到输出
-实际上 `player`是Entity类的一个对象，`name`和 `pos`则是它的属性，
+实际上 `player`是Entity类的一个对象，`name`和 `pos`则是它的属性
 `sendTextPacket`是它的成员函数。
+
+### 4. 控制台调试
+
+在服务器后台输入`pydebug`即可进入控制台调试模式，在这个模式下，你可以键入`Python`语句进行执行，再次键入`pydebug`以返回服务器控制台
+
+以下是一段示例
+
+```python
+pydebug
+>>> import mc
+>>> mc.log("Here is pydebug!", name="PYDEBUG") 
+17:05:56 INFO [PYDEBUG] Here is pydebug!
+>>> mc.log(mc.getBDSVerion(), name="PYDEBUG")  
+17:07:05 INFO [PYDEBUG] 1.19.51.01
+>>> pydebug
+
+```
 
 ## 扩展
 
 除了上面的例子外，我们还提供了丰富的其他接口：
 
 * [mc.py](mc.py.md "文件模块")
-
 * [API](API.md "接口")
 * [Listener](Listener.md "监听器")
 

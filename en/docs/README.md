@@ -15,7 +15,9 @@ If you have met the above requirements, you can start writing the plugin
 
 ### 1. Create a new file
 
-Create myplugin.py in the plugins/py directory and type the following:
+Note: Any `Python` files you create should be in `UTF-8` encoding, otherwise you may get errors when loading them, other files such as `json`, we also recommend using `UTF-8` encoding
+
+Create `myplugin.py` in the `plugins/py` directory and type the following:
 
 ```py
 import mc
@@ -62,6 +64,23 @@ Save the file in ``UTF-8`` format to support Chinese
 Start BDS, enter the game and use the item, you will see the output in the console
 Actually `player` is an object of Entity class, `name` and `pos` are its properties.
 `sendTextPacket` is its member function.
+
+### 4. Console debugging
+
+Type `pydebug` in the server backend to enter console debugging mode, where you can type `Python` statements for execution and type `pydebug` again to return to the server console
+
+Here is an example
+
+```python
+pydebug
+>>> import mc
+>>> mc.log("Here is pydebug!", name="PYDEBUG") 
+17:05:56 INFO [PYDEBUG] Here is pydebug!
+>>> mc.log(mc.getBDSVerion(), name="PYDEBUG")  
+17:07:05 INFO [PYDEBUG] 1.19.51.01
+>>> pydebug
+
+```
 
 ## Extensions
 
