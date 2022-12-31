@@ -10,13 +10,16 @@ import random
 
 
 def logout(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
-    mc.log(content, name = __name__, level = "INFO", info = "")
+    mc.log(content, name=__name__, level="INFO", info="")
+
 
 debug_pc = {}  # 修复pc端多次打开表单
 onlinePlayerList = []  # 在线玩家列表
 NULL_SIGN = "无"
 Bottom_information = "§e[landop]§b %player:§a %message\n§e[landname]§d %displayname"
 # ===============================================================================
+
+
 def loadsdata():
     global landconfig
     global scoreboard
@@ -60,70 +63,102 @@ def loadsdata():
     land_teleport = landconfig['land_teleport']
     NULL_SIGN = lapi.get_null()
     Bottom_information = lapi.get_Bottom_information()
+
+
 def landstart():
     lapi.landapistart()  # 启动领地核心引擎，必要！
     loadsdata()
+    mc.setListener("onServerStarted", onServerStarted)
     mc.setListener('onFormSelected', onSelectForm)  # 统一的表单处理接口，勿修改
     mc.setListener('onJoin', onPlayerJoin)
     mc.setListener('onLeft', onPlayerLeft)
-    mc.setListener('onConsoleCmd', onControlCmd) #使用控制台命令
-    mc.setListener('onChangeDim', onChangeDim) #维度切换
-    mc.setListener('onUseItem', onUseItem) #使用物品
-    mc.setListener('onBlockInteracted',onBlockInteracted) #方块交互
-    mc.setListener('onPlaceBlock', onPutBlock) #放置方块
-    mc.setListener('onDestroyBlock', onDestroyBlock) #破坏方块
-    mc.setListener('onMobHurt', onActorJury) #受伤
-    mc.setListener('onPlayerAttack', onPlayerAttack) #攻击
-    mc.setListener('onOpenContainer', onChestOpen) #开箱
-    #mc.setListener('onOpenBarrel', onChestOpen) #开木桶
-    mc.setListener('onLevelExplode', onWorldBoom) #爆炸
-    mc.setListener('onFarmLandDecay', onFarmDestroy) #耕地
-    mc.setListener('onUseRespawnAnchor', useRespawnAnchorBlock) #使用重生锚
-    mc.setListener('onUseFrameBlock',onUseFrameBlock) #物品展示框
+    mc.setListener('onConsoleCmd', onControlCmd)  # 使用控制台命令
+    mc.setListener('onChangeDim', onChangeDim)  # 维度切换
+    mc.setListener('onUseItem', onUseItem)  # 使用物品
+    mc.setListener('onBlockInteracted', onBlockInteracted)  # 方块交互
+    mc.setListener('onPlaceBlock', onPutBlock)  # 放置方块
+    mc.setListener('onDestroyBlock', onDestroyBlock)  # 破坏方块
+    mc.setListener('onMobHurt', onActorJury)  # 受伤
+    mc.setListener('onPlayerAttack', onPlayerAttack)  # 攻击
+    mc.setListener('onOpenContainer', onChestOpen)  # 开箱
+    # mc.setListener('onOpenBarrel', onChestOpen) #开木桶
+    mc.setListener('onLevelExplode', onWorldBoom)  # 爆炸
+    mc.setListener('onFarmLandDecay', onFarmDestroy)  # 耕地
+    mc.setListener('onUseRespawnAnchor', useRespawnAnchorBlock)  # 使用重生锚
+    mc.setListener('onUseFrameBlock', onUseFrameBlock)  # 物品展示框
     mc.setListener('onMove', onPlayerMobile)
-    mc.setCommandDescription('pland', lapi.get_command_description("pland"),landhelp)
-    mc.setCommandDescription('pland q', lapi.get_command_description("pland q"),pland_q)
-    mc.setCommandDescription('pland 2a', lapi.get_command_description("pland 2a"),pland_2a)
-    mc.setCommandDescription('pland 2b', lapi.get_command_description("pland 2b"),pland_2b)
-    mc.setCommandDescription('pland 3a', lapi.get_command_description("pland 3a"),pland_3a)
-    mc.setCommandDescription('pland 3b', lapi.get_command_description("pland 3b"),pland_3b)
-    mc.setCommandDescription('plandremove', lapi.get_command_description("plandremove"),plandremove)
+    mc.setCommandDescription(
+        'pland', lapi.get_command_description("pland"), landhelp)
+    mc.setCommandDescription(
+        'pland q', lapi.get_command_description("pland q"), pland_q)
+    mc.setCommandDescription(
+        'pland 2a', lapi.get_command_description("pland 2a"), pland_2a)
+    mc.setCommandDescription(
+        'pland 2b', lapi.get_command_description("pland 2b"), pland_2b)
+    mc.setCommandDescription(
+        'pland 3a', lapi.get_command_description("pland 3a"), pland_3a)
+    mc.setCommandDescription(
+        'pland 3b', lapi.get_command_description("pland 3b"), pland_3b)
+    mc.setCommandDescription(
+        'plandremove', lapi.get_command_description("plandremove"), plandremove)
 # =============语言工具====================================
+
+
 def land_message(messagename):
     return lapi.get_message(messagename)
+
+
 def gui_text(guiname):
     return lapi.get_gui_text(guiname)
+
+
 def gui_image(guiname):
     return lapi.get_gui_image(guiname)
+
+
 # =================表单工具==========================================================================
 Formid = {}
 Formdata = {}
 # 将字符串转化为json对象
+
+
 def stringtojson(data):
     jsondata = json.loads(data)
     return jsondata
 # json对象转字符串
+
+
 def jsontostring(data):
     data2 = json.dumps(data, sort_keys=True, ensure_ascii=False)
     return data2
+
+
 def addFormid(formid, BackFun, formdata):
     Formid[formid] = BackFun
     Formdata[formid] = formdata
+
+
 def getFormid(formid, e):
     if e['formid'] in Formid:
         select = getselect(formid, e["selected"].replace('\n', ''))
         Formid[formid](e["player"], select["chooseid"], select["choosedata"])
         del Formid[formid]
 # 发送表单,参数：玩家指针-json数据-返回时调用函数
+
+
 def sendForm(player, jsondata, BackFun):
     formid = player.sendCustomForm(jsontostring(jsondata["form"]))
     if BackFun != "":
         addFormid(formid, BackFun, jsondata["formdata"])
+
+
 def onSelectForm(e):
     debug_pc[e['player'].xuid] = True
     if e["selected"] != "null" and e["selected"] != "null\n":
         getFormid(e["formid"], e)
 # 处理表单返回值
+
+
 def getselect(formid, select2):
     try:
         formdata = Formdata[formid]
@@ -132,7 +167,8 @@ def getselect(formid, select2):
         try:
             formdata = [[0] * int(select2)]
         except:
-            formdata = [[0] * len(stringtojson("{\"select\":" + select2 + "}")["select"])]
+            formdata = [
+                [0] * len(stringtojson("{\"select\":" + select2 + "}")["select"])]
     select = {}
     select["chooseid"] = []  # 选择的序号
     select["choosedata"] = []  # 选择的数据
@@ -151,6 +187,8 @@ def getselect(formid, select2):
                 select["choosedata"].append(id[i])
     return select
 # 创建简单表单
+
+
 def createSmileForm(title, content):
     jv = {}
     jv["form"] = {}
@@ -161,6 +199,8 @@ def createSmileForm(title, content):
     jv["formdata"] = []
     return jv
 # 向简单表单添加按钮
+
+
 def addbuttons(jv, buttonsname, image):
     jv2 = {}
     jv2["text"] = buttonsname
@@ -172,6 +212,8 @@ def addbuttons(jv, buttonsname, image):
     jv["formdata"].append(buttonsname)
     return jv
 # 创建复杂表单
+
+
 def createForm(title):
     jv = {}
     jv["form"] = {}
@@ -181,6 +223,8 @@ def createForm(title):
     jv["formdata"] = []
     return jv
 # 向表单添加下拉框options列表
+
+
 def addDropdown(jv, title, options):
     jv2 = {}
     jv2["type"] = "dropdown"
@@ -192,6 +236,8 @@ def addDropdown(jv, title, options):
     jv["formdata"].append(options)
     return jv
 # 添加一个开关
+
+
 def addToggl(jv, title, default):
     jv2 = {}
     jv2["type"] = "toggle"
@@ -201,6 +247,8 @@ def addToggl(jv, title, default):
     jv["formdata"].append(title)
     return jv
 # 添加一个滑块
+
+
 def addSlider(jv, title, pmin, pmax, step, default):
     jv2 = {}
     jv2["type"] = "slider"
@@ -213,6 +261,8 @@ def addSlider(jv, title, pmin, pmax, step, default):
     jv["formdata"].append(title)
     return jv
 # 添加一个label
+
+
 def addLabel(jv, text):
     jv2 = {}
     jv2["type"] = "label"
@@ -221,6 +271,8 @@ def addLabel(jv, text):
     jv["formdata"].append(text)
     return jv
 # 添加输入信息文本
+
+
 def addInput(jv, title):
     jv2 = {}
     jv2["type"] = "input"
@@ -229,6 +281,8 @@ def addInput(jv, title):
     jv["formdata"].append(title)
     return jv
 # 向表单添加在线玩家列表组件、显示玩家名称，返回是玩家指针
+
+
 def addOnlinePlayerList(jv, title):
     c = []
     jv2 = {}
@@ -247,6 +301,8 @@ def addOnlinePlayerList(jv, title):
     jv["form"]["content"].append(jv2)
     jv["formdata"].append(c)
     return jv
+
+
 def addPlayerLandList(jv, title, player):
     playerxuid = player.xuid
     playerworld = getplayerworld(player)
@@ -271,21 +327,26 @@ def addPlayerLandList(jv, title, player):
     jv["formdata"].append(c)
     return jv
 # ====================经济部分===========================================
-#++++++++++++++++++++感谢huohua+++++++++++++++++++++++++++++++++++++++++++++++++
-#查询LLMoney玩家金钱
+# ++++++++++++++++++++感谢huohua+++++++++++++++++++++++++++++++++++++++++++++++++
+# 查询LLMoney玩家金钱
+
+
 def Query_Money(Plxuid):
-    conn = sq.connect('plugins/LLMoney/money.db',timeout=5,check_same_thread=False)
+    conn = sq.connect('plugins/LLMoney/money.db',
+                      timeout=5, check_same_thread=False)
     c = conn.cursor()
     cursor = c.execute("SELECT XUID, Money  from money")
     result = cursor.fetchall()
-    rejson = {'code':1,'msg':'Not found Player'}
+    rejson = {'code': 1, 'msg': 'Not found Player'}
     for i in result:
-        if int.from_bytes(i[0],'little') == int(Plxuid):
-            rejson = {'code':0,'money':i[1]}
+        if int.from_bytes(i[0], 'little') == int(Plxuid):
+            rejson = {'code': 0, 'money': i[1]}
     return rejson
-#++++++++++++++++++++感谢huohua++++++++++++++++++++++++++++++++++++++++++++++
+# ++++++++++++++++++++感谢huohua++++++++++++++++++++++++++++++++++++++++++++++
+
+
 def getmoney(player):
-    if scoreboard=="LLMoney":
+    if scoreboard == "LLMoney":
         Player_Money_Dict = Query_Money(player.xuid)
         if Player_Money_Dict['code'] == 0:
             return Player_Money_Dict['money']
@@ -294,21 +355,27 @@ def getmoney(player):
             return 0
     else:
         return player.getScore(scoreboard)
+
+
 def addmoney(player, num):
-    if scoreboard=="LLMoney":
+    if scoreboard == "LLMoney":
         mc.runcmd('money add "'+player.name+'" '+str(num))
     else:
         player.modifyScore(scoreboard, num, 1)
+
+
 def removemoney(player, num):
     if getmoney(player) < num:
         return False
-    if scoreboard=="LLMoney":
+    if scoreboard == "LLMoney":
         mc.runcmd('money reduce "'+player.name+'" '+str(num))
     else:
         player.modifyScore(scoreboard, num, 2)
     return True
 # ===================调用函数=============================================================
 # 将世界ID转化为英文名称
+
+
 def getworldname(worldid):
     if worldid == 1:
         worldname = "nether"
@@ -317,10 +384,14 @@ def getworldname(worldid):
     else:
         worldname = "world"
     return worldname
+
+
 def getplayerworld(player):
     worldid = player.did
     return getworldname(worldid)
 # 计算购买领地所需要的钱
+
+
 def getneedbuymoney(pointA, pointB, Dim):
     global land_2D_buy_money
     global land_3D_buy_money
@@ -344,6 +415,8 @@ def getneedbuymoney(pointA, pointB, Dim):
             money = -1
     return [money, landsize]
 # 计算出售领地所获得的钱
+
+
 def getneedsellmoney(pointA, pointB, Dim):
     global land_2D_sell_money
     global land_3D_sell_money
@@ -354,10 +427,13 @@ def getneedsellmoney(pointA, pointB, Dim):
     y2 = pointB[1]
     z2 = pointB[2]
     if Dim == "3D":
-        money = (abs(x1 - x2) + 1) * (abs(y1 - y2) + 1) * (abs(z1 - z2) + 1) * land_3D_sell_money
+        money = (abs(x1 - x2) + 1) * (abs(y1 - y2) + 1) * \
+            (abs(z1 - z2) + 1) * land_3D_sell_money
     else:
         money = (abs(x1 - x2) + 1) * (abs(z1 - z2) + 1) * land_2D_sell_money
     return money
+
+
 # ====================表单部分=========================================================
 playerbuy_2Dlandopen = {}
 playerbuy_3Dlandopen = {}
@@ -366,21 +442,29 @@ playerbuylanddata = {}
 setsharelandplayer = {}
 setpowerlandplayer = {}
 isonlineplayer = {}
+
+
 def isonlineplayers(player):
     try:
         return isonlineplayer[player]
     except:
         return False
+
+
 def getland_displayname(landname):
     displayname = lapi.getlandsign(landname, "displayname")
     if displayname == {}:
         return landname
     return displayname
+
+
 def getland_leave_message(landname):
     message = lapi.getlandsign(landname, "message")
     if message == {}:
         return ""
     return message
+
+
 def landsignhelpback(player, chooseid, choosedata):
     if choosedata[1] == NULL_SIGN:
         player.sendTextPacket(land_message("请先购买领地"))
@@ -417,13 +501,19 @@ def landsignhelpback(player, chooseid, choosedata):
             player.sendTextPacket(land_message("移除成功"))
         else:
             player.sendTextPacket(land_message("移除失败"))
+
+
 def landsignhelp(player):
     jv = createForm(gui_text("设置标识"))
-    addDropdown(jv, gui_text("选项"), [gui_text("设置展示名称"), gui_text("移除展示名称"), gui_text("设置领地留言"), gui_text("移除领地留言")])
+    addDropdown(jv, gui_text("选项"), [gui_text("设置展示名称"), gui_text(
+        "移除展示名称"), gui_text("设置领地留言"), gui_text("移除领地留言")])
     playerworld = getplayerworld(player)
-    addPlayerLandList(jv, gui_text("选择当前世界(%playerworld)的领地").replace("%playerworld", playerworld), player)
+    addPlayerLandList(jv, gui_text("选择当前世界(%playerworld)的领地").replace(
+        "%playerworld", playerworld), player)
     addInput(jv, gui_text("输入标识"))
     sendForm(player, jv, landsignhelpback)
+
+
 def landhelpback(player, chooseid, choosedata):
     if chooseid[0] == 0:
         landbuyhelp(player)
@@ -435,6 +525,8 @@ def landhelpback(player, chooseid, choosedata):
         landsignhelp(player)
     elif chooseid[0] == 4:
         querylandhelp(player)
+
+
 def landbuyhelpback(player, chooseid, choosedata):
     playerxuid = player.xuid
     if not playerbuyland and not lapi.islandop(playerxuid):
@@ -477,11 +569,15 @@ def landbuyhelpback(player, chooseid, choosedata):
             player.sendTextPacket(land_message("空手点击地面或使用命令/pland q退出领地选择模式"))
         else:
             player.sendTextPacket(land_message("未开启三维领地功能"))
+
+
 def landbuyhelp(player):
     jv = createSmileForm(gui_text("领地购买"), gui_text("选项"))
     addbuttons(jv, gui_text("购买二维领地"), gui_image("购买二维领地"))
     addbuttons(jv, gui_text("购买三维领地"), gui_image("购买三维领地"))
     sendForm(player, jv, landbuyhelpback)
+
+
 def delshareplayer(player, chooseid, choosedata):
     playerxuid = player.xuid
     landname = setsharelandplayer[playerxuid]
@@ -492,6 +588,8 @@ def delshareplayer(player, chooseid, choosedata):
     shareplayername = lapi.getshareplayername(shareplayerxuid)
     lapi.setshareplayer(shareplayerxuid, shareplayername, landname, "del")
     player.sendTextPacket(land_message("取消分享") + shareplayername)
+
+
 def setlandplayerpower(player, chooseid, choosedata):
     playerxuid = player.xuid
     landname = setpowerlandplayer[playerxuid]
@@ -507,6 +605,8 @@ def setlandplayerpower(player, chooseid, choosedata):
     lapi.setlandpower(landname, "destroyblock", chooseid[8])
     lapi.setlandpower(landname, "share_destroyblock", chooseid[9])
     player.sendTextPacket(land_message("设置成功"))
+
+
 def mylandhelpback(player, chooseid, choosedata):
     #logout(choosedata[1], name = __name__)
     #logout(NULL_SIGN, name = __name__)
@@ -524,7 +624,8 @@ def mylandhelpback(player, chooseid, choosedata):
         message = getland_leave_message(landname)
         player.sendTextPacket(land_message("领地名称") + displayname)
         player.sendTextPacket(land_message("领地范围") + landname)
-        player.sendTextPacket(land_message("领地主人") + lapi.getshareplayername(land["playerxuid"]))
+        player.sendTextPacket(land_message("领地主人") +
+                              lapi.getshareplayername(land["playerxuid"]))
         player.sendTextPacket(land_message("共享玩家") + shareplayerall)
         player.sendTextPacket(land_message("领地留言") + message)
     elif chooseid[0] == 1:
@@ -572,26 +673,35 @@ def mylandhelpback(player, chooseid, choosedata):
         setsharelandplayer[playerxuid] = landname
         sendForm(player, jv, delshareplayer)
     elif chooseid[0] == 4:
-        moneysell = getneedsellmoney([land["x1"], land["y1"], land["z1"]], [land["x2"], land["y2"], land["z2"]], land["Dim"])
+        moneysell = getneedsellmoney([land["x1"], land["y1"], land["z1"]], [
+                                     land["x2"], land["y2"], land["z2"]], land["Dim"])
         if lapi.removelanddata(landname):
             addmoney(player, moneysell)
             player.sendTextPacket(land_message("出售成功,获得金币") + str(moneysell))
         else:
             player.sendTextPacket(land_message("出售失败"))
+
+
 def mylandhelp(player):
     jv = createForm(gui_text("我的领地"))
-    addDropdown(jv, gui_text("选项"), [gui_text("领地信息"), gui_text("传送至领地"), gui_text("设置领地权限"), gui_text("取消领地分享"), gui_text("出售领地")])
+    addDropdown(jv, gui_text("选项"), [gui_text("领地信息"), gui_text(
+        "传送至领地"), gui_text("设置领地权限"), gui_text("取消领地分享"), gui_text("出售领地")])
     playerworld = getplayerworld(player)
-    addPlayerLandList(jv, gui_text("选择当前世界(%playerworld)的领地").replace("%playerworld", playerworld), player)
+    addPlayerLandList(jv, gui_text("选择当前世界(%playerworld)的领地").replace(
+        "%playerworld", playerworld), player)
     sendForm(player, jv, mylandhelpback)
+
+
 def sharelandhelpback(player, chooseid, choosedata):
     if choosedata[2] == NULL_SIGN or choosedata[2] == "":
         return
     landname = choosedata[2]
     shareplayername = choosedata[1].name
     if chooseid[0] == 0:
-        lapi.setshareplayer(choosedata[1].xuid, shareplayername, landname, "add")
-        player.sendTextPacket(land_message("成功将领地(%land),分享给玩家").replace("%land", landname) + shareplayername)
+        lapi.setshareplayer(choosedata[1].xuid,
+                            shareplayername, landname, "add")
+        player.sendTextPacket(land_message("成功将领地(%land),分享给玩家").replace(
+            "%land", landname) + shareplayername)
     if chooseid[0] == 1:
         land = lapi.getlandinfo(landname)
         playerxuid = land["playerxuid"]
@@ -604,20 +714,28 @@ def sharelandhelpback(player, chooseid, choosedata):
         worldid = land["worldid"]
         Dim = land["Dim"]
         lapi.removelanddata(landname)
-        lapi.createlanddata(choosedata[1].xuid,x1, y1, z1, x2, y2, z2, worldid, Dim)
-        player.sendTextPacket(land_message("成功将领地(%land),赠送给玩家").replace("%land", landname) + shareplayername)
+        lapi.createlanddata(choosedata[1].xuid,
+                            x1, y1, z1, x2, y2, z2, worldid, Dim)
+        player.sendTextPacket(land_message("成功将领地(%land),赠送给玩家").replace(
+            "%land", landname) + shareplayername)
+
+
 def sharelandhelp(player):
     jv = createForm(gui_text("领地共享"))
     addDropdown(jv, gui_text("选项"), [gui_text("分享领地"), gui_text("赠送领地")])
     addOnlinePlayerList(jv, "选择玩家")
     playerworld = getplayerworld(player)
-    addPlayerLandList(jv, gui_text("选择当前世界(%playerworld)的领地").replace("%playerworld", playerworld), player)
+    addPlayerLandList(jv, gui_text("选择当前世界(%playerworld)的领地").replace(
+        "%playerworld", playerworld), player)
     sendForm(player, jv, sharelandhelpback)
+
+
 def querylandhelpback(player, chooseid, choosedata):
     #playerinfo = mc.getPlayerInfo(player)
     XYZ = player.pos
     if chooseid[0] == 0:
-        landall = lapi.island(int(XYZ[0]), int(XYZ[1]), int(XYZ[2]), player.did)
+        landall = lapi.island(int(XYZ[0]), int(
+            XYZ[1]), int(XYZ[2]), player.did)
         if landall == "noland":
             player.sendTextPacket(land_message("你脚下没有领地"))
             return
@@ -631,12 +749,15 @@ def querylandhelpback(player, chooseid, choosedata):
             message = getland_leave_message(landall)
             player.sendTextPacket(land_message("领地名称") + displaynamed)
             player.sendTextPacket(land_message("领地范围") + landall)
-            player.sendTextPacket(land_message("领地主人") + lapi.getshareplayername(land["playerxuid"]))
+            player.sendTextPacket(land_message(
+                "领地主人") + lapi.getshareplayername(land["playerxuid"]))
             player.sendTextPacket(land_message("共享玩家") + shareplayerall)
             player.sendTextPacket(land_message("领地留言") + message)
     if chooseid[0] == 1:
-        land_2D = lapi.getland_point(int(XYZ[0]), int(XYZ[1]), int(XYZ[2]), player.did, "2D")
-        land_3D = lapi.getland_point(int(XYZ[0]), int(XYZ[1]), int(XYZ[2]), player.did, "3D")
+        land_2D = lapi.getland_point(int(XYZ[0]), int(
+            XYZ[1]), int(XYZ[2]), player.did, "2D")
+        land_3D = lapi.getland_point(int(XYZ[0]), int(
+            XYZ[1]), int(XYZ[2]), player.did, "3D")
         if land_2D == [] and land_3D == []:
             player.sendTextPacket(land_message("周围没有领地"))
             return
@@ -645,11 +766,15 @@ def querylandhelpback(player, chooseid, choosedata):
             player.sendTextPacket(land_message("二维领地") + a)
         for b in land_3D:
             player.sendTextPacket(land_message("三维领地") + b)
+
+
 def querylandhelp(player):
     jv = createSmileForm(gui_text("领地查询"), gui_text("选项"))
     addbuttons(jv, gui_text("查询脚下领地"), gui_image("查询脚下领地"))
     addbuttons(jv, gui_text("查询周围领地"), gui_image("查询周围领地"))
     sendForm(player, jv, querylandhelpback)
+
+
 def buylandback(player, chooseid, choosedata):
     playerxuid = player.xuid
     buylanddata = playerbuylanddata[playerxuid]
@@ -676,7 +801,8 @@ def buylandback(player, chooseid, choosedata):
         x2 = pointB[0]
         y2 = pointB[1]
         z2 = pointB[2]
-        landall = lapi.createlanddata(playerxuid, x1, y1, z1, x2, y2, z2, worldid, Dim)
+        landall = lapi.createlanddata(
+            playerxuid, x1, y1, z1, x2, y2, z2, worldid, Dim)
         if landall["2D"] == [] and landall["3D"] == []:
             removemoney(player, needmoney)
             try:
@@ -696,15 +822,18 @@ def buylandback(player, chooseid, choosedata):
             landall_2D = gui_text("重叠二维领地")
             landall_3D = gui_text("重叠三维领地")
             for a in landall["2D"]:
-                landall_2D += "§3" + a + "\n"
+                landall_2D += f"§3{a}\n"
             for b in landall["3D"]:
-                landall_3D += "§3" + b + "\n"
-            msg = gui_text("购买失败，领地重叠").replace("%landall_2D", landall_2D).replace("%landall_3D", landall_3D)
-            #"§9结果：§c购买失败，领地重叠。\n \n"+landall_2D+"\n \n"+landall_3D+"\n \n \n
-            #\n"
+                landall_3D += f"§3{b}\n"
+            msg = gui_text("购买失败，领地重叠").replace(
+                "%landall_2D", landall_2D).replace("%landall_3D", landall_3D)
+            # "§9结果：§c购买失败，领地重叠。\n \n"+landall_2D+"\n \n"+landall_3D+"\n \n \n
+            # \n"
             jv = createSmileForm(gui_text("领地购买"), msg)
             jv = addbuttons(jv, gui_text("确定"), gui_image("确定"))
             sendForm(player, jv, "")
+
+
 def buyland(player, pointA, pointB, worldid, Dim):
     ab = getneedbuymoney(pointA, pointB, Dim)
     needmony = ab[0]
@@ -722,16 +851,18 @@ def buyland(player, pointA, pointB, worldid, Dim):
     x2 = pointB[0]
     y2 = pointB[1]
     z2 = pointB[2]
-    landname = str(Dim) + ":" + str(x1) + "." + str(y1) + "." + str(z1) + \
-        ":" + str(x2) + "." + str(y2) + "." + str(z2) + ":" + str(worldid)
-    msg = gui_text("购买领地信息提示").replace("%playermoney", str(playermoney)).replace("%needmony", str(needmony)).replace("%landname", landname).replace("%ab", str(ab[1]))
-    #"§9我的金币： §3"+str(playermoney)+"\n \n"+"§9购买领地需要金币：§3"+str(needmony)+"\n
-    #\n"+"§9领地范围：§3"+landname+"\n \n"+"§9领地尺寸：§3"+str(ab[1])+"\n \n \n \n"
+    landname = f"{Dim}:{x1}.{y1}.{z1}:{x2}.{y2}.{z2}:{worldid}"
+    msg = gui_text("购买领地信息提示").replace("%playermoney", str(playermoney)).replace(
+        "%needmony", str(needmony)).replace("%landname", landname).replace("%ab", str(ab[1]))
+    # "§9我的金币： §3"+str(playermoney)+"\n \n"+"§9购买领地需要金币：§3"+str(needmony)+"\n
+    # \n"+"§9领地范围：§3"+landname+"\n \n"+"§9领地尺寸：§3"+str(ab[1])+"\n \n \n \n"
     jv = createSmileForm(gui_text("是否购买领地"), msg)
     jv = addbuttons(jv, gui_text("确定"), gui_image("确定"))
     jv = addbuttons(jv, gui_text("取消"), gui_image("取消"))
     sendForm(player, jv, buylandback)
 # ==========================监听函数=========================================
+
+
 def onUseItem(e):
     player = e["player"]
     playerxuid = player.xuid
@@ -804,18 +935,22 @@ def onUseItem(e):
         player.sendTextPacket(land_message("没有该领地使用物品权限"))
         return False
     return True
+
+
 def onBlockInteracted(e):
     player = e["player"]
     playerxuid = player.xuid
     blockpos = e["blockpos"]
-    x=int(blockpos[0])
-    y=int(blockpos[1])
-    z=int(blockpos[2])
+    x = int(blockpos[0])
+    y = int(blockpos[1])
+    z = int(blockpos[2])
     worldid = e["dimensionid"]
     if not lapi.islandplayer(playerxuid, x, y, z, worldid, "useitem"):
         player.sendTextPacket(land_message("没有该领地使用物品权限"))
         return False
     return True
+
+
 def onPutBlock(e):
     player = e["player"]
     playerXYZ = e["position"]
@@ -828,7 +963,7 @@ def onPutBlock(e):
         if playerbuy_2Dlandopen[playerxuid]:
             pointA = [x, y, z]
             playerchoosepointA[playerxuid] = pointA
-            player.sendTextPacket(land_message("成功选择点A") + str(x) + "." + str(y) + "." + str(z))
+            player.sendTextPacket(land_message("成功选择点A") + f"{x}.{y}.{z}")
             player.sendTextPacket(land_message("破坏方块或使用命令/pland 2b选择点B"))
             player.sendTextPacket(land_message("空手点击地面或使用命令/pland q退出领地选择模式"))
             return False
@@ -838,7 +973,7 @@ def onPutBlock(e):
         if playerbuy_3Dlandopen[playerxuid]:
             pointA = [x, y, z]
             playerchoosepointA[playerxuid] = pointA
-            player.sendTextPacket(land_message("成功选择点A") + str(x) + "." + str(y) + "." + str(z))
+            player.sendTextPacket(land_message("成功选择点A") + f"{x}.{y}.{z}")
             player.sendTextPacket(land_message("破坏方块或使用命令/pland 3b选择点B"))
             player.sendTextPacket(land_message("空手点击地面或使用命令/pland q退出领地选择模式"))
             return False
@@ -848,6 +983,8 @@ def onPutBlock(e):
         player.sendTextPacket(land_message("没有该领地放置方块权限"))
         return False
     return True
+
+
 def onDestroyBlock(e):
     player = e["player"]
     playerXYZ = e["position"]
@@ -863,7 +1000,7 @@ def onDestroyBlock(e):
             if pointA == []:
                 player.sendTextPacket("§e[land]§c请先选择点A")
                 return False
-            player.sendTextPacket(land_message("成功选择点B") + str(x) + "." + str(y) + "." + str(z))
+            player.sendTextPacket(land_message("成功选择点B") + f"{x}.{y}.{z}")
             buyland(player, pointA, pointB, worldid, "2D")
             return False
     except:
@@ -875,7 +1012,7 @@ def onDestroyBlock(e):
             if pointA == []:
                 player.sendTextPacket(land_message("请先选择点A"))
                 return False
-            player.sendTextPacket(land_message("成功选择点B") + str(x) + "." + str(y) + "." + str(z))
+            player.sendTextPacket(land_message("成功选择点B") + f"{x}.{y}.{z}")
             buyland(player, pointA, pointB, worldid, "3D")
             return False
     except:
@@ -884,6 +1021,8 @@ def onDestroyBlock(e):
         player.sendTextPacket(land_message("没有该领地破坏方块权限"))
         return False
     return True
+
+
 def onChestOpen(e):
     player = e["player"]
     playerxuid = player.xuid
@@ -896,6 +1035,8 @@ def onChestOpen(e):
         player.sendTextPacket(land_message("没有该领地打开容器权限"))
         return False
     return True
+
+
 def onPlayerAttack(e):
     player = e["player"]
     playerxuid = player.xuid
@@ -908,6 +1049,8 @@ def onPlayerAttack(e):
         player.sendTextPacket(land_message("没有该领地攻击生物权限"))
         return False
     return True
+
+
 def onActorJury(e):
     player = e["actor2"]
     if isonlineplayers(player):
@@ -922,18 +1065,26 @@ def onActorJury(e):
             player.sendTextPacket(land_message("没有该领地攻击生物权限"))
             return False
     return True
+
+
 def onUseFrameBlock(e):
     player = e["player"]
     playerxuid = player.xuid
     blockpos = e["blockpos"]
-    x=int(blockpos[0])
-    y=int(blockpos[1])
-    z=int(blockpos[2])
+    x = int(blockpos[0])
+    y = int(blockpos[1])
+    z = int(blockpos[2])
     worldid = e["dimensionid"]
     if not lapi.islandplayer(playerxuid, x, y, z, worldid, "destroyblock"):
         player.sendTextPacket(land_message("没有该领地破坏方块权限"))
         return False
     return True
+
+
+def onServerStarted(e):
+    mc.runcmd("scoreboard objectives add money dummy money")
+
+
 def onPlayerJoin(player):
     playerxuid = player.xuid
     playerbuy_2Dlandopen[playerxuid] = False
@@ -944,8 +1095,10 @@ def onPlayerJoin(player):
     onlinePlayerList.append(player)
     lapi.addplayername(playerxuid, player.name)
     if scoreboard != "LLMoney":
-        mc.runcmd('scoreboard players add "' + player.name + '" '+str(scoreboard)+' 0')
+        mc.runcmd(f"scoreboard players add {player.name} {scoreboard} 0")
     return True
+
+
 def onPlayerLeft(player):
     try:
         playerxuid = player.xuid
@@ -961,6 +1114,8 @@ def onPlayerLeft(player):
     except:
         pass
     return True
+
+
 def onChangeDim(player):
     playerxuid = player.xuid
     playerbuy_2Dlandopen[playerxuid] = False
@@ -968,6 +1123,8 @@ def onChangeDim(player):
     playerchoosepointA[playerxuid] = []
     del playerchoosepointA[playerxuid]
     return True
+
+
 def onWorldBoom(e):
     XYZ = e["position"]
     worldid = e["dimensionid"]
@@ -983,6 +1140,8 @@ def onWorldBoom(e):
     if landall_2D != [] or landall_3D != []:
         return False
     return True
+
+
 def onFarmDestroy(e):
     player = e["player"]
     playerxuid = e['player'].xuid
@@ -995,6 +1154,8 @@ def onFarmDestroy(e):
         player.sendTextPacket(land_message("没有该领地破坏方块权限"))
         return False
     return True
+
+
 def useRespawnAnchorBlock(e):
     player = e["player"]
     playerxuid = e['player'].xuid
@@ -1025,7 +1186,11 @@ def useRespawnAnchorBlock(e):
         player.sendTextPacket(land_message("你没有该领地使用重生锚的权限"))
         return False
     return True
+
+
 Mobiletick = {}
+
+
 def onPlayerMobile(e):
     global mobile_listener
     if not mobile_listener:
@@ -1044,7 +1209,8 @@ def onPlayerMobile(e):
                 landplayer = lapi.getshareplayername(landinfo['playerxuid'])
                 message = getland_leave_message(landname)
                 displayname = getland_displayname(landname)
-                msg = Bottom_information.replace("%player", landplayer).replace("%message", message).replace("%displayname", displayname)
+                msg = Bottom_information.replace("%player", landplayer).replace(
+                    "%message", message).replace("%displayname", displayname)
                 # msg="§e[landop]§b"+landplayer+":§a"+message+"\n§e[landname]§d"+displayname
                 if random.randint(0, 1) == 0:
                     e.sendTextPacket(msg, 4)
@@ -1052,7 +1218,9 @@ def onPlayerMobile(e):
     except:
         Mobiletick[e] = 0
     return True
-#======================================================================命令部分=============
+# ======================================================================命令部分=============
+
+
 def landhelp(player):
     worldid = player.did
     if worldid == 1:
@@ -1074,6 +1242,8 @@ def landhelp(player):
     addbuttons(jv, gui_text("领地标识"), gui_image("领地标识"))
     addbuttons(jv, gui_text("领地查询"), gui_image("领地查询"))
     sendForm(player, jv, landhelpback)
+
+
 def pland_2a(player):
     playerxuid = player.xuid
     playerXYZ = player.pos
@@ -1102,9 +1272,11 @@ def pland_2a(player):
     playerbuy_2Dlandopen[playerxuid] = True
     pointA = [x, y, z]
     playerchoosepointA[playerxuid] = pointA
-    player.sendTextPacket(land_message("成功选择点A") + str(x) + "." + str(y) + "." + str(z))
+    player.sendTextPacket(land_message("成功选择点A") + f"{x}.{y}.{z}")
     player.sendTextPacket(land_message("破坏方块或使用/pland 2b选择点B"))
     player.sendTextPacket(land_message("空手点击地面或使用/pland q退出领地选择模式"))
+
+
 def pland_2b(player):
     playerxuid = player.xuid
     playerXYZ = player.pos
@@ -1136,8 +1308,10 @@ def pland_2b(player):
     if pointA == []:
         player.sendTextPacket(land_message("请先选择点A"))
         return False
-    player.sendTextPacket(land_message("成功选择点B") + str(x) + "." + str(y) + "." + str(z))
+    player.sendTextPacket(land_message("成功选择点B") + f"{x}.{y}.{z}")
     buyland(player, pointA, pointB, worldid, "2D")
+
+
 def pland_3a(player):
     playerxuid = player.xuid
     playerXYZ = player.pos
@@ -1166,9 +1340,11 @@ def pland_3a(player):
     playerbuy_3Dlandopen[playerxuid] = True
     pointA = [x, y, z]
     playerchoosepointA[playerxuid] = pointA
-    player.sendTextPacket(land_message("成功选择点A") + str(x) + "." + str(y) + "." + str(z))
+    player.sendTextPacket(land_message("成功选择点A") + f"{x}.{y}.{z}")
     player.sendTextPacket(land_message("破坏方块或使用/pland 3b选择点B"))
     player.sendTextPacket(land_message("空手点击地面或使用命令/pland q退出领地选择模式"))
+
+
 def pland_3b(player):
     playerxuid = player.xuid
     playerXYZ = player.pos
@@ -1200,8 +1376,10 @@ def pland_3b(player):
     if pointA == []:
         player.sendTextPacket(land_message("请先选择点A"))
         return False
-    player.sendTextPacket("§e[land]§a成功选择点B:" + str(x) + "." + str(y) + "." + str(z))
+    player.sendTextPacket("§e[land]§a成功选择点B:" + f"{x}.{y}.{z}")
     buyland(player, pointA, pointB, worldid, "3D")
+
+
 def pland_q(player):
     playerxuid = player.xuid
     playerXYZ = player.pos
@@ -1220,6 +1398,8 @@ def pland_q(player):
         del playerchoosepointA[playerxuid]
         player.sendTextPacket(land_message("三维领地选择模式关闭"))
     player.sendTextPacket(land_message("命令使用成功"))
+
+
 def plandremove(player):
     playerxuid = player.xuid
     playerXYZ = player.pos
@@ -1236,6 +1416,8 @@ def plandremove(player):
             player.sendTextPacket(land_message("成功删除领地"))
     else:
         player.sendTextPacket(land_message("权限不足"))
+
+
 def onControlCmd(e):
     if "plandreload" in e:
         lapi.loadsdata()
@@ -1246,6 +1428,8 @@ def onControlCmd(e):
         return False
     return True
 # =======================================转化旧版领地数据组件=============
+
+
 def getoldlandgetXYZ(a):
     b = a.index(":")
     c1 = a[:b]
@@ -1264,6 +1448,8 @@ def getoldlandgetXYZ(a):
     z2 = e2[d3 + 1:]
     return [int(x1), int(y1), int(z1), int(x2), int(y2), int(z2)]
 # 是否存在某个配置文件
+
+
 def havelandoldfp(path2):
     a = os.path.exists(os.getcwd() + "\\land\\" + path2)
     if a:
@@ -1271,6 +1457,8 @@ def havelandoldfp(path2):
     else:
         return False
 # 读取领地文件
+
+
 def readlandoldfp(path2):
     path = ".\\land\\" + path2
     try:
@@ -1280,10 +1468,12 @@ def readlandoldfp(path2):
         if f1:
             f1.close()
     return data
+
+
 def landold_tolandnew():
     landdata_old = {}
     if not havelandoldfp("land.json"):
-        logout("未找到land.json无法完成转化", level= "ERROR")
+        logout("未找到land.json无法完成转化", level="ERROR")
         return
     landdata_old = stringtojson(readlandoldfp("land.json"))
     for landname_old in landdata_old["po"]:
@@ -1291,9 +1481,12 @@ def landold_tolandnew():
             XYZ = getoldlandgetXYZ(landname_old)
             playerxuid = landdata_old["land"][landname_old]["xuid"]
             playername = landdata_old["land"][landname_old]["land_use"]
-            lapi.createlanddata(playerxuid, XYZ[0], XYZ[1], XYZ[2], XYZ[3], XYZ[4], XYZ[5], 0, "2D")
+            lapi.createlanddata(
+                playerxuid, XYZ[0], XYZ[1], XYZ[2], XYZ[3], XYZ[4], XYZ[5], 0, "2D")
             lapi.addplayername(playerxuid, playername)
         except:
             pass
     logout("旧版领地数据转化完成")
+
+
 landstart()
