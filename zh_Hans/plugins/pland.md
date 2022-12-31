@@ -50,7 +50,7 @@
 
 ##### 3.config.json样例
 
-```
+```json
 {
     "accuracy": 10,
     "around_place": false,

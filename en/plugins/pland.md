@@ -50,7 +50,7 @@
 
 ##### 3.config.json sample
 
-```
+```json
 {
     "accuracy": 10,
     "round_place": false,
