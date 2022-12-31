@@ -36,3 +36,4 @@ If after clicking on the download link your browser opens the file directly inst
 | BehaviorLog     | BehaviorLog plugin       | /               | wsr    | [View Details](BehaviorLog.md "here")     |
 | pland           | Territory plugin         | /               | 05007  | [View Details](pland.md "here")           |
 | votekick        | Votekick plugin          | /               | wsr    | [View Details](votekick.md "here")        |
+| chatlog     | Behavior log simplified version, only console output player chat, commands, etc | /       | wsr   | [View Details](chatlog.md "here")     |
