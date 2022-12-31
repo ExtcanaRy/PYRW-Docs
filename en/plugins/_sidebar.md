@@ -8,3 +8,4 @@
 * [BehaviorLog](BehaviorLog.md "BehaviorLog plugin")
 * [pland](pland.md "Territory plugin")
 * [votekick](votekick.md "Votekick plugin")
+* [chatlog](chatlog.md "Chat output plugin")
