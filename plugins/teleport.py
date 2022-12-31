@@ -31,9 +31,8 @@ TP_HEIGH = 500
 STEP_LENTH = 10
 lockList = []  # tpr 锁定玩家列表
 
+
 # 读取配置文件
-
-
 def init():
     global home
     global warp
@@ -62,36 +61,46 @@ def init():
     stepLenth = j['config']['stepLenth']
 
 
-def reset(player):
+def save():
+    j = {"config": {"maxHome": maxHome, "waitTime": waitTime, "lockTime": lockTime, "tpRange": tpRange, "processTime": processTime, "tpHeight": tpHeight, "stepLenth": stepLenth},
+         "home": home, "warp": warp}
+    mc.save_conf("teleport", "teleport.json", j)
+
+
+def reset(player_name):
     global tpaPlayerList
     # logout("")
     # try:
     if True:
         # logout(str(tpaPlayerList.items()))
         # logout(player.name)
-        if player.name in str(tpaPlayerList.items()):
-            if player.name in tpaPlayerList["tpa"]:
+        if player_name in str(tpaPlayerList.items()):
+            if player_name in tpaPlayerList["tpa"]:
                 # logout("0")
-                del(tpaPlayerList["tpa"][player.name])
-            elif player.name in tpaPlayerList["tpah"]:
+                del(tpaPlayerList["tpa"][player_name])
+            elif player_name in tpaPlayerList["tpah"]:
                 # logout("1")
-                del(tpaPlayerList["tpah"][player.name])
+                del(tpaPlayerList["tpah"][player_name])
             else:
                 try:
                     del(tpaPlayerList["tpa"][get_keys(
-                        tpaPlayerList["tpa"], player.name)[0]])
+                        tpaPlayerList["tpa"], player_name)[0]])
                 except:
                     del(tpaPlayerList["tpah"][get_keys(
-                        tpaPlayerList["tpah"], player.name)[0]])
+                        tpaPlayerList["tpah"], player_name)[0]])
             # logout(str(tpaPlayerList.items()))
 
 
 # 传送
 def tp(n1, n2):
-    mc.runcmd('tp "' + n1 + '" "' + n2 + '"')
+    player1 = getPlayer(n1)
+    player2 = getPlayer(n2)
+    p2 = player2.pos
+    did2 = player2.did
+    player1.teleport(p2[0], p2[1]-1.62, p2[2], did2)
+
+
 # tpa回调
-
-
 def tpafn(player, selected, id):
     global tpaPlayerList
     global FormIDs
@@ -111,9 +120,8 @@ def tpafn(player, selected, id):
     t1.setDaemon(True)
     t1.start()
 
+
 # tpahere回调
-
-
 def tpaherefn(player, selected, id):
     global tpaPlayerList
     global FormIDs
@@ -132,24 +140,26 @@ def tpaherefn(player, selected, id):
     t2.setDaemon(True)
     t2.start()
 
+
 # 通过字典的 值 返回 键
-
-
 def get_keys(dict, value):
     #print([key for key,v in dict.items() if v == value])
     return [key for key, v in dict.items() if v == value]
+
+
 # tpa/tpah超时
-
-
 def timeout(player):
+    player_name = player.name
     time.sleep(waitTime)
-    if player.name in str(tpaPlayerList.items()):
-        reset(player)
-        player.sendTextPacket('§c请求超时')
+    if is_online(player_name):
+        if player_name in str(tpaPlayerList.items()):
+            reset(player_name)
+            player.sendTextPacket('§c请求超时')
+    else:
+        reset(player_name)
+
 
 # home tp and home del回调
-
-
 def homefn(player, selected, id):
     xuid = player.xuid
     x = eval(selected)
@@ -161,22 +171,22 @@ def homefn(player, selected, id):
     if mode == 0:  # 传送
         if not hname in home[xuid]:
             player.sendTextPacket('§c没有这个家!')
-            reset(player)
+            reset(player.name)
             return False
         pos = home[xuid][hname]
         t5 = threading.Thread(target=tpdim, args=(player, pos))
         t5.setDaemon(True)
         t5.start()
         player.sendTextPacket('§a已传送到 ' + hname)
-        reset(player)
+        reset(player.name)
     elif mode == 1:  # 删除
         if not hname in home[xuid]:
             player.sendTextPacket('§c没有这个家!')
-            reset(player)
+            reset(player.name)
             return False
         del home[xuid][hname]
         player.sendTextPacket('§a删除家 ' + hname + ' 成功')
-        reset(player)
+        reset(player.name)
         save()
     return False
 
@@ -189,11 +199,11 @@ def homeNew(player, selected, id):
     hname = x[0]
     if len(home[xuid]) >= maxHome:
         player.sendTextPacket('§c家的数量已达到上限!最多为' + str(maxHome) + "!")
-        reset(player)
+        reset(player.name)
         return False
     if hname in home[xuid]:
         player.sendTextPacket('§c已经有这个家!')
-        reset(player)
+        reset(player.name)
         return False
     x = player.pos[0]
     y = player.pos[1]
@@ -201,7 +211,7 @@ def homeNew(player, selected, id):
     d = player.did
     home[xuid][hname] = [x, y, z, d]
     player.sendTextPacket('§a创建家 ' + hname + ' 成功')
-    reset(player)
+    reset(player.name)
     save()
 
 # warp回调
@@ -217,22 +227,22 @@ def warpfn(player, selected, id):
     if mode == 0:  # 传送
         if not wname in warp:
             player.sendTextPacket('§c没有这个传送点!')
-            reset(player)
+            reset(player.name)
             return False
         pos = warp[wname]
         t6 = threading.Thread(target=tpdim, args=(player, pos))
         t6.setDaemon(True)
         t6.start()
         player.sendTextPacket('§a已传送到 ' + wname)
-        reset(player)
+        reset(player.name)
     elif mode == 1:  # 创建
         if wname in warp:
             player.sendTextPacket('§c已经有这个传送点!')
-            reset(player)
+            reset(player.name)
             return False
         if player.perm == 0:
             player.sendTextPacket('§c你没有权限操作!')
-            reset(player)
+            reset(player.name)
             return False
         x = player.pos[0]
         y = player.pos[1]
@@ -240,20 +250,20 @@ def warpfn(player, selected, id):
         d = player.did
         warp[wname] = [x, y, z, d]
         player.sendTextPacket('§a创建传送点 ' + wname + ' 成功')
-        reset(player)
+        reset(player.name)
         save()
     elif mode == 2:  # 删除
         if not wname in warp:
             player.sendTextPacket('§c没有这个家!')
-            reset(player)
+            reset(player.name)
             return False
         if player.perm == 0:
             player.sendTextPacket('§c你没有权限操作!')
-            reset(player)
+            reset(player.name)
             return False
         del warp[wname]
         player.sendTextPacket('§a删除传送点 ' + wname + ' 成功')
-        reset(player)
+        reset(player.name)
         save()
     return False
 
@@ -278,9 +288,8 @@ def tpToLand(x, z, did, player):
                                   ", " + str(y + stepLenth) + ", " + str(z))
             break
 
+
 # 获取玩家列表
-
-
 def getPlayerNameList():
     global playerNameListForm
     global playerList
@@ -291,14 +300,21 @@ def getPlayerNameList():
         playerList.append(i)
 
 
-def getPlayer(playerName):
+# 根据名字获取玩家指针
+def getPlayer(playerName: str):
     for player in mc.getPlayerList():
         if player.name == playerName:
             return player
 
+
+def is_online(player_name: str):
+    if getPlayer(player_name):
+        return True
+    else:
+        return False
+
+
 # 输入命令
-
-
 def command(e):
     global isTpaLock
     global tpaPlayerList
@@ -431,14 +447,14 @@ def tpacFn(player):
         tp(player2.name, player.name)
         player2.sendTextPacket('§a' + player.name + ' 同意了 你 的请求')
         player.sendTextPacket('§a你 同意了 ' + player2.name + ' 的请求')
-        reset(player)
+        reset(player.name)
     # 被tpah者同意{player: 接受者, player2: 请求者}
     elif player.name in tpaPlayerList["tpah"]:
         player2 = getPlayer(tpaPlayerList['tpah'][player.name])
         tp(player.name, player2.name)
         player2.sendTextPacket('§a' + player.name + ' 同意了 你 的请求')
         player.sendTextPacket('§a你 同意了 ' + player2.name + ' 的请求')
-        reset(player)
+        reset(player.name)
     else:
         player.sendTextPacket('§e你没有待处理的传送请求')
 
@@ -449,13 +465,13 @@ def tpadFn(player):
         player2 = getPlayer(get_keys(tpaPlayerList['tpa'], player.name)[0])
         player2.sendTextPacket('§e' + player.name + ' 拒绝了 你 的请求')
         player.sendTextPacket('§e你 拒绝了 ' + player2.name + ' 的请求')
-        reset(player)
+        reset(player.name)
     # 被tpah者拒绝{player: 接受者, player2: 请求者}
     elif player.name in tpaPlayerList["tpah"]:
         player2 = getPlayer(tpaPlayerList['tpah'][player.name])
         player2.sendTextPacket('§e' + player.name + ' 拒绝了 你 的请求')
         player.sendTextPacket('§e你 拒绝了 ' + player2.name + ' 的请求')
-        reset(player)
+        reset(player.name)
     else:
         player.sendTextPacket('§e你没有待处理的传送请求')
 
@@ -467,9 +483,9 @@ def selectForm(e):
     id = e['formid']
     if e['selected'] == 'null':
         return False
-    if id in FormIDs and e['selected']:
+    if id in FormIDs and e['selected'] == "true":
         tpacFn(e["player"])
-    elif id in FormIDs and not e['selected']:
+    elif id in FormIDs and e['selected'] == "false":
         tpadFn(e["player"])
 
     if id in FormFn:
