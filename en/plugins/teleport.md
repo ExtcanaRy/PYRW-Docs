@@ -50,12 +50,3 @@ This plugin is a teleport family bucket, providing home, tpa, tpah, warp and oth
 | /home   | hone interface                                                                                                                                                      |
 | /warp   | warp interface, teleportation point                                                                                                                                 |
 | /tpr    | Random teleportation -- This feature is currently unstable and may fail or crash, please practice landing water before using it! Failure consequences are your own! |
-
-# Known Issues
-
-| Module     | Known Issues:                                                                                  | Status             |
-| ---------- | ---------------------------------------------------------------------------------------------- | ------------------ |
-| [TPA/TPAH] | Player selection list may have been selected in the wrong order                                | [Fixed]            |
-| [TPA/TPAH] | Players entering/leaving the service with player list not loaded causing /tpa or /tpah to fail | [Fixed]            |
-| [TPR]      | It eats up server configuration and tends to fail when server configuration is low             | [To be optimized   |
-| [TPR]      | May crash the service (rare)                                                                   | [to be reproduced] |
