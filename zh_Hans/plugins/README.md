@@ -38,3 +38,5 @@ python.exe -m pip install --upgrade pip
 | pland           | 领地插件     | /       | 05007 | [查看详情](pland.md "这里")           |
 | votekick        | 投票踢出插件 | /       | wsr   | [查看详情](votekick.md "这里")        |
 | chatlog     | 行为日志简化版，仅控制台输出玩家聊天、指令等 | /       | wsr   | [查看详情](chatlog.md "这里")     |
+| BestScoreBoard     | 隐藏离线玩家计分板的插件 | /       | Moxiner   | [查看详情](BestScoreBoard.md "这里")     |
+

@@ -1,6 +1,11 @@
 # BDSpyrunnerW 文档
 
 欢迎来到 `BDSpyrunnerW Docs`！
+
+![Liscense](https://img.shields.io/github/license/WillowSauceR/BDSpyrunner)
+![Downloads](https://img.shields.io/github/downloads/WillowSauceR/BDSpyrunner/total)
+![BDS](https://img.shields.io/badge/support--BDS--version-1.19.51.01-blue)
+
 此文档将帮助你开发适用于BDSpyrunnerW的插件。
 
 ## 要求
