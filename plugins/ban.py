@@ -46,6 +46,7 @@ def onPlayerCmd(data):
                 admin.sendTextPacket(
                     "用法: /ban <玩家名> <时间: 秒数或形如2022.04.01-11.45.14的具体时间, 不填为永久> <原因:选填>")
             return False
+        cmd[1] = cmd[1].replace("\"","")
         for player in mc.getPlayerList():
             if player.name == cmd[1]:
                 playerXuid = player.xuid
@@ -81,6 +82,7 @@ def onConsoleCmd(data):
                 logout(
                     "用法: ban <玩家名> <时间: 秒数或形如2022.04.01-11.45.14的具体时间, 不填为永久> <原因:选填>", level="ERROR")
             return False
+        cmd[1] = cmd[1].replace("\"","")
         for player in mc.getPlayerList():
             if player.name == cmd[1]:
                 playerXuid = player.xuid
