@@ -116,6 +116,18 @@ The following are all events.
 * ``blockname`` - the name of the block
 * ``player`` - player
 
+## onPlacedBlock
+
+* Placed Block listener
+* Can intercept: No
+* Return data:
+
+
+* ``position`` - the location of the action block
+* ``blockid`` - block ID
+* ``blockname`` - the name of the block
+* ``player`` - player
+
 ## onDestroyBlock
 
 * Destroy block listener
