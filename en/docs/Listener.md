@@ -72,7 +72,7 @@ Return data:
 
 ## onUseItem
 
-Use item listener 
+Use item listener
 ``Note: Win10 client use item event will trigger multiple times within a single click``
 Can intercept: Yes
 Return data:
@@ -100,7 +100,7 @@ Return data:
 
 ## onPlaceBlock
 
-Place Block Listening
+Place Block listener
 Can intercept: Yes
 Return data:
 
