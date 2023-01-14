@@ -72,16 +72,31 @@ Return data:
 
 ## onUseItem
 
-Use item listener
-``Note: Win10 client use item event will be triggered multiple times within a single click``
+Use item listener 
+``Note: Win10 client use item event will trigger multiple times within a single click``
 Can intercept: Yes
 Return data:
 
-* position - the location of the operation cube
-* itemid - item ID
-* itemaux - the item's special value
-* itemname - the name of the item
 * player - player
+* itemid - item ID
+* itemaux - item aux value
+* itemcount - number of items
+* itemname - the name of the item
+* blockname - the name of the block being manipulated
+* blockid - ID of the block being manipulated
+* position - the coordinates of the block being manipulated
+
+## onUseItemEx
+
+Using item listener (optimized version)
+Can intercept: Yes
+Return data:
+
+* player - the player
+* itemid - item ID
+* itemaux - item special value
+* itemcount - number of items
+* itemname - the name of the item
 
 ## onPlaceBlock
 

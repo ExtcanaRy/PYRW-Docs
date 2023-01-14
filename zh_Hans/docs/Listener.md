@@ -70,15 +70,31 @@
 
 ## onUseItem
 
-使用物品监听 `注：Win10客户端使用物品事件会在单次点击内触发多次`
+使用物品监听
+``注：Win10客户端使用物品事件会在单次点击内触发多次``
 拦截可否：是
 回传数据：
 
-* position – 操作方块所在位置
-* itemid – 物品ID
-* itemaux – 物品特殊值
-* itemname – 物品名称
 * player - 玩家
+* itemid - 物品ID
+* itemaux - 物品特殊值
+* itemcount - 物品数量
+* itemname - 物品名称
+* blockname - 被操作的方块名字
+* blockid - 被操作的方块ID
+* position - 被操作的方块坐标
+
+## onUseItemEx
+
+使用物品监听(优化版)
+拦截可否：是
+回传数据：
+
+* player - 玩家
+* itemid - 物品ID
+* itemaux - 物品特殊值
+* itemcount - 物品数量
+* itemname - 物品名称
 
 ## onPlaceBlock
 
