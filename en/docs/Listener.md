@@ -219,7 +219,8 @@ The following are all events.
 
 ## onMobHurt
 
-* The creature injury listener can use setDamage to set the damage value under this listener
+* The mob hurt listener
+* Can use setDamage to set the damage value under this listener
 * Can intercept: Yes
 * Return data:
 
