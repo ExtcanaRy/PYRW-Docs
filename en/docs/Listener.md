@@ -1,74 +1,93 @@
 # Listener
+
 Event description format.
 
-```
+```format
 Listener keyword
 Introduction
 Can intercept
 return data
 ```
 
-# Listener
+## Listener
 
 Event Listener
 
-* Use setListener to set the listener
+* Use ``setListener`` to set the listener
+* Use ``removeListener`` to remove the listener
 * The callback function has one and only one parameter and is of type dictionary
 
 The following are all events.
 
-# onConsoleInput
+## onConsoleInput
 
-Can the console input listener intercept: is the return data: ## onConsoleInput
+Console input listener
+Can intercept: Yes
+Return data:
 
 * cmd - command data
 
 ## onConsoleOutput
 
-Can the console output listener intercept: Yes or No.
+Console output listener
+Can intercept: Yes
+Return data:
 
 * output - output information
 
 ## onPlayerJoin
 
-PlayerJoin ServerListeningInterceptedCan: NoData returned: * player - PlayerJoin
+Player join server listener
+Can intercept: No
+Return data:
 
 * player - player
 
 ## onPlayerLeft
 
-Can the player leaving the server listen to the interception: No.
+Player leaving the server listener
+Can intercept: No
+Return data:
 
-* player - Player
+* player - player
 
 ## onPlayerAttack
 
-Can the player attack listener intercept: Yes Return data: * player - player ## onPlayerAttack
+Player attack listener
+Can intercept: Yes
+Return data:
 
-* actor - attacked entity
-* player - player
+* actor - the attacked entity
+* player - the player
 
 ## onSelectForm
 
-Can the player select GUI form listener intercept: Yes or No. Return data: * actor - the attacked entity
+Player selection GUI form listener
+Can intercept: Yes
+Return data:
 
 * formid - Form ID
-* selected - information about the selected item returned by the form
-* player - player
+* selected - the information about the selected item returned by the form
+* player - the player
 
 ## onUseItem
 
-Use item listener `Note: Win10 client use item event will be triggered multiple times within a single click ` Interception allowed: Yes return data: * position - the location of the operation cube
+Use item listener
+``Note: Win10 client use item event will be triggered multiple times within a single click``
+Can intercept: Yes
+Return data:
 
 * position - the location of the operation cube
 * itemid - item ID
-* itemaux - item special value
+* itemaux - the item's special value
 * itemname - the name of the item
 * player - player
 
 ## onPlaceBlock
 
-Can the onPlaceBlock listener intercept: is the return data: ## onPlaceBlock
+Place Block Listening
+Can intercept: Yes
+Return data:
 
 * position - the location of the action block
 * blockid - block ID
@@ -77,48 +96,60 @@ Can the onPlaceBlock listener intercept: is the return data: ## onPlaceBlock
 
 ## onDestroyBlock
 
-Can the destroy block listener intercept: is returning data: * position - the location of the block
+Destroy block listener
+Can intercept: Yes
+Return data:
 
-* position - the location of the operation block
+* position - the location of the manipulated block
 * blockid - block ID
 * blockname - the name of the block
 * player - player
 
 ## onOpenChest
 
-Can the openChest listener intercept: is the return data: ## onChest
-
-* position - the location of the operating block
-* player - player
-
-## onCloseChest
-
-Can the CloseChest listener intercept: No. Return data: * position - the location of the action cube
+OpenChest listener
+Can intercept: Yes
+Return data:
 
 * position - the location of the operation cube
 * player - the player
 
-## onOpenBarrel
+## onCloseChest
 
-Can the open barrel listener intercept: No Data returned: * position - the location of the action square
+Close chest listener
+Whether to intercept: No
+Return data:
 
 * position - the location of the action box
 * player - the player
 
+## onOpenBarrel
+
+Open barrel listener
+Can intercept: No
+Return data:
+
+* position - the location of the action square
+* player - the player
+
 ## onCloseBarrel
 
-CloseBarrelListeningInterceptedCan: NoData returned: * position - the location of the action square
+Close barrel listener
+Can intercept: No
+Return data:
 
 * position - the location of the action barrel
 * player - the player
 
 ## onContainerChange
 
-Putting in and taking out items listens to intercept whether or not: No. Return data: * itemid - item ID
+Put in and take out item listener
+Can intercept: No
+Return data:
 
 * itemid - item ID
 * itemcount - the number of items
-* itemname - item name
+* itemname - the name of the item
 * itemaux - the item's special value
 * position - the location of the operation block
 * blockid - block ID
@@ -128,36 +159,46 @@ Putting in and taking out items listens to intercept whether or not: No. Return 
 
 ## onChangeDimension
 
-Can the onChangeDimension listener intercept: is the return data.
+Switching dimension listener
+Can intercept: Yes
+Return data:
 
 * player - player
 
 ## onMobDie
 
-Creature Death Listening Interception Can: No Return data: * player - player ## onMobDie
+Creature death listener
+Can intercept: No
+Return data:
 
-* dmcase - damage specific cause ID
-* actor1 - the entity that died
-* actor2 - damage source entity
+* dmcase - Damage specific cause ID
+* actor1 - death entity
+* actor2 - the source entity of the damage
 
 ## onMobHurt
 
-The creature injury listener can use setDamage to set the damage value under this listener Interceptable: yes Return data: * dmcase - the damage specific cause ID * actor1 - the death entity
+The creature injury listener can use setDamage to set the damage value under this listener
+Can intercept: Yes
+Return data:
 
 * dmcase - Damage specific cause ID
 * actor1 - the entity that died
-* actor2 - damage source entity
+* actor2 - Damage source entity
 * damage - theoretical damage value
 
 ## onRespawn
 
-Player respawn listener can intercept: no Return data.
+Player respawn listener
+Can interception be done: No
+Return data:
 
 * player - player
 
 ## onChat
 
-Can the chat listener intercept: No. Return data: ## onChat
+Chat listener
+Can intercept: No
+Return data:
 
 * sender - sender's name
 * target - the name of the receiver
@@ -166,18 +207,22 @@ Can the chat listener intercept: No. Return data: ## onChat
 
 ## onInputText
 
-Can the player input text listener intercept: is the return data.
+Player input text listener
+Can intercept: yes
+Return data:
 
 * msg - the input text
 * player - the player
 
 ## onCommandBlockUpdate
 
-Can the player update the command block listener intercept: Yes or No.
+Player update command block listener
+Can intercept: Yes
+Return data:
 
-* player - the player
+* player - player
 * cmd - the new command that will be updated
-* mode - command block mode
+* mode - command cube mode
 * condition - if there is a condition
 * redstone - whether to redstone or not
 * output - last output
@@ -187,14 +232,18 @@ Can the player update the command block listener intercept: Yes or No.
 
 ## onInputCommand
 
-Can the player input command listener intercept: is the return data.
+Player input command listener
+Can intercept: Yes
+Return data:
 
 * cmd - the command entered by the player
 * player - the player
 
 ## onCommandBlockPerform
 
-CommandBlockPerform CommandBlockPerform CommandBlockListeningInterceptable: Yes or No
+Command Block Perform Listens for commands
+Can intercept: Yes
+Return data:
 
 * cmd - the command that will be executed
 * rawname - the name of the command block
@@ -204,60 +253,74 @@ CommandBlockPerform CommandBlockPerform CommandBlockListeningInterceptable: Yes 
 
 ## onLevelExplode
 
-Can the explosion listener intercept: yes return data: ## onLevelExplode
+Explosion Listening
+Can intercept: yes
+Return data:
 
-* actor - the exploder entity (this is invalid for bed explosion)
+* actor - the exploder entity (this is invalid when the bed explodes)
 * position - the location of the explosion point
 * dimensionid - the dimension ID of the exploder
 * power - the strength of the explosion
 
 ## onSetArmor
 
-Can the player wear a listener intercept: No Return data: ## onSetArmor
+Player wear listener
+Can intercept: no
+Return data:
 
 * player - player
 * itemid - item ID
 * itemcount - number of items
 * itemname - item name
-* itemaux - item special value
+* itemaux - item's special value
 * slot - the position of the action grid
 
 ## onFallBlockTransform
 
-Can the farming damage listener intercept: is returning data: ## onFallBlockTransform
-
-* player - player
-* position - the location of the square
-* dimensionid - the dimension ID of the dimension in which it is located
-
-## onUseRespawnAnchorBlock
-
-Can the onUseRespawnAnchorBlock listener intercept: yes return data: * player - player
+Plot destruction listener
+Can intercept: Yes
+Return data:
 
 * player - player
 * position - the location of the block
-* dimensionid - the dimension ID of the block
+* dimensionid - the ID of the dimension it is in
+
+## onUseRespawnAnchorBlock
+
+Use the respawn anchor listener
+Can intercept: yes
+Return data:
+
+* player - player
+* position - the location of the block
+* dimensionid - the ID of the dimension it is in
 
 ## onScoreChanged
 
-Can the scoreboard change listener intercept: No Data returned: * player - the player's position * position - the location of the square * dimensionid - the dimension ID of the player
+Scoreboard change listener
+Can intercept: No
+Return data:
 
 * scoreboardid - scoreboard ID
-* playersnum - player score
+* playersnum - the player score
 * objectivename - the actual name of the object
 * objectivedisname - the object's display name
 
 ## onMove
 
-Player Move Listening Intercepted Can: No Return data: ## player - player
+Player Move Listening
+Can interception be done: No
+Return data:
 
 * player - player
 
 ## onPistonPush
 
-Can the piston push listener intercept: No. Return data: ## onPistonPush
+Piston push listener
+Can intercept: No
+Return data:
 
-* blockname - block name
+* blockname - the name of the block
 * blockid - block ID
 * blockpos - block coordinates
 * pistonpos - piston coordinates
@@ -265,43 +328,55 @@ Can the piston push listener intercept: No. Return data: ## onPistonPush
 
 ## onEndermanRandomTeleport
 
-Can the onEndermanRandomTeleport listener intercept: is the return data.
+Enderman Random Teleport Listening
+Can intercept: Yes
+Return data:
 
 * actor - entity
 
 ## onServerStarted
 
-ServerStarted finish listening to intercept Can: No Return data: * actor - entity
+Server start completion listener
+Can intercept: No
+Return data:
 
 * none - none
 
 ## onDropItem
 
-Can the player drop item listener intercept: Yes Data returned: * player - player
+Player drop item listener
+Can intercept: Yes
+Return data:
 
 * player - player
 * itemid - item ID
 * itemcount - number of items
 * itemname - item name
-* itemaux - item's special value
+* itemaux - item special value
 
 ## onTakeIte
 
-Can the player pick up the item listener intercept: is the return data: ## onTakeIte
+Player picking up items listens
+Can intercept: Yes
+Return data:
 
-* player - player
-* actor - the item being picked up
+* player - the player
+* actor - the picked up item
 
 ## onRide
 
-Can the creature ride listener intercept: yes return data: * actor1 - rider
+Creature Ride Listening
+Can intercept: Yes
+Return data:
 
 * actor1 - rider
-* actor2 - ridden
+* actor2 - the rider
 
 ## onUseFrameBlock
 
-Can the onUseFrameBlock listener intercept: Yes or No.
+Operation display frame listener
+Can intercept: Yes
+Return data:
 
 * player - player
 * blockpos - block coordinates
@@ -309,20 +384,25 @@ Can the onUseFrameBlock listener intercept: Yes or No.
 
 ## onJump
 
-Can the player jump listener intercept: No Data returned: * player - player
+Player jump listener
+Can interception be done: No
+Return data:
 
 * player - player
 
 ## onSneak
 
-Player Sneak Listening
+Player sneak listener
 Can intercept: No
-Return data.
-*player - player
+Return data:
+
+* player - player
 
 ## onBlockInteracted
 
-Block Accepted Player Interaction Listening Interceptable: Yes Return Data:
+The block accepts player interaction listeners
+Can intercept: Yes
+Return data:
 
 * player - player
 * blockpos - block coordinates
@@ -332,9 +412,11 @@ Block Accepted Player Interaction Listening Interceptable: Yes Return Data:
 
 ## onBlockExploded
 
-Block is exploded listen to intercept whether: no return data.
+Block exploded listens
+Can intercept: No
+Return data:
 
-* actor - exploded entity
+* actor - the entity that exploded
 * blockpos - block coordinates
 * blockname - block name
 * blockid - block ID
@@ -342,7 +424,9 @@ Block is exploded listen to intercept whether: no return data.
 
 ## onUseSignBlock
 
-Can the signboard use a listener to intercept: is the return data.
+Signboard use listener
+Can intercept: Yes
+Return data:
 
 * player - player
 * text - text content
