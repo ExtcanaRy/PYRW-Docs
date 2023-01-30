@@ -29,7 +29,7 @@
 
 将已设置的监听器移除，移除后事件发生时将不再会调用对应callback，填入的参数应当与设置时填写的一致
 
-## setCommandDescription(cmd:str,callback:function，description:str) -> None
+## setCommandDescription(cmd:str, description:str，callback:function) -> None
 
 设置指令说明，参数三是可选参数，
 用于触发命令回调，回调函数原型：callback(player:mc.Entity) -> None

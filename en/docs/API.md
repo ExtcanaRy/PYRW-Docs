@@ -31,7 +31,7 @@ The available keys can be found in the Listener interface
 
 Remove the set listener, the corresponding callback will no longer be called when the event occurs after the removal.
 
-## setCommandDescription(cmd:str,callback:function，description:str) -> None
+## setCommandDescription(cmd:str, description:str，callback:function) -> None
 
 Set the command description, parameter three is an optional parameter that
 Used to trigger the command callback, callback function prototype: callback(player:mc.Entity) -> None
