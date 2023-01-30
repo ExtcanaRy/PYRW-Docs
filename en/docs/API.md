@@ -133,6 +133,10 @@ Add a new item for the player, data is a JSON string
 
 Remove count items from the player's backpack slot.
 
+### openInventoryGUI() -> None
+
+Open the player's Inventory GUI
+
 ### teleport(x:float,y:float,z:float,did:int) -> None
 
 Teleport the player to the specified coordinates and dimensions

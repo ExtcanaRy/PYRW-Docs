@@ -131,6 +131,10 @@
 
 移除玩家背包slot格子的count个物品
 
+### openInventoryGUI() -> None
+
+打开玩家的背包GUI
+
 ### teleport(x:float,y:float,z:float,did:int) -> None
 
 传送玩家到指定坐标和维度

@@ -198,6 +198,20 @@ The following are all events.
 * ``slot`` - the position of the action grid
 * ``player`` - player
 
+## onPlayerInventoryChange
+
+* Player inventory content change listener
+* Can intercept: No
+* Return data:
+
+
+* ``itemid`` - item ID
+* ``itemcount`` - the number of items
+* ``itemname`` - the name of the item
+* ``itemaux`` - the item's special value
+* ``slot`` - the position of the action grid
+* ``player`` - player
+
 ## onChangeDimension
 
 * Switching dimension listener
