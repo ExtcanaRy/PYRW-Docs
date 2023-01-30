@@ -2,13 +2,13 @@
 
 # Introduction
 
-This file module is located in `plugins/py/mc.py` and provides various functions, including listener name compatibility, API modification, log output functions, configuration file manipulation functions, etc.
+This file module is located in ``plugins/py/mc.py`` and provides various functions, including listener name compatibility, API modification, log output functions, configuration file manipulation functions, etc.
 
 # Contents
 
 ##### 1. Listener Name Compatibility
 
-We can achieve compatibility between old and new listener names by modifying the listener names passed in by `mc.setListener` and `mc.removeListener`, for example
+We can achieve compatibility between old and new listener names by modifying the listener names passed in by ``mc.setListener`` and ``mc.removeListener``, for example
 
 ```python
 def setListener(event: str, function: Callable[[object], Optional[bool]]) -> None:
@@ -25,7 +25,7 @@ def setListener(event: str, function: Callable[[object], Optional[bool]]) -> Non
 
 ##### 2. API modification
 
-We modify the values we want to pass in and provide a clearer function prototype by wrapping the `API` provided by `BDSpyrunnerW`, for example
+We modify the values we want to pass in and provide a clearer function prototype by wrapping the ``API`` provided by ``BDSpyrunnerW``, for example
 
 ```python
 def setCommandDescription(cmd:str, description:str, function: Callable[[object], Optional[bool]] = None) -> None:
@@ -123,7 +123,7 @@ logout(config['i_am_3'])
 logout(config['the_4_obj'][1]['name'])
 ```
 
-This will generate the following in `plugins/py/myplugin/myplugin.json`
+This will generate the following in ``plugins/py/myplugin/myplugin.json``
 
 ```json
 {
@@ -151,3 +151,38 @@ and output the following on the console
 ```
 
 By changing the contents of the configuration file, the output on the console will change accordingly
+
+
+##### 5. Pointer operations
+
+To simplify the operation of modifying values using the function interface, we have chosen to use pointers as a bridge for data exchange between ``C++`` and ``Python``.
+The pointer provided by ``BDSpyrunnerW`` in ``Python`` is usually of type ``int`` represented by a string of numbers, which we call type ``pointer`` in the documentation, and requires the use of the ``ctypes`` library to take and modify its value.
+When you need to modify the value pointed by the pointer, you can use the ``Pointer`` class provided in the ``mc`` documentation module, which provides an easy way to access the memory data pointed by the pointer and modify it.
+
+The following is an example of modifying the damage generated during a player attack.
+
+```python
+import mc
+import ctypes
+
+def onPlayerAttack(event):
+    pointer = mc.Pointer(event['damage'], ctypes.c_float)
+    damage = pointer.get()
+    pointer.set(100)
+    mc.log(
+        f"{event['player'].name}: ",
+        f"{damage} -> {pointer.get()} ({event['damage']})",
+        name="ATK",
+        info="onPlayerAttack"
+    )
+
+mc.setListener("onPlayerAttack", onPlayerAttack)
+```
+
+When initializing ``mc.Pointer``, you need to pass in a pointer and a pointer type. The damage value in ``BDS`` is of type ``float``, so pass in ``ctypes.c_float``. The memory modification takes effect immediately, so the value obtained after calling the ``set`` member function is the modified one, whether the memory is accessed in ``C++`` or ``Python``. This is the basic principle of the method.
+
+When using an empty-handed attack on a creature within the server, the creature will normally be killed outright and the console will print something like this
+
+```text
+11:45:14 INFO [ATK][onPlayerAttack] SenpaiHomo: 1.0 -> 100.0 (114514001919810)
+```

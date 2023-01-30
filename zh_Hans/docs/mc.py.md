@@ -2,13 +2,13 @@
 
 # 简介
 
-该文件模块位于 `plugins/py/mc.py`，提供多种功能，包括监听器名字兼容，API修改，日志输出函数，配置文件操作函数等功能
+该文件模块位于 ``plugins/py/mc.py``，提供多种功能，包括监听器名字兼容，API修改，日志输出函数，配置文件操作函数等功能
 
 # 内容
 
 ##### 1.监听器名字兼容
 
-我们通过修改 `mc.setListener`和 `mc.removeListener`传入的监听器名字来实现兼容新旧监听器名字，例如
+我们通过修改 ``mc.setListener``和 ``mc.removeListener``传入的监听器名字来实现兼容新旧监听器名字，例如
 
 ```python
 def setListener(event: str, function: Callable[[object], Optional[bool]]) -> None:
@@ -25,7 +25,7 @@ def setListener(event: str, function: Callable[[object], Optional[bool]]) -> Non
 
 ##### 2.API修改
 
-我们通过包装 `BDSpyrunnerW`提供的 `API`来修改想要传入的值并提供更为清晰的函数原型，例如
+我们通过包装 ``BDSpyrunnerW``提供的 ``API``来修改想要传入的值并提供更为清晰的函数原型，例如
 
 ```python
 def setCommandDescription(cmd:str, description:str, function: Callable[[object], Optional[bool]] = None) -> None:
@@ -37,7 +37,7 @@ def setCommandDescription(cmd:str, description:str, function: Callable[[object],
 
 ##### 3.日志输出函数
 
-模块内提供了统一的日志输出接口来帮助开发者规范插件的控制台输出，您首先需要在您的插件中填写以下代码，此后插件在输出日志时便不必填写 `name`参数，插件名默认为文件名
+模块内提供了统一的日志输出接口来帮助开发者规范插件的控制台输出，您首先需要在您的插件中填写以下代码，此后插件在输出日志时便不必填写 ``name``参数，插件名默认为文件名
 
 ```python
 def logout(*content, name: str = __name__, level: str = "INFO", info: str = ""):
@@ -101,7 +101,7 @@ filename: 文件名，位于 plugins/py/<folder>/ 目录下
 encoding: 文件编码，默认为utf-8
 ```
 
-以下是示例代码，假设您的插件文件名为 `myplugin.py`
+以下是示例代码，假设您的插件文件名为 ``myplugin.py``
 
 ```python
 # 定义默认配置文件
@@ -123,7 +123,7 @@ logout(config['i_am_3'])
 logout(config['the_4_obj'][1]['name'])
 ```
 
-这将会在 `plugins/py/myplugin/myplugin.json`中产生如下内容
+这将会在 ``plugins/py/myplugin/myplugin.json``中产生如下内容
 
 ```json
 {
@@ -151,3 +151,37 @@ logout(config['the_4_obj'][1]['name'])
 ```
 
 修改配置文件中的内容，在控制台上的输出也会相应的发生改变
+
+##### 5.指针操作
+
+为了简化使用函数接口修改值的操作，我们选用指针作为``C++``和``Python``之间的数据交换桥梁。
+``Python``中的``BDSpyrunnerW``提供的指针通常是由一串数字表示的``int``类型，在文档中我们称其为``pointer``类型，需要使用``ctypes``库对其进行取值和修改操作。
+当需要修改指针指向的值时，可以使用``mc``文件模块中提供的``Pointer``类，该类提供了简便的访问指针指向的内存数据并对其进行修改的方法。
+
+以下为在玩家攻击时修改产生的伤害的示例：
+
+```python
+import mc
+import ctypes
+
+def onPlayerAttack(event):
+    pointer = mc.Pointer(event['damage'], ctypes.c_float)
+    damage = pointer.get()
+    pointer.set(100)
+    mc.log(
+        f"{event['player'].name}: ",
+        f"{damage} -> {pointer.get()} ({event['damage']})",
+        name="ATK",
+        info="onPlayerAttack"
+    )
+
+mc.setListener("onPlayerAttack", onPlayerAttack)
+```
+
+在初始化``mc.Pointer``时，需要传入指针和指针类型，``BDS``中的伤害值为``float``类型，因此传入``ctypes.c_float``。内存修改立即生效，因此在调用``set``成员函数后，不论是在``C++``还是``Python``中访问该内存，获得的值都是修改后的。这是该方法的基本原理。
+
+在服务器内使用空手攻击生物，一般生物会被直接击杀，控制台会打印类似于如下内容
+
+```text
+11:45:14 INFO [ATK][onPlayerAttack] SenpaiHomo: 1.0 -> 100.0 (114514001919810)
+```

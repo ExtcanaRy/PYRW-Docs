@@ -60,8 +60,9 @@ The following are all events.
 * Return data:
 
 
-* ``actor`` - the attacked entity
-* ``player`` - the player
+* ``actor: object`` - the attacked entity
+* ``player: object`` - the player
+* ``damage: pointer.c_float`` - the damage
 
 ## onSelectForm
 
