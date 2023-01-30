@@ -174,9 +174,6 @@
 * ``itemcount`` - 物品数量
 * ``itemname`` - 物品名字
 * ``itemaux`` - 物品特殊值
-* ``position`` - 操作方块所在位置
-* ``blockid`` - 方块ID
-* ``blockname`` - 方块名称
 * ``slot`` - 操作格子位置
 * ``player`` - 玩家
 
