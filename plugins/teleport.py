@@ -48,7 +48,7 @@ def init():
     j = {"config": {"maxHome": MAX_HOME, "waitTime": WAIT_TIME, "lockTime": LOCK_TIME, "tpRange": TP_RANGE, "processTime": PROCESS_TIME, "tpHeight": TP_HEIGH, "stepLenth": STEP_LENTH},
          "home": home, "warp": warp}
     mc.make_conf("teleport", "teleport.json", j)
-    j = mc.read_conf("teleport", "teleport.json", j)
+    j = mc.read_conf("teleport", "teleport.json")
     home = j['home']
     warp = j['warp']
     maxHome = j['config']['maxHome']
