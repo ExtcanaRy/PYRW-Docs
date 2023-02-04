@@ -3,6 +3,7 @@ from typing import Optional, Callable
 import time
 import os
 import json
+import ctypes
 
 # Listener
 def setListener(event: str, function: Callable[[object], Optional[bool]]) -> None:
@@ -173,8 +174,18 @@ def save_conf(folder:str, filename:str, config={}, encoding="utf-8"):
 
 def make_conf(folder:str, filename:str, config={}, encoding="utf-8"):
     if not os.path.exists(f"plugins/py/{folder}/{filename}"):
-        os.makedirs(f"plugins/py/{folder}")
+        os.makedirs(f"plugins/py/{folder}", exist_ok=True)
         save_conf(folder, filename, config, encoding)
         return True
     else:
         return False
+
+class Pointer:
+    def __init__(self, pointer: int, data_type: type):
+        self.pointer = ctypes.cast(pointer, ctypes.POINTER(data_type))
+
+    def get(self):
+        return self.pointer.contents.value
+
+    def set(self, value: any):
+        self.pointer.contents.value = value
