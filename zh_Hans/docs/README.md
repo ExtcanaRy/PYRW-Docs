@@ -2,10 +2,6 @@
 
 欢迎来到 `BDSpyrunnerW Docs`！
 
-![Liscense](https://img.shields.io/github/license/WillowSauceR/BDSpyrunner)
-![Downloads](https://img.shields.io/github/downloads/WillowSauceR/BDSpyrunner/total)
-![BDS](https://img.shields.io/badge/support--BDS--version-1.19.51.01-blue)
-
 此文档将帮助你开发适用于BDSpyrunnerW的插件。
 
 ## 要求
@@ -20,9 +16,9 @@
 
 ### 1. 创建新文件
 
-注意：你所创建的任何 `Python`文件都要使用 `UTF-8`编码，否则在加载时可能会出现错误，其他文件如`json`，我们也推荐使用`UTF-8`编码
+注意：你所创建的任何 `Python`文件都要使用 `UTF-8`编码，否则在加载时可能会出现错误，其他文件如 `json`，我们也推荐使用 `UTF-8`编码
 
-在`plugins/py`目录下创建`myplugin.py`，键入以下内容:
+在 `plugins/py`目录下创建 `myplugin.py`，键入以下内容:
 
 ```py
 import mc
@@ -72,7 +68,7 @@ mc.setListener('onUseItem', onUseItem)
 
 ### 4. 控制台调试
 
-在服务器后台输入`pydebug`即可进入控制台调试模式，在这个模式下，你可以键入`Python`语句进行执行，再次键入`pydebug`以返回服务器控制台
+在服务器后台输入 `pydebug`即可进入控制台调试模式，在这个模式下，你可以键入 `Python`语句进行执行，再次键入 `pydebug`以返回服务器控制台
 
 以下是一段示例
 
