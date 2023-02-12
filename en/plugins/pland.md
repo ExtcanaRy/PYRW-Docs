@@ -13,13 +13,13 @@
 
 [main](https://pyr.jfishing.love/plugins/pland.py "click me to download")
 
-[submodule](https://pyr.jfishing.love/plugins/landAPI.pyc "click me to download")
+[submodule](https://pyr.jfishing.love/plugins/landAPI.py "click me to download")
 
 # Configuration file
 
 ##### 1. Folder
 
-`pyplugins\land`
+``plugins/py/pland``
 
 ##### 2.config.json
 
@@ -106,49 +106,47 @@ Record data, do not modify it!
 ##### 1. Call the territory menu
 
 ```python
-impot mc
-landhelp=mc.getShareData('landhelp')
-landhelp(player)
+import pland
+pland.landhelp(player)
 # Parameters: player pointer
 ```
 
 ##### 2. Core function interface
 
 ```python
-lapi=mc.getShareData('landAPI')
-# Please don't use the impot method
+import landAPI as lapi
 
-lapi.island(x,y,z,worldid)
-# Check if it is a territory, parameters: (int)coordinates - (int)worldid, return value: (string)territory name, not present return "noland"
+lapi.island(x, y, z, worldid)
+# Check if it is a territory, parameters: (int)coordinates - (int)worldid, return value: (str)territory name, not present return "noland"
 
-lapi.islandplayer(playerxuid,x,y,z,worldid,powername)
-# Check if the player has a certain permission in the territory, parameters: (string)playerxuid - (int)coordinates - (int)worldid - (string)permission name, return value: bool
+lapi.islandplayer(playerxuid, x, y, z, worldid, powername)
+# Check if the player has a certain permission in the territory, parameters: (str)playerxuid - (int)coordinates - (int)worldid - (str)permission name, return value: bool
 # powername values: "useitem"|"putblock"|"destroyblock"|"openchest"|"attack"
 
 lapi.getlandinfo(landname)
-# Get land information, parameter: (string) landname, return value: (dict) dictionary
+# Get land information, parameter: (str) landname, return value: (dict) dictionary
 
 lapi.getplayerland(playerxuid)
-# Get the player owned territory, parameter: (string)playerxuid
+# Get the player owned territory, parameter: (str)playerxuid
 # Return value: (dict) dictionary, "world" - main world territory, "nether" - hell territory, "ender" - mordor territory
 
-lapi.getland_area(x1,y1,z1,x2,y2,z2,worldid,Dim)
+lapi.getland_area(x1, y1, z1, x2, y2, z2, worldid, Dim)
 # Get all the territories in a region
 # Dim values: "2D"|"3D"
 
-lapi.getland_point(x,y,z,worldid,Dim)
+lapi.getland_point(x, y, z, worldid, Dim)
 # Get the territory around a point
 # Dim values: "2D"|"3D"
 
-lapi.createlanddata(playerxuid,x1,y1,z1,x2,y2,z2,worldid,Dim)
-# Create a territory, parameters: (string)playerxuid-(int)coordinate1-(int)coordinate2-(int)worldid-(string)territory mode
+lapi.createlanddata(playerxuid, x1, y1, z1, x2, y2, z2, worldid, Dim)
+# Create a territory, parameters: (str)playerxuid-(int)coordinate1-(int)coordinate2-(int)worldid-(str)territory mode
 # Return value: (dict)dictionary, create success return -{"2D":[], "3D":[]}, create failure return the name of the overlapping territory
 # Dim values: "2D"|"3D"
 
 lapi.removeanddata(landname):
-# Remove a territory, parameter: (string)landname, return: bool
+# Remove a territory, parameter: (str)landname, return: bool
 
-lapi.setlandop(playerxuid,mode)
+lapi.setlandop(playerxuid, mode)
 # Set the territory administrator, parameter: playerxuid-mode, return value: bool
 # mode value: "add"|"del"
 ```
@@ -156,12 +154,12 @@ lapi.setlandop(playerxuid,mode)
 ##### 3. Extension function interface
 
 ```python
-lapi.addlandsign(landname,signname,data)
-# Add a sign for the territory, arguments: (string)territoryname - (string)signname - (dict)dictionary, return value: bool
+lapi.addlandsign(landname, signname, data)
+# Add a sign for the territory, arguments: (str)territoryname - (str)signname - (dict)dictionary, return value: bool
 
-lapi.removelandsign(landname,signname)
-# remove landsign, arguments: (string)landsname - (string)signname, return value: bool
+lapi.removelandsign(landname, signname)
+# remove landsign, arguments: (str)landsname - (str)signname, return value: bool
 
-lapi.getlandsign(landname,signname)
-# Get landsign, arguments: (string)landsname - (string)signname, return value (dict)dictionary, does not exist return -{}
+lapi.getlandsign(landname, signname)
+# Get landsign, arguments: (str)landsname - (str)signname, return value (dict)dictionary, does not exist return -{}
 ```

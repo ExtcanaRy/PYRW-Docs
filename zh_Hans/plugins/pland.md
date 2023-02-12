@@ -13,13 +13,13 @@
 
 [主体](https://pyr.jfishing.love/plugins/pland.py "点我下载")
 
-[子模块](https://pyr.jfishing.love/plugins/landAPI.pyc "点我下载")
+[子模块](https://pyr.jfishing.love/plugins/landAPI.py "点我下载")
 
 # 配置文件
 
 ##### 1.文件夹
 
-`pyplugins\land`
+``plugins/py/pland``
 
 ##### 2.config.json
 
@@ -41,12 +41,12 @@
 | land_teleport        | 玩家是否可以传送到领地                               | bool         |
 | land_world_open      | 主世界领地开关                                       | bool         |
 | landop_xuid          | 领地管理员的xuid，填写格式为["xuid1","xuid2"]        | list         |
-| menu_itemname        | 打开菜单的物品名称，如compass为指南针                | string       |
+| menu_itemname        | 打开菜单的物品名称，如compass为指南针                | str       |
 | mobile_listener      | 是否开启玩家移动监听，用于领地信息显示               | bool         |
 | pistonBlock_listener | 是否开启活塞推拉监听                                 | bool         |
-| scoreboard           | 经济采用的计分板名称                                 | string       |
+| scoreboard           | 经济采用的计分板名称                                 | str       |
 | playerbuyland        | 设置玩家是否可以购买领地                             | bool         |
-| version              | 版本                                                 | string       |
+| version              | 版本                                                 | str       |
 
 ##### 3.config.json样例
 
@@ -106,49 +106,47 @@
 ##### 1.调用领地菜单
 
 ```python
-impot mc
-landhelp=mc.getShareData('landhelp')
-landhelp(player)
+import pland
+pland.landhelp(player)
 # 参数：玩家指针
 ```
 
 ##### 2.核心功能接口
 
 ```python
-lapi=mc.getShareData('landAPI')
-# 请不要使用impot方法
+import landAPI as lapi
 
-lapi.island(x,y,z,worldid)
-# 检查是否为领地，参数：(int)坐标-(int)世界id，返回值：(string)领地名称，不存在返回“noland”
+lapi.island(x, y, z, worldid)
+# 检查是否为领地，参数：(int)坐标-(int)世界id，返回值：(str)领地名称，不存在返回“noland”
 
-lapi.islandplayer(playerxuid,x,y,z,worldid,powername)
-# 检查玩家是否拥有领地某项权限，参数：(string)玩家xuid-(int)坐标-(int)世界id-(string)权限名称，返回值：bool
+lapi.islandplayer(playerxuid, x, y, z, worldid, powername)
+# 检查玩家是否拥有领地某项权限，参数：(str)玩家xuid-(int)坐标-(int)世界id-(str)权限名称，返回值：bool
 # powername值："useitem"|"putblock"|"destroyblock"|"openchest"|"attack"
 
 lapi.getlandinfo(landname)
-# 获取领地信息，参数：(string)领地名称，返回值：(dict)字典
+# 获取领地信息，参数：(str)领地名称，返回值：(dict)字典
 
 lapi.getplayerland(playerxuid)
-# 获取玩家拥有的领地，参数：(string)玩家xuid
+# 获取玩家拥有的领地，参数：(str)玩家xuid
 # 返回值：(dict)字典，"world"-主世界领地，"nether"-地狱领地，"ender"-末地领地
 
-lapi.getland_area(x1,y1,z1,x2,y2,z2,worldid,Dim)
+lapi.getland_area(x1, y1, z1, x2, y2, z2, worldid, Dim)
 # 获得一个区域内的全部领地
 # Dim值："2D"|"3D"
 
-lapi.getland_point(x,y,z,worldid,Dim)
+lapi.getland_point(x, y, z, worldid, Dim)
 # 获得一个点周围的领地
 # Dim值："2D"|"3D"
 
-lapi.createlanddata(playerxuid,x1,y1,z1,x2,y2,z2,worldid,Dim)
-# 创建一个领地，参数：(string)玩家xuid-(int)坐标1-(int)坐标2-(int)世界id-(string)领地模式
+lapi.createlanddata(playerxuid, x1, y1, z1, x2, y2, z2, worldid, Dim)
+# 创建一个领地，参数：(str)玩家xuid-(int)坐标1-(int)坐标2-(int)世界id-(str)领地模式
 # 返回值：(dict)字典，创建成功返回-{"2D":[],"3D":[]}，创建失败返回重叠领地的名称
 # Dim值："2D"|"3D"
 
 lapi.removelanddata(landname):
-# 移除一个领地，参数：(string)领地名称，返回：bool
+# 移除一个领地，参数：(str)领地名称，返回：bool
 
-lapi.setlandop(playerxuid,mode)
+lapi.setlandop(playerxuid, mode)
 # 设置领地管理员，参数：玩家xuid-模式，返回值：bool
 # mode值："add"|"del"
 ```
@@ -156,12 +154,12 @@ lapi.setlandop(playerxuid,mode)
 ##### 3.拓展功能接口
 
 ```python
-lapi.addlandsign(landname,signname,data)
-# 为领地添加一个标志，参数：(string)领地名称-(string)标志名称-(dict)字典，返回值：bool
+lapi.addlandsign(landname, signname, data)
+# 为领地添加一个标志，参数：(str)领地名称-(str)标志名称-(dict)字典，返回值：bool
 
-lapi.removelandsign(landname,signname)
-# 移除领地标志，参数：(string)领地名称-(string)标志名称，返回值：bool
+lapi.removelandsign(landname, signname)
+# 移除领地标志，参数：(str)领地名称-(str)标志名称，返回值：bool
 
-lapi.getlandsign(landname,signname)
-# 获取领地标志，参数：(string)领地名称-(string)标志名称，返回值 (dict)字典，不存在返回-{}
+lapi.getlandsign(landname, signname)
+# 获取领地标志，参数：(str)领地名称-(str)标志名称，返回值 (dict)字典，不存在返回-{}
 ```

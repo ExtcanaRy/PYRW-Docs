@@ -9,8 +9,8 @@ import sqlite3 as sq
 import random
 
 
-def logout(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
-    mc.log(content, name=__name__, level="INFO", info="")
+def logout(*content, name: str = __name__, level: str = "INFO", info: str = ""):
+    mc.log(content, name=name, level=level, info=info)
 
 
 debug_pc = {}  # 修复pc端多次打开表单
@@ -1488,5 +1488,5 @@ def landold_tolandnew():
             pass
     logout("旧版领地数据转化完成")
 
-
-landstart()
+if __name__ == "pland":
+    landstart()

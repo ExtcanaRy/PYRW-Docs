@@ -1,6 +1,6 @@
 import mco
 from typing import Optional, Callable
-import time
+from datetime import datetime
 import os
 import json
 import ctypes
@@ -133,7 +133,11 @@ logger = log_out_function_replace
 logger = print
 
 def log(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
-    date = time.strftime('%H:%M:%S')
+    if os.path.exists("BDXCORE.dll") and not os.path.exists("bedrock_server_mod.exe"):
+        date = datetime.now().strftime("[%Y-%m-%d %H:%M:%S:%f")[:-3]
+        level += "]"
+    else:
+        date = datetime.now().strftime("%H:%M:%S")
     strs = ""
     for string in content:
         strs += str(string)
@@ -142,16 +146,16 @@ def log(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
     else:
         content = strs
     if __name__ != '__main__':
-        if name != "plugin" and content != "Test Message" and level != "INFO" and info != "":
-            logger(f"{date} {level} [{name}][{info}] {content}")
-        elif name != "plugin" and level != "INFO":
-            logger(f"{date} {level} [{name}] {content}")
-        elif name != "plugin" and info != "":
-            logger(f"{date} INFO [{name}][{info}] {content}")
+        if name != "Plugin" and content != "Test Message" and level != "INFO" and info != "":
+            logger(f"{date} {level}[{name}][{info}] {content}")
+        elif name != "Plugin" and level != "INFO":
+            logger(f"{date} {level}[{name}] {content}")
+        elif name != "Plugin" and info != "":
+            logger(f"{date} {level}[{name}][{info}] {content}")
         elif info != "":
-            logger(f"{date} INFO [{name}][{info}] {content}")
+            logger(f"{date} {level}[{name}][{info}] {content}")
         else:
-            logger(f"{date} INFO [{name}] {content}")
+            logger(f"{date} {level}[{name}] {content}")
 
 
 def read_conf(folder:str, filename:str, encoding="utf-8"):

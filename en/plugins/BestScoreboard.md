@@ -10,19 +10,20 @@ hide scoreboard for offline players
 
 # Configuration file
 
-配置文件位于`plugins/py/BestScoreboard/Config.json`
+The configuration file is located at ``plugins/py/BestScoreboard/Config.json``
+
 ```json
 {
-    "Money": "money",    // 经济计分板
-    "DisplayerScore": "displayermoney",        // 显示计分板名称
-    "DisplayerName": "Gold leaderboard",         // 游戏内显示计分板名称
-    "ScoreboardSet": true,            // 启动服务器时，显示本插件设置
-    "Scoreboardsidebar": true,        // 为 右侧计分板
-    "Scoreboardlist": true,           // 为 游戏暂停界面计分板
-    "ScoreboardBelowname": true,     // 为 玩家头顶显示计分板
-    "ScoreboardLog":true              // 控制台输出日志
+    "Money": "money",    // Economic scoreboard name
+    "DisplayerScore": "displayermoney",        // Display scoreboard name
+    "DisplayerName": "Gold leaderboard",         // In-game display of scoreboard names
+    "ScoreboardSet": true,            // display this plugin settings when starting the server
+    "Scoreboardsidebar": true,        // Displayed as right-hand scoreboard
+    "Scoreboardlist": true,           // Display as game pause screen scoreboard
+    "ScoreboardBelowname": true,     // Display as player overhead display scoreboard
+    "ScoreboardLog": true              // Console output log
     }
-    // Json files in Pyr do not allow comments
+    // JSON files do NOT allow comments
     // Please do not copy the description code directly
     // The configuration file is generated at the first startup
 ```

@@ -9,3 +9,4 @@
 * [pland](pland.md "Territory plugin")
 * [votekick](votekick.md "Votekick plugin")
 * [chatlog](chatlog.md "Chat output plugin")
+* [BestScoreboard](BestScoreboard.md)
