@@ -37,8 +37,10 @@ playerbuyland = True
 mobile_listener = True
 around_place = True
 
+
 def logout(*content, name: str = __name__, level: str = "INFO", info: str = ""):
     mc.log(content, name="pland", level=level, info=info)
+
 
 def stringtojson(data):
     jsondata = json.loads(data)
@@ -46,7 +48,8 @@ def stringtojson(data):
 
 
 def jsontostring(data):
-    data2 = json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
+    data2 = json.dumps(data, sort_keys=True, indent=4,
+                       separators=(',', ': '), ensure_ascii=False)
     return data2
 
 
@@ -119,6 +122,7 @@ config['around_place'] = True
 config['land_teleport'] = True
 config['pistonBlock_listener'] = True
 
+
 def createconfig():
     global config
     writelandfp('config.json', jsontostring(config))
@@ -130,13 +134,11 @@ def createlanddata(playerxuid, x1, y1, z1, x2, y2, z2, worldid, Dim):
         if worldid != 1:
             if worldid != 2:
                 logout(f"参数[worldid={worldid}有误, 无法创建领地", level="ERROR")
-                return [
-                 'False']
+                return ['False']
     if Dim != '2D':
         if Dim != '3D':
             logout(f"参数[Dim={Dim}]有误！无法创建领地", level="ERROR")
-            return [
-             'False']
+            return ['False']
     landall = {}
     landall['2D'] = getland_area(x1, y1, z1, x2, y2, z2, worldid, '2D')
     if Dim == '2D':
@@ -370,72 +372,57 @@ def createlandindex():
     global landindex
     for landname in landdata['po']:
         land = getlandinfo(landname)
-        x1 = land['x1']
-        z1 = land['z1']
-        x2 = land['x2']
-        z2 = land['z2']
-        startx = int(min([x1, x2]) / accuracy)
-        endx = int(max([x1, x2]) / accuracy)
-        startz = int(min([z1, z2]) / accuracy)
-        endz = int(max([z1, z2]) / accuracy)
-        worldid = land['worldid']
+        x1, z1, x2, z2 = land['x1'], land['z1'], land['x2'], land['z2']
+        startx, endx = int(min([x1, x2]) / accuracy), int(max([x1, x2]) / accuracy)
+        startz, endz = int(min([z1, z2]) / accuracy), int(max([z1, z2]) / accuracy)
+        worldid, Dim = land['worldid'], land['Dim']
         worldname = getworldname(worldid)
-        Dim = land['Dim']
         for i in range(endx - startx + 1):
             p = startx + i
             for j in range(endz - startz + 1):
                 q = startz + j
-                aindex = str(p) + ':' + str(q)
-                try:
+                aindex = f"{p}:{q}"
+                if aindex in landindex[Dim][worldname]:
                     landindex[Dim][worldname][aindex].append(landname)
-                except:
-                    landindex[Dim][worldname][aindex] = []
-                    landindex[Dim][worldname][aindex].append(landname)
-
+                else:
+                    landindex[Dim][worldname][aindex] = [landname]
     return landindex
 
 
 def addlandindex(x1, y1, z1, x2, y2, z2, worldid, Dim):
     landname = f"{Dim}:{x1}.{y1}.{z1}:{x2}.{y2}.{z2}:{worldid}"
     worldname = getworldname(worldid)
-    startx = int(min([x1, x2]) / accuracy)
-    endx = int(max([x1, x2]) / accuracy)
-    startz = int(min([z1, z2]) / accuracy)
-    endz = int(max([z1, z2]) / accuracy)
+    startx, endx = int(min([x1, x2]) / accuracy), int(max([x1, x2]) / accuracy)
+    startz, endz = int(min([z1, z2]) / accuracy), int(max([z1, z2]) / accuracy)
     for i in range(endx - startx + 1):
         p = startx + i
         for j in range(endz - startz + 1):
             q = startz + j
-            aindex = str(p) + ':' + str(q)
-            try:
+            aindex = f"{p}:{q}"
+            if aindex in landindex[Dim][worldname]:
                 landindex[Dim][worldname][aindex].append(landname)
-            except:
-                landindex[Dim][worldname][aindex] = []
-                landindex[Dim][worldname][aindex].append(landname)
-
+            else:
+                landindex[Dim][worldname][aindex] = [landname]
     return landindex
+
 
 
 def removelandindex(landname):
     land = getlandinfo(landname)
     if land == {}:
         return
-    x1 = land['x1']
-    z1 = land['z1']
-    x2 = land['x2']
-    z2 = land['z2']
-    startx = int(min([x1, x2]) / accuracy)
-    endx = int(max([x1, x2]) / accuracy)
-    startz = int(min([z1, z2]) / accuracy)
-    endz = int(max([z1, z2]) / accuracy)
-    Dim = land['Dim']
-    worldid = land['worldid']
+
+    x1, z1, x2, z2 = land['x1'], land['z1'], land['x2'], land['z2']
+    startx, endx = int(min([x1, x2]) / accuracy), int(max([x1, x2]) / accuracy)
+    startz, endz = int(min([z1, z2]) / accuracy), int(max([z1, z2]) / accuracy)
+    Dim, worldid = land['Dim'], land['worldid']
     worldname = getworldname(worldid)
+
     for i in range(endx - startx + 1):
         p = startx + i
         for j in range(endz - startz + 1):
             q = startz + j
-            aindex = str(p) + ':' + str(q)
+            aindex = f"{p}:{q}"
             try:
                 landindex[Dim][worldname][aindex].remove(landname)
             except:
@@ -445,52 +432,27 @@ def removelandindex(landname):
 
 
 def island2(x, y, z, worldid, LandDim):
-    try:
-        worldname = getworldname(worldid)
-        if LandDim == '2D':
-            xa = int(x / accuracy)
-            za = int(z / accuracy)
-            aindex = str(xa) + ':' + str(za)
-            aland = landindex['2D'][worldname][aindex]
-            for landname in aland:
-                land = getlandinfo(landname)
-                x1 = land['x1']
-                z1 = land['z1']
-                x2 = land['x2']
-                z2 = land['z2']
-                if x >= min([x1, x2]):
-                    if x <= max([x1, x2]):
-                        if z >= min([z1, z2]):
-                            if z <= max([z1, z2]):
-                                return landname
-
-        else:
-            if LandDim == '3D':
-                xa = int(x / accuracy)
-                za = int(z / accuracy)
-                aindex = str(xa) + ':' + str(za)
-                aland = landindex['3D'][worldname][aindex]
-                for landname in aland:
-                    land = getlandinfo(landname)
-                    x1 = land['x1']
-                    y1 = land['y1']
-                    z1 = land['z1']
-                    x2 = land['x2']
-                    y2 = land['y2']
-                    z2 = land['z2']
-                    if x >= min([x1, x2]):
-                        if x <= max([x1, x2]):
-                            if y >= min([y1, y2]):
-                                if y <= max([y1, y2]):
-                                    if z >= min([z1, z2]):
-                                        if z <= max([z1, z2]):
-                                            return landname
-
-            else:
-                return 'noland'
-    except:
+    worldname = getworldname(worldid)
+    if LandDim not in ["2D", "3D"]:
         return 'noland'
-    else:
+
+    try:
+        xa, za = int(x / accuracy), int(z / accuracy)
+        aindex = f"{xa}:{za}"
+        aland = landindex[LandDim][worldname][aindex]
+
+        for landname in aland:
+            land = getlandinfo(landname)
+            x1, z1, x2, z2 = land['x1'], land['z1'], land['x2'], land['z2']
+            if min([x1, x2]) <= x <= max([x1, x2]) and min([z1, z2]) <= z <= max([z1, z2]):
+                if LandDim == "3D":
+                    y1, y2 = land['y1'], land['y2']
+                    if min([y1, y2]) <= y <= max([y1, y2]):
+                        return landname
+                else:
+                    return landname
+        return 'noland'
+    except:
         return 'noland'
 
 
@@ -516,7 +478,7 @@ def islandplayer(playerxuid, x, y, z, worldid, adminname):
         return True
     if worldid == 2 and not land_ender_open:
         return True
-    
+
     if islandop(playerxuid):
         return True
     landname = island(x, y, z, worldid)
@@ -525,40 +487,22 @@ def islandplayer(playerxuid, x, y, z, worldid, adminname):
     land = getlandinfo(landname)
     if playerxuid == land['playerxuid']:
         return True
-    if islandshareplayer(playerxuid, landname):
-        if getlandpower(landname, 'share_' + adminname):
-            return True
-    else:
-        if getlandpower(landname, adminname):
-            return True
+    if islandshareplayer(playerxuid, landname) and getlandpower(landname, 'share_' + adminname):
+        return True
+    elif getlandpower(landname, adminname):
+        return True
     return False
 
 
-def landis(x, z, x1, z1, x2, z2):
-    if x1 < x2:
-        if not x >= x1 or x <= x2:
-            if z1 < z2:
-                if not z >= z1 or z <= z2:
-                    return True
-            else:
-                if z >= z2:
-                    if z <= z1:
-                        return True
-    else:
-        if x <= x1:
-            if x >= x2:
-                if z1 < z2:
-                    if z >= z1:
-                        if z <= z2:
-                            return True
-                else:
-                    if z >= z2:
-                        if z <= z1:
-                            return True
-    return False
+def is_inside_rectangle(land, rect):
+    return (land['x1'] >= rect['x1'] and land['x1'] <= rect['x2'] and
+            land['x2'] >= rect['x1'] and land['x2'] <= rect['x2'] and
+            land['z1'] >= rect['z1'] and land['z1'] <= rect['z2'] and
+            land['z2'] >= rect['z1'] and land['z2'] <= rect['z2'])
 
 
 def getland_area(x1, y1, z1, x2, y2, z2, worldid, Dim):
+    rect = {'x1': x1, 'x2': x2, 'z1': z1, 'z2': z2}
     startx = int(min(x1, x2) / accuracy)
     endx = int(max(x1, x2) / accuracy)
     startz = int(min([z1, z2]) / accuracy)
@@ -569,105 +513,60 @@ def getland_area(x1, y1, z1, x2, y2, z2, worldid, Dim):
         p = startx + i
         for j in range(endz - startz + 1):
             q = startz + j
-            aindex = str(p) + ':' + str(q)
+            aindex = f"{p}:{q}"
             try:
                 aa = landindex[Dim][worldname][aindex]
                 for landname in aa:
                     if landname not in landall:
                         land = getlandinfo(landname)
-                        landx1 = land['x1']
-                        landx2 = land['x2']
-                        landy1 = land['y1']
-                        landy2 = land['y2']
-                        landz1 = land['z1']
-                        landz2 = land['z2']
-                        if Dim == '3D':
-                            if not max([y1, y2]) < min([landy1, landy2]):
-                                if min([y1, y2]) > max([landy1, landy2]):
-                                    continue
-                        if not landis(landx1, landz1, x1, z1, x2, z2):
-                            if not landis(landx1, landz2, x1, z1, x2, z2):
-                                if not landis(landx2, landz1, x1, z1, x2, z2):
-                                    if not landis(landx2, landz2, x1, z1, x2, z2):
-                                        if landis(x2, z2, landx1, landz1, landx2, landz2):
-                                            pass
-                        landall.append(landname)
-
+                        if Dim == '3D' and max([y1, y2]) >= min([land['y1'], land['y2']]) and min([y1, y2]) <= max([land['y1'], land['y2']]):
+                            continue
+                        if is_inside_rectangle(land, rect):
+                            landall.append(landname)
             except:
                 continue
-
     return landall
 
 
 def getland_point(x, y, z, worldid, Dim):
-    x1 = x - accuracy
-    z1 = z - accuracy
-    x2 = x + accuracy
-    z2 = z + accuracy
-    startx = int(min(x1, x2) / accuracy)
-    endx = int(max(x1, x2) / accuracy)
-    startz = int(min([z1, z2]) / accuracy)
-    endz = int(max([z1, z2]) / accuracy)
+    x1, z1 = x - accuracy, z - accuracy
+    x2, z2 = x + accuracy, z + accuracy
+    startx, endx = int(min(x1, x2) / accuracy), int(max(x1, x2) / accuracy)
+    startz, endz = int(min(z1, z2) / accuracy), int(max(z1, z2) / accuracy)
     worldname = getworldname(worldid)
     landall = []
     for i in range(endx - startx + 1):
         p = startx + i
         for j in range(endz - startz + 1):
             q = startz + j
-            aindex = str(p) + ':' + str(q)
-            try:
-                aa = landindex[Dim][worldname][aindex]
-                for landname in aa:
-                    if landname not in landall:
-                        landall.append(landname)
-
-            except:
-                continue
-
+            aindex = f"{p}:{q}"
+            aa = landindex.get(Dim, {}).get(worldname, {}).get(aindex, [])
+            for landname in aa:
+                if landname not in landall:
+                    landall.append(landname)
     return landall
+
 
 
 def getplayerland(playerxuid):
     landall = {}
-    landall['world'] = []
-    landall['nether'] = []
-    landall['ender'] = []
-    try:
-        landall['world'] = landdata['player'][playerxuid]['worldland']
-    except:
-        landall['world'] = []
-
-    try:
-        landall['nether'] = landdata['player'][playerxuid]['netherland']
-    except:
-        landall['nether'] = []
-
-    try:
-        landall['ender'] = landdata['player'][playerxuid]['enderland']
-    except:
-        landall['ender'] = []
-
+    for dimension in ['worldland', 'netherland', 'enderland']:
+        try:
+            landall[dimension] = landdata['player'][playerxuid][dimension]
+        except KeyError:
+            landall[dimension] = []
     return landall
+
 
 
 def getplayerlandnum(playerxuid):
     landnum = 0
-    try:
-        landnum += len(landdata['player'][playerxuid]['worldland'])
-    except:
-        landnum += 0
-
-    try:
-        landnum += len(landdata['player'][playerxuid]['netherland'])
-    except:
-        landnum += 0
-
-    try:
-        landnum += len(landdata['player'][playerxuid]['enderland'])
-    except:
-        landnum += 0
-
-    return int(landnum)
+    for dimension in ['worldland', 'netherland', 'enderland']:
+        try:
+            landnum += len(landdata['player'][playerxuid][dimension])
+        except KeyError:
+            pass
+    return landnum
 
 
 language = {}
@@ -807,21 +706,20 @@ language['gui_image']['查询周围领地'] = ''
 language['gui_image']['确定'] = ''
 language['gui_image']['取消'] = ''
 
+
 def read_language():
     global language
     fplanguage = stringtojson(readlandfp('language.json'))
     for a in language:
         for key in language[a]:
-            try:
+            if a in fplanguage and key in fplanguage[a]:
                 language[a][key] = fplanguage[a][key]
-            except:
-                try:
-                    fplanguage[a][key] = language[a][key]
-                except:
+            else:
+                if a not in fplanguage:
                     fplanguage[a] = {}
-                    fplanguage[a][key] = language[a][key]
-
-                logout(f" lack <{a}|{key}>,Successful supplement.", level="ERROR", info="Language")
+                fplanguage[a][key] = language[a][key]
+                logout(f"Missing language mapping <{a}|{key}>, successfully added.",
+                       level="WARN", info="Language")
 
     writelandfp('language.json', jsontostring(fplanguage))
 
