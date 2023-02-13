@@ -510,33 +510,28 @@ def islandplayer(playerxuid, x, y, z, worldid, adminname):
     global land_ender_open
     global land_nether_open
     global land_world_open
-    if worldid == 0:
-        if not land_world_open:
+    if worldid == 0 and not land_world_open:
+        return True
+    if worldid == 1 and not land_nether_open:
+        return True
+    if worldid == 2 and not land_ender_open:
+        return True
+    
+    if islandop(playerxuid):
+        return True
+    landname = island(x, y, z, worldid)
+    if landname == 'noland':
+        return True
+    land = getlandinfo(landname)
+    if playerxuid == land['playerxuid']:
+        return True
+    if islandshareplayer(playerxuid, landname):
+        if getlandpower(landname, 'share_' + adminname):
             return True
     else:
-        if worldid == 1:
-            if not land_nether_open:
-                return True
-        else:
-            pass
-    if worldid == 2:
-        if not land_ender_open:
+        if getlandpower(landname, adminname):
             return True
-        if islandop(playerxuid):
-            return True
-        landname = island(x, y, z, worldid)
-        if landname == 'noland':
-            return True
-        land = getlandinfo(landname)
-        if playerxuid == land['playerxuid']:
-            return True
-        if islandshareplayer(playerxuid, landname):
-            if getlandpower(landname, 'share_' + adminname):
-                return True
-        else:
-            if getlandpower(landname, adminname):
-                return True
-        return False
+    return False
 
 
 def landis(x, z, x1, z1, x2, z2):
@@ -930,7 +925,7 @@ def loadsdata():
                 config[aa] = pfconfig[aa]
             except:
                 pfconfig[aa] = config[aa]
-                logout("config.json 缺少:' + aa + ',已自动补齐.")
+                logout(f"config.json 缺少: {aa}, 已自动补齐.")
 
         pfconfig['version'] = VERSION
         writelandfp('config.json', jsontostring(pfconfig))
