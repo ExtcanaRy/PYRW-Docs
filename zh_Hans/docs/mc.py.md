@@ -1,12 +1,12 @@
 # mc.py
 
-# 简介
+## 简介
 
 该文件模块位于 ``plugins/py/mc.py``，提供多种功能，包括监听器名字兼容，API修改，日志输出函数，配置文件操作函数等功能
 
-# 内容
+### 内容
 
-##### 1.监听器名字兼容
+#### 1.监听器名字兼容
 
 我们通过修改 ``mc.setListener``和 ``mc.removeListener``传入的监听器名字来实现兼容新旧监听器名字，例如
 
@@ -23,7 +23,7 @@ def setListener(event: str, function: Callable[[object], Optional[bool]]) -> Non
         return mco.setListener(event, function)
 ```
 
-##### 2.API修改
+#### 2.API修改
 
 我们通过包装 ``BDSpyrunnerW``提供的 ``API``来修改想要传入的值并提供更为清晰的函数原型，例如
 
@@ -35,13 +35,13 @@ def setCommandDescription(cmd:str, description:str, function: Callable[[object],
         return mco.setCommandDescription(cmd, description)
 ```
 
-##### 3.日志输出函数
+#### 3.日志输出函数
 
 模块内提供了统一的日志输出接口来帮助开发者规范插件的控制台输出。
 
 初始化类，这里使用``__name__``以使用插件的文件名作为输出日志名。假设我们当前编写的插件名为``myplugin.py``。
 
-```
+```python
 logger = mc.Logger(__name__)
 ```
 
@@ -73,7 +73,7 @@ mc.setListener("onServerStarted", testonServerStarted)
 14:37:05 WARN [myplugin][LOG] Listener onServerStarted
 ```
 
-##### 4.配置文件操作
+#### 4.配置文件操作
 
 函数原型
 
@@ -90,15 +90,15 @@ make_conf(folder:str, filename:str, config={}, encoding="utf-8")
 
 参数
 
-```
+```plaintext
 folder: 保存配置文件的文件夹，位于 plugins/py/ 目录下
 ```
 
-```
+```plaintext
 filename: 文件名，位于 plugins/py/<folder>/ 目录下
 ```
 
-```
+```plaintext
 encoding: 文件编码，默认为utf-8
 ```
 
@@ -128,19 +128,19 @@ logout(config['the_4_obj'][1]['name'])
 
 ```json
 {
-	"obj_1": 3,
-	"obj_2": true,
-	"i_am_3": "I am 3",
-	"the_4_obj": [
-		{
-			"name": "this is 1"
-		},
-		{
-			"name": "another_obj",
-			"type": "str"
-		}
-	],
-	"i_am_none": null
+    "obj_1": 3,
+    "obj_2": true,
+    "i_am_3": "I am 3",
+    "the_4_obj": [
+        {
+            "name": "this is 1"
+        },
+        {
+            "name": "another_obj",
+            "type": "str"
+        }
+    ],
+    "i_am_none": null
 }
 ```
 
@@ -153,7 +153,7 @@ logout(config['the_4_obj'][1]['name'])
 
 修改配置文件中的内容，在控制台上的输出也会相应的发生改变
 
-##### 5.指针操作
+#### 5.指针操作
 
 为了简化使用函数接口修改值的操作，我们选用指针作为 ``C++``和 ``Python``之间的数据交换桥梁。
 ``Python``中的 ``BDSpyrunnerW``提供的指针通常是由一串数字表示的 ``int``类型，在文档中我们称其为 ``pointer``类型，需要使用 ``ctypes``库对其进行取值和修改操作。
@@ -183,6 +183,6 @@ mc.setListener("onPlayerAttack", onPlayerAttack)
 
 在服务器内使用空手攻击生物，一般生物会被直接击杀，控制台会打印类似于如下内容
 
-```text
+```plaintext
 11:45:14 INFO [ATK][onPlayerAttack] SenpaiHomo: 1.0 -> 100.0 (114514001919810)
 ```

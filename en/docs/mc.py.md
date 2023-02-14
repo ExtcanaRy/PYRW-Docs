@@ -1,12 +1,12 @@
 # mc.py
 
-# Introduction
+## Introduction
 
 This file module is located in ``plugins/py/mc.py`` and provides various functions, including listener name compatibility, API modification, log output functions, configuration file manipulation functions, etc.
 
-# Contents
+### Contents
 
-##### 1. Listener Name Compatibility
+#### 1. Listener Name Compatibility
 
 We can achieve compatibility between old and new listener names by modifying the listener names passed in by ``mc.setListener`` and ``mc.removeListener``, for example
 
@@ -23,7 +23,7 @@ def setListener(event: str, function: Callable[[object], Optional[bool]]) -> Non
         return mco.setListener(event, function)
 ```
 
-##### 2. API modification
+#### 2. API modification
 
 We modify the values we want to pass in and provide a clearer function prototype by wrapping the ``API`` provided by ``BDSpyrunnerW``, for example
 
@@ -35,13 +35,13 @@ def setCommandDescription(cmd:str, description:str, function: Callable[[object],
         return mco.setCommandDescription(cmd, description)
 ```
 
-##### 3. Log output functions
+#### 3. Log output functions
 
 The module provides a uniform log output interface to help developers standardize the console output of the plugin.
 
 Initialize the class, here ``__name__`` is used to use the plugin's filename as the output log name. Suppose we currently write a plugin named ``myplugin.py``.
 
-```
+```python
 logger = mc.Logger(__name__)
 ```
 
@@ -73,7 +73,7 @@ This will produce the following output
 14:37:05 WARN [myplugin][LOG] Listener onServerStarted
 ```
 
-##### 4. Configuration file manipulation
+#### 4. Configuration file manipulation
 
 Function prototype
 
@@ -90,15 +90,15 @@ make_conf(folder:str, filename:str, config={}, encoding="utf-8")
 
 Parameters
 
-```
+```plaintext
 folder: folder where the configuration file is stored, located in the plugins/py/ directory
 ```
 
-```
+```plaintext
 filename: the name of the file, located in the plugins/py/<folder>/ directory
 ```
 
-```
+```plaintext
 encoding: encoding of the file, default is utf-8
 ```
 
@@ -128,19 +128,19 @@ This will generate the following in ``plugins/py/myplugin/myplugin.json``
 
 ```json
 {
-	"obj_1": 3,
-	"obj_2": true,
-	"i_am_3": "I am 3",
-	"the_4_obj": [
-		{
-			"name": "this is 1"
-		},
-		{
-			"name": "another_obj",
-			"type": "str"
-		}
-	],
-	"i_am_none": null
+    "obj_1": 3,
+    "obj_2": true,
+    "i_am_3": "I am 3",
+    "the_4_obj": [
+        {
+            "name": "this is 1"
+        },
+        {
+            "name": "another_obj",
+            "type": "str"
+        }
+    ],
+    "i_am_none": null
 }
 ```
 
@@ -153,7 +153,7 @@ and output the following on the console
 
 By changing the contents of the configuration file, the output on the console will change accordingly
 
-##### 5. Pointer operations
+#### 5. Pointer operations
 
 To simplify the operation of modifying values using the function interface, we have chosen to use pointers as a bridge for data exchange between ``C++`` and ``Python``.
 The pointer provided by ``BDSpyrunnerW`` in ``Python`` is usually of type ``int`` represented by a string of numbers, which we call type ``pointer`` in the documentation, and requires the use of the ``ctypes`` library to take and modify its value.
@@ -183,6 +183,6 @@ When initializing ``mc.Pointer``, you need to pass in a pointer and a pointer ty
 
 When using an empty-handed attack on a creature within the server, the creature will normally be killed outright and the console will print something like this
 
-```text
+```plaintext
 11:45:14 INFO [ATK][onPlayerAttack] SenpaiHomo: 1.0 -> 100.0 (114514001919810)
 ```
