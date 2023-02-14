@@ -37,18 +37,19 @@ def setCommandDescription(cmd:str, description:str, function: Callable[[object],
 
 ##### 3. Log output functions
 
-The module provides a unified log output interface to help developers standardize the console output of the plugin. You first need to fill in the following code in your plugin, then the plugin does not need to fill in the `name` parameter when outputting the log, the plugin name is the file name by default
+The module provides a uniform log output interface to help developers standardize the console output of the plugin.
 
-```python
-def logout(*content, name: str = __name__, level: str = "INFO", info: str = ""):
-    mc.log(content, name=name, level=level, info=info)
+Initialize the class, here ``__name__`` is used to use the plugin's filename as the output log name. Suppose we currently write a plugin named ``myplugin.py``.
+
+```
+logger = mc.Logger(__name__)
 ```
 
 To generate the first output, we write the following code
 
 ```python
 def testonServerStarted(e):
-	logout("Listener onServerStarted")
+    logger.info("Listener onServerStarted")
 mc.setListener("onServerStarted", testonServerStarted)
 ```
 
@@ -62,14 +63,14 @@ To make the output more diverse, we modified the code as follows
 
 ```python
 def testonServerStarted(e):
-	logout("Listener onServerStarted", name="MY_FIRST_PLUGIN", level="WARN", info="LOG")
+    logger.warn("Listener onServerStarted", info="LOG")
 mc.setListener("onServerStarted", testonServerStarted)
 ```
 
 This will produce the following output
 
 ```plaintext
-14:37:05 WARN [MY_FIRST_PLUGIN][LOG] Listener onServerStarted
+14:37:05 WARN [myplugin][LOG] Listener onServerStarted
 ```
 
 ##### 4. Configuration file manipulation
@@ -151,7 +152,6 @@ and output the following on the console
 ```
 
 By changing the contents of the configuration file, the output on the console will change accordingly
-
 
 ##### 5. Pointer operations
 

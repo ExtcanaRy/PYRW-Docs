@@ -1,9 +1,11 @@
 import mco
-from typing import Optional, Callable
-from datetime import datetime
+
 import os
 import json
 import ctypes
+import inspect
+from typing import Optional, Callable
+from datetime import datetime
 
 # Listener
 def setListener(event: str, function: Callable[[object], Optional[bool]]) -> None:
@@ -156,6 +158,37 @@ def log(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
             logger(f"{date} {level}[{name}][{info}] {content}")
         else:
             logger(f"{date} {level}[{name}] {content}")
+
+
+class Logger:
+    def __init__(self, name):
+        self.name = name
+    
+    def log(self, *content, info: str = ""):
+        level = inspect.currentframe().f_back.f_code.co_name.upper()
+        if os.path.exists("BDXCORE.dll") and not os.path.exists("bedrock_server_mod.exe"):
+            date = datetime.now().strftime("[%Y-%m-%d %H:%M:%S:%f")[:-3]
+            level += "]"
+        else:
+            date = datetime.now().strftime("%H:%M:%S")
+            level += " "
+        if __name__ != '__main__':
+            if info != "":
+                print(f"{date} {level}[{self.name}][{info}] ", *content, sep="")
+            else:
+                print(f"{date} {level}[{self.name}] ", *content, sep="")
+    
+    def info(self, *content, info=""):
+        self.log(*content, info=info)
+    
+    def warn(self, *content, info=""):
+        self.log(*content, info=info)
+    
+    def error(self, *content, info=""):
+        self.log(*content, info=info)
+    
+    def fatal(self, *content, info=""):
+        self.log(*content, info=info)
 
 
 def read_conf(folder:str, filename:str, encoding="utf-8"):

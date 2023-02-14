@@ -37,18 +37,19 @@ def setCommandDescription(cmd:str, description:str, function: Callable[[object],
 
 ##### 3.日志输出函数
 
-模块内提供了统一的日志输出接口来帮助开发者规范插件的控制台输出，您首先需要在您的插件中填写以下代码，此后插件在输出日志时便不必填写 ``name``参数，插件名默认为文件名
+模块内提供了统一的日志输出接口来帮助开发者规范插件的控制台输出。
 
-```python
-def logout(*content, name: str = __name__, level: str = "INFO", info: str = ""):
-    mc.log(content, name=name, level=level, info=info)
+初始化类，这里使用``__name__``以使用插件的文件名作为输出日志名。假设我们当前编写的插件名为``myplugin.py``。
+
+```
+logger = mc.Logger(__name__)
 ```
 
 要产生第一条输出，我们编写了如下代码
 
 ```python
 def testonServerStarted(e):
-	logout("Listener onServerStarted")
+    logger.info("Listener onServerStarted")
 mc.setListener("onServerStarted", testonServerStarted)
 ```
 
@@ -62,14 +63,14 @@ mc.setListener("onServerStarted", testonServerStarted)
 
 ```python
 def testonServerStarted(e):
-	logout("Listener onServerStarted", name="MY_FIRST_PLUGIN", level="WARN", info="LOG")
+    logger.warn("Listener onServerStarted", info="LOG")
 mc.setListener("onServerStarted", testonServerStarted)
 ```
 
 这将会产生如下输出
 
 ```plaintext
-14:37:05 WARN [MY_FIRST_PLUGIN][LOG] Listener onServerStarted
+14:37:05 WARN [myplugin][LOG] Listener onServerStarted
 ```
 
 ##### 4.配置文件操作
@@ -154,9 +155,9 @@ logout(config['the_4_obj'][1]['name'])
 
 ##### 5.指针操作
 
-为了简化使用函数接口修改值的操作，我们选用指针作为``C++``和``Python``之间的数据交换桥梁。
-``Python``中的``BDSpyrunnerW``提供的指针通常是由一串数字表示的``int``类型，在文档中我们称其为``pointer``类型，需要使用``ctypes``库对其进行取值和修改操作。
-当需要修改指针指向的值时，可以使用``mc``文件模块中提供的``Pointer``类，该类提供了简便的访问指针指向的内存数据并对其进行修改的方法。
+为了简化使用函数接口修改值的操作，我们选用指针作为 ``C++``和 ``Python``之间的数据交换桥梁。
+``Python``中的 ``BDSpyrunnerW``提供的指针通常是由一串数字表示的 ``int``类型，在文档中我们称其为 ``pointer``类型，需要使用 ``ctypes``库对其进行取值和修改操作。
+当需要修改指针指向的值时，可以使用 ``mc``文件模块中提供的 ``Pointer``类，该类提供了简便的访问指针指向的内存数据并对其进行修改的方法。
 
 以下为在玩家攻击时修改产生的伤害的示例：
 
@@ -178,7 +179,7 @@ def onPlayerAttack(event):
 mc.setListener("onPlayerAttack", onPlayerAttack)
 ```
 
-在初始化``mc.Pointer``时，需要传入指针和指针类型，``BDS``中的伤害值为``float``类型，因此传入``ctypes.c_float``。内存修改立即生效，因此在调用``set``成员函数后，不论是在``C++``还是``Python``中访问该内存，获得的值都是修改后的。这是该方法的基本原理。
+在初始化 ``mc.Pointer``时，需要传入指针和指针类型，``BDS``中的伤害值为 ``float``类型，因此传入 ``ctypes.c_float``。内存修改立即生效，因此在调用 ``set``成员函数后，不论是在 ``C++``还是 ``Python``中访问该内存，获得的值都是修改后的。这是该方法的基本原理。
 
 在服务器内使用空手攻击生物，一般生物会被直接击杀，控制台会打印类似于如下内容
 
