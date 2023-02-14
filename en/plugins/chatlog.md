@@ -1,12 +1,13 @@
 # chatlog
 
-# Introduction
+## Introduction
 
 Chat output plugin, this plugin can be the player's chat instructions printed on the server console
 
-# Download
+## Download
 
 [here](https://pyr.jfishing.love/plugins/chatlog.py "click me to download")
 
-# Data
+## Data
+
 Data is not logged

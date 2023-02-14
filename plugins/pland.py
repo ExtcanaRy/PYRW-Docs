@@ -4,13 +4,11 @@ import mc
 import landAPI as lapi
 import json
 import os
-import time
 import sqlite3 as sq
 import random
 
 
-def logout(*content, name: str = __name__, level: str = "INFO", info: str = ""):
-    mc.log(content, name=name, level=level, info=info)
+logger = mc.Logger(__name__)
 
 
 debug_pc = {}  # 修复pc端多次打开表单
@@ -608,8 +606,8 @@ def setlandplayerpower(player, chooseid, choosedata):
 
 
 def mylandhelpback(player, chooseid, choosedata):
-    #logout(choosedata[1], name = __name__)
-    #logout(NULL_SIGN, name = __name__)
+    #logger.info(choosedata[1])
+    #logger.info(NULL_SIGN)
     if choosedata[1] == NULL_SIGN or choosedata[1] == "":
         return
     landname = choosedata[1]
@@ -1473,7 +1471,7 @@ def readlandoldfp(path2):
 def landold_tolandnew():
     landdata_old = {}
     if not havelandoldfp("land.json"):
-        logout("未找到land.json无法完成转化", level="ERROR")
+        logger.error("未找到land.json无法完成转化")
         return
     landdata_old = stringtojson(readlandoldfp("land.json"))
     for landname_old in landdata_old["po"]:
@@ -1486,7 +1484,7 @@ def landold_tolandnew():
             lapi.addplayername(playerxuid, playername)
         except:
             pass
-    logout("旧版领地数据转化完成")
+    logger.info("旧版领地数据转化完成")
 
 if __name__ == "pland":
     landstart()

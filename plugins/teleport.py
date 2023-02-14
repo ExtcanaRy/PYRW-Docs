@@ -3,14 +3,12 @@ from cmath import exp, log
 from webbrowser import get
 import mc
 import json
-import os
 import time
 import random
 import threading
 
 
-def logout(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
-    mc.log(content, name=__name__, level=level, info=info)
+logger = mc.Logger(__name__)
 
 
 home = {}  # key = xuid
@@ -69,17 +67,17 @@ def save():
 
 def reset(player_name):
     global tpaPlayerList
-    # logout("")
+    # logger.info("")
     # try:
     if True:
-        # logout(str(tpaPlayerList.items()))
-        # logout(player.name)
+        # logger.info(str(tpaPlayerList.items()))
+        # logger.info(player.name)
         if player_name in str(tpaPlayerList.items()):
             if player_name in tpaPlayerList["tpa"]:
-                # logout("0")
+                # logger.info("0")
                 del(tpaPlayerList["tpa"][player_name])
             elif player_name in tpaPlayerList["tpah"]:
-                # logout("1")
+                # logger.info("1")
                 del(tpaPlayerList["tpah"][player_name])
             else:
                 try:
@@ -88,7 +86,7 @@ def reset(player_name):
                 except:
                     del(tpaPlayerList["tpah"][get_keys(
                         tpaPlayerList["tpah"], player_name)[0]])
-            # logout(str(tpaPlayerList.items()))
+            # logger.info(str(tpaPlayerList.items()))
 
 
 # 传送
@@ -554,4 +552,4 @@ mc.setCommandDescription('back', '返回上一次死亡点')
 mc.setCommandDescription(
     'tpr', '随机传送 —— 目前该功能不稳定，可能会出现失败或崩服情况，使用前请练习落地水！失败后果自负！')
 init()
-logout('已加载完成')
+logger.info("Loaded!")

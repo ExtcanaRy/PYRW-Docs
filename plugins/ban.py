@@ -1,10 +1,7 @@
 import mc
 import time
 
-
-def logout(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
-    mc.log(content, name=__name__, level=level, info=info)
-
+logger = mc.Logger(__name__)
 
 banData = {}
 
@@ -77,10 +74,9 @@ def onConsoleCmd(data):
     if cmd[0] == "ban" or cmd[0] == "unban":
         if len(cmd) == 1:
             if cmd[0] == "unban":
-                logout("用法: unban <玩家名>", level="ERROR")
+                logger.error("用法: unban <玩家名>")
             if cmd[0] == "ban":
-                logout(
-                    "用法: ban <玩家名> <时间: 秒数或形如2022.04.01-11.45.14的具体时间, 不填为永久> <原因:选填>", level="ERROR")
+                logger.error("用法: ban <玩家名> <时间: 秒数或形如2022.04.01-11.45.14的具体时间, 不填为永久> <原因:选填>")
             return False
         cmd[1] = cmd[1].replace("\"","")
         for player in mc.getPlayerList():
@@ -91,7 +87,7 @@ def onConsoleCmd(data):
         if cmd[0] == "unban":
             addBanPlayer(cmd[1], playerXuid, playerIP, time="unban")
             saveBanList()
-            logout("已解封")
+            logger.info("已解封")
             return False
         elif len(cmd) == 2:
             addBanPlayer(cmd[1], playerXuid, playerIP)
@@ -100,7 +96,7 @@ def onConsoleCmd(data):
         elif len(cmd) == 4:
             addBanPlayer(cmd[1], playerXuid, playerIP, cmd[2], cmd[3])
         saveBanList()
-        logout("玩家已被封禁")
+        logger.info("玩家已被封禁")
         return False
 
 

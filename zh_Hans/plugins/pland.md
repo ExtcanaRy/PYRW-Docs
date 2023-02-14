@@ -1,6 +1,6 @@
 # pland
 
-# 简介
+## 简介
 
 1. 兼容旧版领地数据
 2. 支持全部维度
@@ -9,19 +9,19 @@
 5. 添加设置领地默认权限、防止领地耕地破坏、领地内爆炸等
 6. 丰富的拓展接口
 
-# 下载
+## 下载
 
 [主体](https://pyr.jfishing.love/plugins/pland.py "点我下载")
 
 [子模块](https://pyr.jfishing.love/plugins/landAPI.py "点我下载")
 
-# 配置文件
+## 配置文件
 
-##### 1.文件夹
+### 1.文件夹
 
 ``plugins/py/pland``
 
-##### 2.config.json
+### 2.config.json
 
 | 项目                 | 解释                                                 | 允许的值类型 |
 | -------------------- | ---------------------------------------------------- | ------------ |
@@ -48,7 +48,7 @@
 | playerbuyland        | 设置玩家是否可以购买领地                             | bool         |
 | version              | 版本                                                 | str       |
 
-##### 3.config.json样例
+### 3.config.json样例
 
 ```json
 {
@@ -81,29 +81,29 @@
 }
 ```
 
-##### 4.land.json
+### 4.land.json
 
 记录数据，勿随意修改！
 
-# 可用命令
+## 可用命令
 
-##### 1.游戏内
+### 1.游戏内
 
 | 命令         | 解释                   |
 | ------------ | ---------------------- |
 | /pland       | 打开菜单               |
 | /plandremove | 领地管理员强制移除领地 |
 
-##### 2.服务器控制台
+### 2.服务器控制台
 
 | 命令          | 解释                                                                         |
 | ------------- | ---------------------------------------------------------------------------- |
 | plandreload   | 重新加载配置文件                                                             |
 | oldlandreload | 将旧版领地数据转化为新版，旧版领地为：land-g7.dll,转化时不要删除land文件夹。 |
 
-# 调用接口
+## 调用接口
 
-##### 1.调用领地菜单
+### 1.调用领地菜单
 
 ```python
 import pland
@@ -111,7 +111,7 @@ pland.landhelp(player)
 # 参数：玩家指针
 ```
 
-##### 2.核心功能接口
+### 2.核心功能接口
 
 ```python
 import landAPI as lapi
@@ -151,7 +151,7 @@ lapi.setlandop(playerxuid, mode)
 # mode值："add"|"del"
 ```
 
-##### 3.拓展功能接口
+### 3.拓展功能接口
 
 ```python
 lapi.addlandsign(landname, signname, data)

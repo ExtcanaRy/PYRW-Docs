@@ -1,18 +1,18 @@
 # Backups
 
-# Introduction
+## Introduction
 
 This plugin is used to automate hot backups, supports scheduled tasks and specified directories, and can copy maps to specified directories at specified times
 
-# Download
+## Download
 
 [here](https://pyr.jfishing.love/plugins/Backups.py "click me to download")
 
-# Dependency modules
+## Dependency modules
 
 `apscheduler`: built-in task manager dependency, optional. Not used: configure `use_internel_task_manager` item to `false` in the configuration file
 
-# configuration file
+## configuration file
 
 The configuration file is generated when the plugin is loaded for the first time and is located in `plugins/py/Backups/Backups.json`
 
@@ -65,7 +65,7 @@ The following timer parameters, you can specify the execution of the task at a c
 ```
 
 
-# Available Commands
+## Available Commands
 
 The following commands can be executed from the server console and within the game
 

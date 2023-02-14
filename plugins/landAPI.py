@@ -38,8 +38,7 @@ mobile_listener = True
 around_place = True
 
 
-def logout(*content, name: str = __name__, level: str = "INFO", info: str = ""):
-    mc.log(content, name="pland", level=level, info=info)
+logger = mc.Logger(__name__)
 
 
 def stringtojson(data):
@@ -133,11 +132,11 @@ def createlanddata(playerxuid, x1, y1, z1, x2, y2, z2, worldid, Dim):
     if worldid != 0:
         if worldid != 1:
             if worldid != 2:
-                logout(f"参数[worldid={worldid}有误, 无法创建领地", level="ERROR")
+                logger.warn(f"参数[worldid={worldid}有误, 无法创建领地")
                 return ['False']
     if Dim != '2D':
         if Dim != '3D':
-            logout(f"参数[Dim={Dim}]有误！无法创建领地", level="ERROR")
+            logger.warn(f"参数[Dim={Dim}]有误！无法创建领地")
             return ['False']
     landall = {}
     landall['2D'] = getland_area(x1, y1, z1, x2, y2, z2, worldid, '2D')
@@ -225,7 +224,7 @@ def setlandop(playerxuid, mode):
                 return True
             print(playerxuid + '不是管理员, 无法删除')
         else:
-            logout(f"参数[mode={mode}]有误, 无法设置领地管理员", level="ERROR")
+            logger.warn(f"参数[mode={mode}]有误, 无法设置领地管理员")
     return False
 
 
@@ -255,7 +254,7 @@ def setshareplayer(playerxuid, playername, landname, mode):
                     writelandfp('land.json', jsontostring(landdata))
                     return True
             else:
-                logout(f"参数[mode={mode}]有误, 无法设置领地共享", level="ERROR")
+                logger.warn(f"参数[mode={mode}]有误, 无法设置领地共享")
                 return False
     except:
         return False
@@ -718,8 +717,8 @@ def read_language():
                 if a not in fplanguage:
                     fplanguage[a] = {}
                 fplanguage[a][key] = language[a][key]
-                logout(f"Missing language mapping <{a}|{key}>, successfully added.",
-                       level="WARN", info="Language")
+                logger.warn(f"Missing language mapping <{a}|{key}>, successfully added.",
+                       info="Language")
 
     writelandfp('language.json', jsontostring(fplanguage))
 
@@ -742,7 +741,7 @@ def get_command_description(command):
     try:
         return str(language['command'][command])
     except:
-        logout("at: " + command, level="ERROR", info="Language")
+        logger.error("at: " + command, info="Language")
         return command
 
 
@@ -750,7 +749,7 @@ def get_message(messagename):
     try:
         return str(language['sign']['Prefix']) + str(language['message'][messagename])
     except:
-        logout("at: " + messagename, level="ERROR", info="Language")
+        logger.error("at: " + messagename, info="Language")
         return messagename
 
 
@@ -758,7 +757,7 @@ def get_gui_text(guiname):
     try:
         return str(language['gui'][guiname])
     except:
-        logout("at: " + guiname, level="ERROR", info="Language")
+        logger.error("at: " + guiname, info="Language")
         return guiname
 
 
@@ -766,7 +765,7 @@ def get_gui_image(guiname):
     try:
         return str(language['gui_image'][guiname])
     except:
-        logout("at: " + guiname, level="ERROR", info="Language")
+        logger.error("at: " + guiname, info="Language")
         return ''
 
 
@@ -823,36 +822,36 @@ def loadsdata():
                 config[aa] = pfconfig[aa]
             except:
                 pfconfig[aa] = config[aa]
-                logout(f"config.json 缺少: {aa}, 已自动补齐.")
+                logger.warn(f"Missing config.json: {aa}, successfully added.")
 
         pfconfig['version'] = VERSION
         writelandfp('config.json', jsontostring(pfconfig))
         loadsdata()
         return
     else:
-        logout("成功读取配置文件: config.json")
+        logger.info("Successfully read the config file: config.json")
         landdata = stringtojson(readlandfp('land.json'))
         createlandindex()
-        logout("成功读取配置文件: land.json")
+        logger.info("Successfully read the config file: land.json")
         read_language()
-        logout("成功读取配置文件: language.json")
+        logger.info("Successfully read the config file: language.json")
 
 
 def landapistart():
     global isstart
     if not isstart:
         createpath('plugins/py/pland')
-        logout('BDSpyrunner版landAPI已加载, 版本: ' + VERSION, info="启动")
-        logout("插件作者: g05007, bug反馈请加QQ: 654921949")
-        logout("本插件无需付费, 转载发布必须经作者授权!")
+        logger.info(f"landAPI for BDSpyrunnerW loaded! Author: g05007, Version: {VERSION}")
+        # logger.info("插件作者: g05007, bug反馈请加QQ: 654921949")
+        # logger.info("本插件无需付费, 转载发布必须经作者授权!")
         if havefp('config.json') == False:
             createconfig()
-            logout("创建配置文件: config.json")
+            logger.info("Creating config file: config.json")
         if havefp('land.json') == False:
             writelandfp('land.json', jsontostring(landdata))
-            logout("创建配置文件: land.json")
+            logger.info("Creating config file: land.json")
         if havefp('language.json') == False:
             writelandfp('language.json', jsontostring(language))
-            logout("创建配置文件: language.json")
+            logger.info("Creating config file: language.json")
         loadsdata()
         isstart = True

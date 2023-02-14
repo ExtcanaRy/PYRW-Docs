@@ -39,7 +39,7 @@ def setCommandDescription(cmd:str, description:str, function: Callable[[object],
 
 模块内提供了统一的日志输出接口来帮助开发者规范插件的控制台输出。
 
-初始化类，这里使用``__name__``以使用插件的文件名作为输出日志名。假设我们当前编写的插件名为``myplugin.py``。
+初始化类，这里使用 ``__name__``以使用插件的文件名作为输出日志名。假设我们当前编写的插件名为 ``myplugin.py``。
 
 ```python
 logger = mc.Logger(__name__)
@@ -165,14 +165,15 @@ logout(config['the_4_obj'][1]['name'])
 import mc
 import ctypes
 
+logger = mc.logger("ATK")
+
 def onPlayerAttack(event):
     pointer = mc.Pointer(event['damage'], ctypes.c_float)
     damage = pointer.get()
     pointer.set(100)
-    mc.log(
+    logger.info(
         f"{event['player'].name}: ",
         f"{damage} -> {pointer.get()} ({event['damage']})",
-        name="ATK",
         info="onPlayerAttack"
     )
 

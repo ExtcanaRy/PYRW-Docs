@@ -3,8 +3,7 @@ import threading
 
 import mc
 
-def logout(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
-    mc.log(content, name = __name__, level = level, info = info)
+logger = mc.Logger(__name__)
 
 config = {}
 config['tax'] = 1 / 3
@@ -83,7 +82,7 @@ def onSelect(e):
         mc.runcmd("kick " + mostAppearPlayerName + " 您已被投票踢出，请等待" + str(banTime / 60) + "分钟后再进入服务器")
         #不知道为什么，这里tellraw用不了中文
         mc.runcmd('tellraw @a {\"rawtext\":[{\"text\":' + '\"VOTEKICK:' + mostAppearPlayerName + ' has been kick by report，the number of report:' + str(mostAppearPlayerNum) + '\"}]}')
-        logout(f"{mostAppearPlayerName} 已经被投票踢出，票数: {str(mostAppearPlayerNum)}")
+        logger.info(f"{mostAppearPlayerName} 已经被投票踢出，票数: {str(mostAppearPlayerNum)}")
         banNameList.append(mostAppearPlayerName)
         #使用多线程延迟重置封禁数据
         t = threading.Timer(banTime, banOver)
@@ -110,4 +109,4 @@ mc.setListener('onPlayerCmd', onCmd)
 mc.setListener('onFormSelected', onSelect)
 mc.setCommandDescription('vk', f'投票踢出，票数到达在线人数的{str(tax * 100)[0:3]}%%时将会踢出')
 mc.setCommandDescription('vklist','已被投票的玩家')
-logout("投票踢出加载成功！作者: WillowSauceR")
+logger.info("Loaded! Author: WillowSauceR")

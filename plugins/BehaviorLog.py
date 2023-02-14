@@ -3,8 +3,7 @@ import time
 import os
 
 
-def logout(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
-    mc.log(content, name=__name__, level=level, info=info)
+logger = mc.Logger(__name__)
 
 
 def writeLog(mode, player, data):
@@ -63,9 +62,9 @@ def logChat(e):
     msg = e['msg']
     if target == "":
         pass
-        #logout(f"<{sender}> {msg}")
+        #logger.info(f"<{sender}> {msg}")
     else:
-        logout(f"<{sender}>-><{target}> {msg}")
+        logger.info(f"<{sender}>-><{target}> {msg}")
 
     day = time.strftime("%Y-%m-%d")
     if not os.path.exists(f"logs/{day}"):
@@ -79,7 +78,7 @@ def logChat(e):
 def onInputText(e):
     sender = e['player']
     msg = e['msg']
-    logout(f"<{sender}> {msg}")
+    logger.info(f"<{sender}> {msg}")
     day = time.strftime("%Y-%m-%d")
     if not os.path.exists(f"logs/{day}"):
         os.mkdir(f"logs/{day}")
@@ -97,4 +96,4 @@ mc.setListener("onOpenContainer", onOpenContainer)
 mc.setListener("onPlayerCmd", onPlayerCmd)
 mc.setListener('onChat', logChat)
 mc.setListener('onInputText', onInputText)
-logout(f"Loaded!")
+logger.info(f"Loaded!")

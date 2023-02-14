@@ -22,9 +22,7 @@ Config["ScoreboardLog"]  = True
 # ====================================代码部分======================================================
 # 以下内容为代码部分，萌新切勿修改
 # 插件主要类
-class Log:
-    def logout(*content, name: str = __name__, level: str = "INFO", info: str = ""):
-        mc.log(content, name=name, level=level, info=info)
+logger = mc.Logger(__name__)
 
 class master:
     def CreateScroe(e):
@@ -44,33 +42,33 @@ class master:
             mc.runcmd(
                 f"scoreboard objectives setdisplay sidebar {Config['DisplayerScore']}")
             if Config['ScoreboardSet']:
-                Log.logout("右侧计分板 [开启]")
+                logger.info("右侧计分板 [开启]")
         else:
             mc.runcmd(f"scoreboard objectives setdisplay sidebar")
             if Config['ScoreboardSet']:
-                Log.logout("右侧计分板 [关闭]")
+                logger.info("右侧计分板 [关闭]")
         if Config['Scoreboardlist']:
             mc.runcmd(
                 f"scoreboard objectives setdisplay list {Config['DisplayerScore']}")
             if Config['ScoreboardSet']:
-                Log.logout("暂停界面计分板 [开启]")
+                logger.info("暂停界面计分板 [开启]")
         else:
             mc.runcmd(f"scoreboard objectives setdisplay list")
             if Config['ScoreboardSet']:
-                Log.logout("暂停界面计分板 [关闭]")
+                logger.info("暂停界面计分板 [关闭]")
         if Config['ScoreboardBelowname']:
             mc.runcmd(
                 f"scoreboard objectives setdisplay belowname {Config['DisplayerScore']}")
             if Config['ScoreboardSet']:
-                Log.logout("人物头部计分板 [开启]")
+                logger.info("人物头部计分板 [开启]")
         else:
             mc.runcmd(f"scoreboard objectives setdisplay belowname")
             if Config['ScoreboardSet']:
-                Log.logout("人物头部计分板 [关闭]")
+                logger.info("人物头部计分板 [关闭]")
         if Config["ScoreboardLog"]:
-            Log.logout("BestScoreBord控制台日志输出 [开启]")
+            logger.info("控制台日志输出 [开启]")
         else:
-            Log.logout("BestScoreBord控制台日志输出 [关闭]")
+            logger.info("控制台日志输出 [关闭]")
 
 
 
@@ -90,7 +88,7 @@ class master:
         player = e
         mc.runcmd(f"scoreboard players operation @a {Config['DisplayerScore']} = @a {Config['Money']}")
         if Config["ScoreboardLog"]:
-            Log.logout(f"已显示玩家 {player.name} 的计分板")
+            logger.info(f"已显示玩家 {player.name} 的计分板")
 
     def HiddenScore(e):
         '''
@@ -101,7 +99,7 @@ class master:
         mc.runcmd(
             f"scoreboard players reset {player} {Config['DisplayerScore']}")
         if Config["ScoreboardLog"]:
-            Log.logout(f"已隐藏玩家 {player} 的计分板")
+            logger.info(f"已隐藏玩家 {player} 的计分板")
 
     def HiddenConsoleLog(e):
         '''
@@ -135,7 +133,7 @@ class master:
 # 初始化配置文件
 if not os.path.exists(f"./plugins/py/{ConfigName}"):
     mc.make_conf(ConfigName, "Config.json", Config)
-    Log.logout("未检测到配置文件，已重新生成" ,level="WARN")
+    logger.warn("未检测到配置文件，已重新生成")
 config = mc.read_conf(ConfigName, "Config.json")
 
 # 一堆监听器
@@ -145,5 +143,5 @@ mc.setListener("onJoin", master.DisplayerScore)
 mc.setListener("onLeft", master.HiddenScore)
 mc.setListener("onConsoleOutput", master.HiddenConsoleLog)
 # 控制台输出
-Log.logout(f"已加载  {Version}")
-Log.logout("作者：莫欣儿（Moxiner）")
+logger.info(f"Loaded! Author: Moxiner, Version: {Version}")
+# logger.info("作者: 莫欣儿(Moxiner)")

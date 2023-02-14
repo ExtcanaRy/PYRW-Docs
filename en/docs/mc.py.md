@@ -165,14 +165,15 @@ The following is an example of modifying the damage generated during a player at
 import mc
 import ctypes
 
+logger = mc.logger("ATK")
+
 def onPlayerAttack(event):
     pointer = mc.Pointer(event['damage'], ctypes.c_float)
     damage = pointer.get()
     pointer.set(100)
-    mc.log(
+    logger.info(
         f"{event['player'].name}: ",
         f"{damage} -> {pointer.get()} ({event['damage']})",
-        name="ATK",
         info="onPlayerAttack"
     )
 

@@ -1,18 +1,18 @@
 # Backups
 
-# 简介
+## 简介
 
 本插件用于自动化热备份，支持计划任务和指定目录，可以在指定时间复制地图到指定目录
 
-# 下载
+## 下载
 
 [这里](https://pyr.jfishing.love/plugins/Backups.py "点我下载")
 
-# 依赖模块
+## 依赖模块
 
 `apscheduler`：内置任务管理器依赖，可选。不使用的方法：在配置文件中配置 `use_internel_task_manager`项目为 `false`
 
-# 配置文件
+## 配置文件
 
 配置文件会在第一次加载插件时生成，位于 `plugins/py/Backups/Backups.json`
 
@@ -64,7 +64,7 @@
 }
 ```
 
-# 可用命令
+## 可用命令
 
 以下命令可以在服务器控制台和游戏内执行
 

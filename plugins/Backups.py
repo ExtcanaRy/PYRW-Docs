@@ -13,6 +13,7 @@ query_flag = False
 copy_lock = False
 config = {}
 
+logger = mc.Logger(__name__)
 
 def init():
     global config
@@ -24,7 +25,7 @@ def init():
                                 {'name': 'another_task', 'type': 'cron', 'month': None, 'day': "3-10", 'hour': 12, 'minute': 12}]
     mc.make_conf("Backups", "Backups.json", config)
     config = mc.read_conf("Backups", "Backups.json")
-    mc.log("Loaded!", name="Backups")
+    logger.info("Loaded!")
 
 
 init()
@@ -47,7 +48,7 @@ def auto_del():
 
 def start_bak():
     global start_flag, query_flag, copy_lock
-    mc.log("Started.", name="Backups")
+    logger.info("Started.")
     mc.runcmd("save hold")
     start_flag = True
     query_flag = True
@@ -76,7 +77,7 @@ def finish_bak():
     start_flag = False
     copy_lock = False
     mc.runcmd("save resume")
-    mc.log("Finished.", name="Backups")
+    logger.info("Finished.")
 
 
 def copy_files(file_path):
@@ -88,7 +89,7 @@ def copy_files(file_path):
     folder_name = time.strftime(f"{backup_folder}/%Y.%m.%d-%H.%M")
     if os.path.exists(folder_name):
         shutil.rmtree(folder_name)
-    mc.log("Copying files...", name="Backups")
+    logger.info("Copying files...")
     shutil.copytree("worlds/" + file_path, folder_name)
     finish_bak()
 
@@ -98,7 +99,7 @@ def onConsoleInput(e: str):
         threading.Thread(target=start_bak, daemon=True).start()
         return False
     elif e == "bak" and start_flag:
-        mc.log("Backing up now!", name="Backups", level="WARN")
+        logger.warn("Backing up now!")
         return False
 
 

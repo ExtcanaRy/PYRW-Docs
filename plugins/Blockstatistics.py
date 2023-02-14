@@ -1,9 +1,7 @@
 #-*- coding: utf-8 -*-
 import mc
 
-
-def logout(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
-    mc.log(content, name = __name__, level = level, info = info)
+logger = mc.Logger(__name__)
 
 data = {}
 can_save = 0
@@ -84,4 +82,4 @@ mc.setListener('onPlayerCmd',onCmd)
 mc.setListener('onDestroyBlock', onDestroyBlock)
 mc.setCommandDescription('stat','在线挖掘榜')
 mc.setCommandDescription('statt','总挖掘榜')
-logout(f"Loaded!")
+logger.info("Loaded!")

@@ -1,18 +1,18 @@
 # ban
 
-# Introduction
+## Introduction
 
 Blacklist plugin that supports banning players for a specified time and reason
 
-# Download
+## Download
 
 [here](https://pyr.jfishing.love/plugins/ban.py "click me to download")
 
-# Data
+## Data
 
 The data file is located in `plugins/py/ban/ban.json`
 
-# Available commands
+## Available commands
 
 The following commands can be executed from the server console and from within the game
 

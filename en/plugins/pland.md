@@ -1,6 +1,6 @@
 # pland
 
-# Introduction
+## Introduction
 
 1. Compatible with old territorial data
 2. Support all dimensions
@@ -9,19 +9,19 @@
 5. add set territory default permission, prevent territory farming destruction, territory explosion, etc.
 6. rich expansion interface
 
-# Download
+## Download
 
 [main](https://pyr.jfishing.love/plugins/pland.py "click me to download")
 
 [submodule](https://pyr.jfishing.love/plugins/landAPI.py "click me to download")
 
-# Configuration file
+## Configuration file
 
-##### 1. Folder
+### 1. Folder
 
 ``plugins/py/pland``
 
-##### 2.config.json
+### 2.config.json
 
 | Project              | Explanation                                                                                                      | Allowed value types     |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------------- |
@@ -48,7 +48,7 @@
 | playerbuyland        | Sets whether players can buy territories                                                                         | bool                    |
 | version              | version                                                                                                          | string                  |
 
-##### 3.config.json sample
+### 3.config.json sample
 
 ```json
 {
@@ -81,29 +81,29 @@
 }
 ```
 
-##### 4.land.json
+### 4.land.json
 
 Record data, do not modify it!
 
-# Available commands
+## Available commands
 
-##### 1. In-game
+### 1. In-game
 
 | Commands     | Explanation                                        |
 | ------------ | -------------------------------------------------- |
 | /pland       | Open menu                                          |
 | /plandremove | Force territory removal by territory administrator |
 
-##### 2. Server Console
+### 2. Server Console
 
 | Command       | Explanation                                                                                                                          |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | plandreload   | Reload the configuration file                                                                                                        |
 | oldlandreload | Convert the old territory data to the new version, the old territory is: land-g7.dll, do not delete the land folder when converting. |
 
-# Call the interface
+## Call the interface
 
-##### 1. Call the territory menu
+### 1. Call the territory menu
 
 ```python
 import pland
@@ -111,7 +111,7 @@ pland.landhelp(player)
 # Parameters: player pointer
 ```
 
-##### 2. Core function interface
+### 2. Core function interface
 
 ```python
 import landAPI as lapi
@@ -151,7 +151,7 @@ lapi.setlandop(playerxuid, mode)
 # mode value: "add"|"del"
 ```
 
-##### 3. Extension function interface
+### 3. Extension function interface
 
 ```python
 lapi.addlandsign(landname, signname, data)
