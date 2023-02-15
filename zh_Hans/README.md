@@ -1,9 +1,9 @@
 # BDSpyrunnerW(轻量级Python插件平台)
 
-![Liscense](https://img.shields.io/github/license/WillowSauceR/BDSpyrunner)
-![Downloads](https://img.shields.io/github/downloads/WillowSauceR/BDSpyrunner/total)
-![DwonloadsLatest](https://img.shields.io/github/downloads/WillowSauceR/BDSpyrunnerW/latest/total)
-![BDS](https://img.shields.io/badge/BDS-1.19.61.01-blue)
+![Liscense](https://img.shields.io/github/license/WillowSauceR/BDSpyrunner?style=for-the-badge)
+[![Downloads](https://img.shields.io/github/downloads/WillowSauceR/BDSpyrunner/total?style=for-the-badge)](https://github.com/WillowSauceR/BDSpyrunnerW/releases/latest)
+[![DwonloadsLatest](https://img.shields.io/github/downloads/WillowSauceR/BDSpyrunnerW/latest/total?label=DOWNLOAD@LATEST&style=for-the-badge)](https://github.com/WillowSauceR/BDSpyrunnerW/releases/latest)
+[![BDS](https://img.shields.io/badge/BDS-1.19.61.01-blue?style=for-the-badge)](https://www.minecraft.net/download/server/bedrock)
 
 [简体中文](/) | [English](https://pyr.jfishing.love/en/)
 
