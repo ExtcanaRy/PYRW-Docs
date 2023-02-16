@@ -124,6 +124,9 @@ def isSlimeChunk(x:int, y:int) -> bool:
 def setSignBlockMessage(msg:str, x:int, y:int, z:int, did:int) -> None:
     return setSignBlockMessage(msg, x, y, z, did)
 
+def reload(name: str):
+    return mco.reload(name)
+
 
 ######### TOOL API ##########
 '''

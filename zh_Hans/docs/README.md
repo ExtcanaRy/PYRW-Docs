@@ -83,6 +83,93 @@ pydebug
 
 ```
 
+### 5. 热重载插件
+
+热重载对于开发人员是非常有意义的功能，可以节省大量时间。我们不仅可以在控制台使用命令``pyreload``重载所有插件，也可以为自己的插件单独设置一个重载命令。以下是热重载的用法。
+
+我们创建一个名为``reloader.py``的文件，并在其中编写如下代码：
+
+```python
+import mc
+
+logger = mc.Logger(__name__)
+
+def onConsoleInput(cmd: str):
+    logger.debug(cmd, info="Input")
+    cmd = cmd.split()
+    if len(cmd) > 0 and cmd[0] == "reloader":
+        if len(cmd) > 1 and cmd[1] == "reload":
+            mc.removeListener("onConsoleInput", onConsoleInput)
+            mc.removeListener("onConsoleOutput", onConsoleOutput)
+            mc.reload(__name__)
+            return False
+
+def onConsoleOutput(output: str):
+    logger.debug(output, info="Output")
+
+mc.setListener("onConsoleInput", onConsoleInput)
+mc.setListener("onConsoleOutput", onConsoleOutput)
+```
+
+然后在服务器控制台键入命令``list``，你将看到形如以下内容：
+
+```plaintext
+list
+[2023-02-17 04:11:49:266 DEBUG][reloader][Input] list
+[2023-02-17 04:11:49:872 DEBUG][reloader][Output] There are 0/10 players online:
+
+
+There are 0/10 players online:
+```
+
+这时我们去插件中修改代码。
+
+* 注释``mc.setListener("onConsoleOutput", onConsoleOutput)``
+* 注释``mc.removeListener("onConsoleOutput", onConsoleOutput)``
+* 将``logger.debug``改为``logger.error``
+
+以下是修改完毕后的代码：
+
+```python
+import mc
+
+logger = mc.Logger(__name__)
+
+def onConsoleInput(cmd: str):
+    logger.error(cmd, info="Input") # 已修改
+    cmd = cmd.split()
+    if len(cmd) > 0 and cmd[0] == "reloader":
+        if len(cmd) > 1 and cmd[1] == "reload":
+            mc.removeListener("onConsoleInput", onConsoleInput)
+            # mc.removeListener("onConsoleOutput", onConsoleOutput)
+            mc.reload(__name__)
+            return False
+
+def onConsoleOutput(output: str):
+    logger.debug(output, info="Output")
+
+mc.setListener("onConsoleInput", onConsoleInput)
+# mc.setListener("onConsoleOutput", onConsoleOutput)
+```
+
+在保存文件后，在控制台键入``reloader reload``，你将看到形如以下内容：
+
+```plaintext
+reloader reload
+[2023-02-17 04:21:18:194 DEBUG][reloader][Input] reloader reload
+[2023-02-17 04:21:18:194 INFO][BDSpyrunnerW] Reloading reloader
+```
+
+再次输入``list``，你将看到形如以下内容：
+
+```plaintext
+list
+[2023-02-17 04:21:22:193 ERROR][reloader][Input] list
+There are 0/10 players online:
+```
+
+你可以注意到``Output``的输出消失了，且``reloader``的日志输出等级从``DEBUG``变为了``ERROR``，这说明插件热重载成功了。
+
 ## 扩展
 
 除了上面的例子外，我们还提供了丰富的其他接口：

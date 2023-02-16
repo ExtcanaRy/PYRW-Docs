@@ -31,6 +31,11 @@ The available keys can be found in the Listener interface
 
 Remove the set listener, the corresponding callback will no longer be called when the event occurs after the removal.
 
+## reload(name:str)
+
+Hot reload the module ``name``. Since it is not possible to remove the set listeners for other modules, you can only reload the current module for now, commonly used call method: ``reload(__name__)``
+Before reloading, you must use ``removeListener`` to remove all the listeners that have been set, otherwise it may cause the server to crash!
+
 ## setCommandDescription(cmd:str, description:str，callback:function) -> None
 
 Set the command description, parameter three is an optional parameter that

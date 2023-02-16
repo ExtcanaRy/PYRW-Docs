@@ -83,6 +83,93 @@ pydebug
 
 ```
 
+### 5. Hot Reload Plugin
+
+Hot reloading is a very meaningful feature for developers and can save a lot of time. Not only can we reload all plugins with the command ``pyreload`` from the console, but we can also set up a separate reload command for our own plugins. Here's how hot reloads are used.
+
+We create a file called ``reloader.py`` and write the following code in it.
+
+```python
+import mc
+
+logger = mc.Logger(__name__)
+
+def onConsoleInput(cmd: str):
+    logger.debug(cmd, info="Input")
+    cmd = cmd.split()
+    if len(cmd) > 0 and cmd[0] == "reloader":
+        if len(cmd) > 1 and cmd[1] == "reload":
+            mc.removeListener("onConsoleInput", onConsoleInput)
+            mc.removeListener("onConsoleOutput", onConsoleOutput)
+            mc.reload(__name__)
+            return False
+
+def onConsoleOutput(output: str):
+    logger.debug(output, info="Output")
+
+mc.setListener("onConsoleInput", onConsoleInput)
+mc.setListener("onConsoleOutput", onConsoleOutput)
+```
+
+Then type the command ``list`` in the server console and you will see something like this.
+
+```plaintext
+list
+[2023-02-17 04:11:49:266 DEBUG][reloader][Input] list
+[2023-02-17 04:11:49:872 DEBUG][reloader][Output] There are 0/10 players online:
+
+
+There are 0/10 players online:
+```
+
+At this point we go to the plugin and change the code.
+
+* Comment ``mc.setListener("onConsoleOutput", onConsoleOutput)``
+* Comment ``mc.removeListener("onConsoleOutput", onConsoleOutput)``
+* Replace ``logger.debug`` with ``logger.error``
+
+Here is the code after the change.
+
+```python
+import mc
+
+logger = mc.Logger(__name__)
+
+def onConsoleInput(cmd: str):
+    logger.error(cmd, info="Input") # Modified
+    cmd = cmd.split()
+    if len(cmd) > 0 and cmd[0] == "reloader":
+        if len(cmd) > 1 and cmd[1] == "reload":
+            mc.removeListener("onConsoleInput", onConsoleInput)
+            # mc.removeListener("onConsoleOutput", onConsoleOutput)
+            mc.reload(__name__)
+            return False
+
+def onConsoleOutput(output: str):
+    logger.error(output, info="Output")
+
+mc.setListener("onConsoleInput", onConsoleInput)
+# mc.setListener("onConsoleOutput", onConsoleOutput)
+```
+
+After saving the file, type ``reloader reload`` in the console and you will see something that looks like this
+
+```plaintext
+reloader reload
+[2023-02-17 04:21:18:194 DEBUG][reloader][Input] reloader reload
+[2023-02-17 04:21:18:194 INFO][BDSpyrunnerW] Reloading reloader
+```
+
+Type ``list`` again and you will see something that looks like the following.
+
+```plaintext
+list
+[2023-02-17 04:21:22:193 ERROR][reloader][Input] list
+There are 0/10 players online:
+```
+
+You can notice that the output of ``Output`` disappears and the log output level of ``reloader`` changes from ``DEBUG`` to ``ERROR``, which means the plugin hot reload was successful.
+
 ## Extensions
 
 In addition to the above example, we provide a rich set of other interfaces.

@@ -17,6 +17,10 @@ Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/B
 4. Put ``BDSpyrunnerW.dll`` and ``BDSpyrunnerW.pdb`` into the folders you use to store plugins, such as ``plugins``, ``bdxcore_mod``
 5. Put ``mc.py`` into the ``plugins/py/`` folder
 
+### Available commands
+
+* ``pyreload``: hot reload all plugins
+
 ## Plugin list
 
 [co↑co↓](plugins/README.md "here")

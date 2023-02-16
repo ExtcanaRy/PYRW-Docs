@@ -29,6 +29,11 @@
 
 将已设置的监听器移除，移除后事件发生时将不再会调用对应callback，填入的参数应当与设置时填写的一致
 
+## reload(name:str)
+
+将模块``name``进行热重载，由于无法为其他模块删除已设置的监听器，故目前只能重载当前模块，常用调用方法：``reload(__name__)``
+在重载前必须使用``removeListener``删除所有已设置的监听器，否则可能引发服务器崩溃！
+
 ## setCommandDescription(cmd:str, description:str，callback:function) -> None
 
 设置指令说明，参数三是可选参数，

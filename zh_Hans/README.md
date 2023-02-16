@@ -17,6 +17,10 @@
 4. 将``BDSpyrunnerW.dll``和``BDSpyrunnerW.pdb``放入您用于存放插件的文件夹，如``plugins``、``bdxcore_mod``
 5. 将``mc.py``放入``plugins/py``文件夹
 
+### 可用命令
+
+* ``pyreload``: 热重载所有插件
+
 ## 插件列表
 
 [co↑co↓](plugins/README.md "这里")
