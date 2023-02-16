@@ -125,7 +125,7 @@ def setSignBlockMessage(msg:str, x:int, y:int, z:int, did:int) -> None:
     return setSignBlockMessage(msg, x, y, z, did)
 
 
-######### PRIVATE API ##########
+######### TOOL API ##########
 '''
 log_out_function_inner = __import__("mc").logout
 def log_out_function_replace(content: str):
@@ -188,6 +188,9 @@ class Logger:
         self.log(*content, info=info)
     
     def fatal(self, *content, info=""):
+        self.log(*content, info=info)
+
+    def debug(self, *content, info=""):
         self.log(*content, info=info)
 
 
