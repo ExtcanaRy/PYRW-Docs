@@ -187,3 +187,18 @@ When using an empty-handed attack on a creature within the server, the creature 
 ```plaintext
 11:45:14 INFO [ATK][onPlayerAttack] SenpaiHomo: 1.0 -> 100.0 (114514001919810)
 ```
+
+#### 6. File monitoring
+
+Sometimes we need to monitor the file content changes and perform the appropriate actions after that, the ``FileMonitor`` class provides this function and can be used for hot reloading of plugins or configuration files and so on.
+
+Available member functions.
+
+```python
+# Initialize, pass no arguments to automatically hot-reload all plugins
+def __init__(self, path="plugins/py/", callback=reload, args=("",), interval=1)
+# Start monitoring
+def start(self)
+# Stop monitoring
+def stop(self)
+```

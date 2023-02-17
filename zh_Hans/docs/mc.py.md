@@ -187,3 +187,18 @@ mc.setListener("onPlayerAttack", onPlayerAttack)
 ```plaintext
 11:45:14 INFO [ATK][onPlayerAttack] SenpaiHomo: 1.0 -> 100.0 (114514001919810)
 ```
+
+#### 6.文件监控
+
+有时，我们需要监控文件内容的变化并在那之后执行相应的操作，``FileMonitor``类就提供这个功能，可以用于插件或配置文件的热重载等等。
+
+可使用的成员函数：
+
+```python
+# 初始化，不传入任何参数则代表自动热重载所有插件
+def __init__(self, path="plugins/py/", callback=reload, args=("",), interval=1)
+# 启动监控
+def start(self)
+#停止监控
+def stop(self)
+```

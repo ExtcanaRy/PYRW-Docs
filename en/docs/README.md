@@ -170,6 +170,38 @@ There are 0/10 players online:
 
 You can notice that the output of ``Output`` disappears and the log output level of ``reloader`` changes from ``DEBUG`` to ``ERROR``, which means the plugin hot reload was successful.
 
+You can also use the ``FileMonitor`` class provided in the ``mc.py`` file module to perform hot reloading when the contents of a file change, as shown in the following example
+
+```python
+import mc
+
+logger = mc.Logger(__name__)
+
+# Automatically reload all modules by default when no arguments are passed in
+file_monitor = mc.FileMonitor("plugins/py/reloader.py", callback=mc.reload, args=(__name__,), interval=1)
+
+file_monitor.start()
+
+# Comment this line and save the file repeatedly, automatic hot reloading can be observed
+logger.debug("Reload")
+
+def onConsoleInput(cmd: str):
+    logger.debug(cmd, info="Input")
+    cmd = cmd.split()
+    if len(cmd) > 0 and cmd[0] == "reloader":
+        if len(cmd) > 1 and cmd[1] == "reload":
+            mc.removeListener("onConsoleInput", onConsoleInput)
+            mc.removeListener("onConsoleOutput", onConsoleOutput)
+            mc.reload(__name__)
+            return False
+
+def onConsoleOutput(output: str):
+    logger.debug(output, info="Output")
+
+mc.setListener("onConsoleInput", onConsoleInput)
+mc.setListener("onConsoleOutput", onConsoleOutput)
+```
+
 ## Extensions
 
 In addition to the above example, we provide a rich set of other interfaces.

@@ -85,6 +85,8 @@ pydebug
 
 ### 5. 热重载插件
 
+* 阅读本节前您可能需要首先阅读其他文档来了解相应API
+
 热重载对于开发人员是非常有意义的功能，可以节省大量时间。我们不仅可以在控制台使用命令``pyreload``重载所有插件，也可以为自己的插件单独设置一个重载命令。以下是热重载的用法。
 
 我们创建一个名为``reloader.py``的文件，并在其中编写如下代码：
@@ -169,6 +171,38 @@ There are 0/10 players online:
 ```
 
 你可以注意到``Output``的输出消失了，且``reloader``的日志输出等级从``DEBUG``变为了``ERROR``，这说明插件热重载成功了。
+
+你也可以使用``mc.py``文件模块中提供的``FileMonitor``类，在文件内容发生变化时进行热重载，以下是一个示例
+
+```python
+import mc
+
+logger = mc.Logger(__name__)
+
+# 不传入任何参数时，默认自动重载所有模块
+file_monitor = mc.FileMonitor("plugins/py/reloader.py", callback=mc.reload, args=(__name__,), interval=1)
+
+file_monitor.start()
+
+# 反复注释本行并保存文件，可观察到自动热重载
+logger.debug("Reload")
+
+def onConsoleInput(cmd: str):
+    logger.debug(cmd, info="Input")
+    cmd = cmd.split()
+    if len(cmd) > 0 and cmd[0] == "reloader":
+        if len(cmd) > 1 and cmd[1] == "reload":
+            mc.removeListener("onConsoleInput", onConsoleInput)
+            mc.removeListener("onConsoleOutput", onConsoleOutput)
+            mc.reload(__name__)
+            return False
+
+def onConsoleOutput(output: str):
+    logger.debug(output, info="Output")
+
+mc.setListener("onConsoleInput", onConsoleInput)
+mc.setListener("onConsoleOutput", onConsoleOutput)
+```
 
 ## 扩展
 

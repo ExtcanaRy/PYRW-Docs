@@ -1,9 +1,12 @@
 import mco
 
 import os
+import time
 import json
 import ctypes
+import hashlib
 import inspect
+import threading
 from typing import Optional, Callable
 from datetime import datetime
 
@@ -163,6 +166,35 @@ def log(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
             logger(f"{date} {level}[{name}] {content}")
 
 
+
+
+def read_conf(folder:str, filename:str, encoding="utf-8"):
+    if os.path.exists(f"plugins/py/{folder}/{filename}"):
+        try:
+            with open(f"plugins/py/{folder}/{filename}", "r", encoding=encoding) as file:
+                config = json.load(file)
+        except:
+            with open(f"plugins/py/{folder}/{filename}", "r", encoding="gbk") as file:
+                config = json.load(file)
+        return config
+    else:
+        return None
+
+
+def save_conf(folder:str, filename:str, config={}, encoding="utf-8"):
+    with open(f"plugins/py/{folder}/{filename}", 'w+', encoding=encoding) as file:
+        json.dump(config, file, indent='\t', ensure_ascii=False)
+
+
+def make_conf(folder:str, filename:str, config={}, encoding="utf-8"):
+    if not os.path.exists(f"plugins/py/{folder}/{filename}"):
+        os.makedirs(f"plugins/py/{folder}", exist_ok=True)
+        save_conf(folder, filename, config, encoding)
+        return True
+    else:
+        return False
+   
+
 class Logger:
     def __init__(self, name):
         self.name = name
@@ -197,32 +229,6 @@ class Logger:
         self.log(*content, info=info)
 
 
-def read_conf(folder:str, filename:str, encoding="utf-8"):
-    if os.path.exists(f"plugins/py/{folder}/{filename}"):
-        try:
-            with open(f"plugins/py/{folder}/{filename}", "r", encoding=encoding) as file:
-                config = json.load(file)
-        except:
-            with open(f"plugins/py/{folder}/{filename}", "r", encoding="gbk") as file:
-                config = json.load(file)
-        return config
-    else:
-        return None
-
-
-def save_conf(folder:str, filename:str, config={}, encoding="utf-8"):
-    with open(f"plugins/py/{folder}/{filename}", 'w+', encoding=encoding) as file:
-        json.dump(config, file, indent='\t', ensure_ascii=False)
-
-
-def make_conf(folder:str, filename:str, config={}, encoding="utf-8"):
-    if not os.path.exists(f"plugins/py/{folder}/{filename}"):
-        os.makedirs(f"plugins/py/{folder}", exist_ok=True)
-        save_conf(folder, filename, config, encoding)
-        return True
-    else:
-        return False
-
 class Pointer:
     def __init__(self, pointer: int, data_type: type):
         self.pointer = ctypes.cast(pointer, ctypes.POINTER(data_type))
@@ -232,3 +238,59 @@ class Pointer:
 
     def set(self, value: any):
         self.pointer.contents.value = value
+
+
+class FileMonitor:
+    def __init__(self, path="plugins/py/", callback=reload, args=("",), interval=1):
+        """
+        :param path: file or folder path
+        :param callback: callback function
+        :param args: callback function arguments
+        :param interval: monitoring interval, in seconds
+        """
+        self.path = path
+        self.callback = callback
+        self.args = args
+        self.interval = interval
+        self.hash = self.get_hash()
+        self.loop = True
+        self.thread = threading.Thread(target=self.monitor, daemon=True)
+
+    def start(self):
+        self.thread.start()
+
+    def stop(self):
+        self.loop = False
+
+    def get_hash(self):
+        # Get file or folder hash
+        if os.path.isdir(self.path):
+            md5 = hashlib.md5()
+            for root, dirs, files in os.walk(self.path):
+                for file in files:
+                    with open(os.path.join(root, file), 'rb') as f:
+                        while True:
+                            data = f.read(8192)
+                            if not data:
+                                break
+                            md5.update(data)
+            return md5.hexdigest()
+        else:
+            md5 = hashlib.md5()
+            with open(self.path, 'rb') as f:
+                while True:
+                    data = f.read(8192)
+                    if not data:
+                        break
+                    md5.update(data)
+            return md5.hexdigest()
+
+    def monitor(self):
+        while self.loop:
+            time.sleep(self.interval)
+            new_hash = self.get_hash()
+            if new_hash != self.hash:
+                if self.callback.__name__ == "reload":
+                    self.loop = False
+                self.hash = new_hash
+                self.callback(*self.args)
