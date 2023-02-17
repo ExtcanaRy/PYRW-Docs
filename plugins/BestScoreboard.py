@@ -23,6 +23,7 @@ Config["ScoreboardLog"]  = True
 # 以下内容为代码部分，萌新切勿修改
 # 插件主要类
 logger = mc.Logger(__name__)
+conf_mgr = mc.ConfigManager(ConfigName)
 
 class master:
     def CreateScroe(e):
@@ -132,9 +133,9 @@ class master:
 
 # 初始化配置文件
 if not os.path.exists(f"./plugins/py/{ConfigName}"):
-    mc.make_conf(ConfigName, "Config.json", Config)
+    conf_mgr.make(Config)
     logger.warn("未检测到配置文件，已重新生成")
-config = mc.read_conf(ConfigName, "Config.json")
+config = conf_mgr.read()
 
 # 一堆监听器
 mc.setListener("onScoreChanged", master.ChangeScore)

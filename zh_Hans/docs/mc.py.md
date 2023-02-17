@@ -75,27 +75,25 @@ mc.setListener("onServerStarted", testonServerStarted)
 
 #### 4.配置文件操作
 
-函数原型
+我们使用``ConfigManager``类来简化对``json``配置文件的管理
+
+可用的成员函数：
 
 ```python
-# 读取
-read_conf(folder:str, filename:str, encoding="utf-8")
-
-# 保存
-save_conf(folder:str, filename:str, config={}, encoding="utf-8")
-
-# 创建
-make_conf(folder:str, filename:str, config={}, encoding="utf-8")
+def __init__(self, filename:str, folder:str = "", encoding="utf-8")
+def read(self)
+def save(self, config={})
+def make(self, config={})
 ```
 
-参数
+初始化参数
 
 ```plaintext
-folder: 保存配置文件的文件夹，位于 plugins/py/ 目录下
+filename: 文件名，位于 plugins/py/<folder>/ 目录下，不需要添加文件后缀名".json"
 ```
 
 ```plaintext
-filename: 文件名，位于 plugins/py/<folder>/ 目录下
+folder: 保存配置文件的文件夹，位于 plugins/py/ 目录下，默认为filename
 ```
 
 ```plaintext
@@ -105,6 +103,8 @@ encoding: 文件编码，默认为utf-8
 以下是示例代码，假设您的插件文件名为 ``myplugin.py``
 
 ```python
+import mc
+conf_mgr = mc.ConfigManager(__name__)
 # 定义默认配置文件
 def_conf = {}
 def_conf['obj_1'] = 3
@@ -114,10 +114,10 @@ def_conf['the_4_obj'] = [{'name': 'this is 1'}, {'name': 'another_obj', 'type': 
 def_conf['i_am_none'] = None
 
 # 创建配置文件，已有则不做任何操作
-mc.make_conf(__name__, f"{__name__}.json", def_conf)
+conf_mgr.make(def_conf)
 
 # 读取配置文件
-config = mc.read_conf("myplugin", "myplugin.json")
+config = conf_mgr.read()
 
 # 输出配置内容
 logout(config['i_am_3'])

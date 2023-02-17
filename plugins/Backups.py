@@ -2,7 +2,6 @@ import mc
 import threading
 import time
 import shutil
-import json
 import os
 import warnings
 
@@ -14,6 +13,7 @@ copy_lock = False
 config = {}
 
 logger = mc.Logger(__name__)
+conf_mgr = mc.ConfigManager(__name__)
 
 def init():
     global config
@@ -23,8 +23,8 @@ def init():
     config['backup_folder'] = "bak"
     config['scheduled_jobs'] = [{'name': 'backup_task', 'type': 'cron', 'month': None, 'day': "1,3,5", 'hour': 0, 'minute': 0},
                                 {'name': 'another_task', 'type': 'cron', 'month': None, 'day': "3-10", 'hour': 12, 'minute': 12}]
-    mc.make_conf("Backups", "Backups.json", config)
-    config = mc.read_conf("Backups", "Backups.json")
+    conf_mgr.make(config)
+    config = conf_mgr.read()
     logger.info("Loaded!")
 
 

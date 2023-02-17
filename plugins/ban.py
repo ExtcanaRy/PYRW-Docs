@@ -2,14 +2,15 @@ import mc
 import time
 
 logger = mc.Logger(__name__)
+conf_mgr = mc.ConfigManager(__name__)
 
 banData = {}
 
 
 def init():
     global banData
-    mc.make_conf("ban", "ban.json")
-    banData = mc.read_conf("ban", "ban.json")
+    conf_mgr.make()
+    banData = conf_mgr.read()
 
 
 def onPlayerJoin(player):
@@ -111,7 +112,7 @@ def addBanPlayer(playerName, xuid="unknown", IP="unknown", time="forever", reaso
 
 
 def saveBanList():
-    mc.save_conf("ban", "ban.json", banData)
+    conf_mgr.save(banData)
 
 
 def compareTime(bannedTime, banTime: int):

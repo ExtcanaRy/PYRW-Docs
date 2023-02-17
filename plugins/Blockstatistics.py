@@ -2,17 +2,18 @@
 import mc
 
 logger = mc.Logger(__name__)
+conf_mgr = mc.ConfigManager(__name__)
 
 data = {}
 can_save = 0
 def init():
 	global data
-	mc.make_conf("Blockstatistics", "Blockstatistics.json", data, encoding="gbk")
-	data = mc.read_conf("Blockstatistics", "Blockstatistics.json", encoding="gbk")
+	conf_mgr.make(data)
+	data = conf_mgr.read()
 	
 
 def save():
-	mc.save_conf("Blockstatistics", "Blockstatistics.json", data, encoding="gbk")
+	conf_mgr.save(data)
 
 
 def onDestroyBlock(e):

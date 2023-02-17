@@ -131,69 +131,7 @@ def reload(name: str):
     return mco.reload(name)
 
 
-######### TOOL API ##########
-'''
-log_out_function_inner = __import__("mc").logout
-def log_out_function_replace(content: str):
-    log_out_function_inner(content + "\n")
-logger = log_out_function_replace
-'''
-logger = print
-
-def log(*content, name: str = "Plugin", level: str = "INFO", info: str = ""):
-    if os.path.exists("BDXCORE.dll") and not os.path.exists("bedrock_server_mod.exe"):
-        date = datetime.now().strftime("[%Y-%m-%d %H:%M:%S:%f")[:-3]
-        level += "]"
-    else:
-        date = datetime.now().strftime("%H:%M:%S")
-    strs = ""
-    for string in content:
-        strs += str(string)
-    if strs[:2] == "('":
-        content = strs[2:-3]
-    else:
-        content = strs
-    if __name__ != '__main__':
-        if name != "Plugin" and content != "Test Message" and level != "INFO" and info != "":
-            logger(f"{date} {level}[{name}][{info}] {content}")
-        elif name != "Plugin" and level != "INFO":
-            logger(f"{date} {level}[{name}] {content}")
-        elif name != "Plugin" and info != "":
-            logger(f"{date} {level}[{name}][{info}] {content}")
-        elif info != "":
-            logger(f"{date} {level}[{name}][{info}] {content}")
-        else:
-            logger(f"{date} {level}[{name}] {content}")
-
-
-
-
-def read_conf(folder:str, filename:str, encoding="utf-8"):
-    if os.path.exists(f"plugins/py/{folder}/{filename}"):
-        try:
-            with open(f"plugins/py/{folder}/{filename}", "r", encoding=encoding) as file:
-                config = json.load(file)
-        except:
-            with open(f"plugins/py/{folder}/{filename}", "r", encoding="gbk") as file:
-                config = json.load(file)
-        return config
-    else:
-        return None
-
-
-def save_conf(folder:str, filename:str, config={}, encoding="utf-8"):
-    with open(f"plugins/py/{folder}/{filename}", 'w+', encoding=encoding) as file:
-        json.dump(config, file, indent='\t', ensure_ascii=False)
-
-
-def make_conf(folder:str, filename:str, config={}, encoding="utf-8"):
-    if not os.path.exists(f"plugins/py/{folder}/{filename}"):
-        os.makedirs(f"plugins/py/{folder}", exist_ok=True)
-        save_conf(folder, filename, config, encoding)
-        return True
-    else:
-        return False
-   
+######### TOOL API ########## 
 
 class Logger:
     def __init__(self, name):
@@ -227,6 +165,40 @@ class Logger:
 
     def debug(self, *content, info=""):
         self.log(*content, info=info)
+
+
+class ConfigManager:
+    def __init__(self, filename:str, folder:str = "", encoding="utf-8"):
+        self.filename = filename
+        self.encoding = encoding
+        if folder:
+            self.folder = folder
+        else:
+            self.folder = filename
+        
+    def read(self):
+        if os.path.exists(f"plugins/py/{self.folder}/{self.filename}.json"):
+            try:
+                with open(f"plugins/py/{self.folder}/{self.filename}.json", "r", encoding=self.encoding) as file:
+                    config = json.load(file)
+            except:
+                with open(f"plugins/py/{self.folder}/{self.filename}.json", "r", encoding="gbk") as file:
+                    config = json.load(file)
+            return config
+        else:
+            return {}
+    
+    def save(self, config={}):
+        with open(f"plugins/py/{self.folder}/{self.filename}.json", 'w+', encoding=self.encoding) as file:
+            json.dump(config, file, indent='\t', ensure_ascii=False)
+    
+    def make(self, config={}):
+        if not os.path.exists(f"plugins/py/{self.folder}/{self.filename}.json"):
+            os.makedirs(f"plugins/py/{self.folder}", exist_ok=True)
+            self.save(config)
+            return True
+        else:
+            return False
 
 
 class Pointer:

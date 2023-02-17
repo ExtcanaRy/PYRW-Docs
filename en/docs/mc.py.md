@@ -75,36 +75,36 @@ This will produce the following output
 
 #### 4. Configuration file manipulation
 
-Function prototype
+We use the ``ConfigManager`` class to simplify the management of ``json`` configuration files
+
+Available member functions:
 
 ```python
-# read
-read_conf(folder:str, filename:str, encoding="utf-8")
-
-# Save
-save_conf(folder:str, filename:str, config={}, encoding="utf-8")
-
-# Create
-make_conf(folder:str, filename:str, config={}, encoding="utf-8")
+def __init__(self, filename:str, folder:str = "", encoding="utf-8")
+def read(self)
+def save(self, config={})
+def make(self, config={})
 ```
 
-Parameters
+Init Parameters
 
 ```plaintext
-folder: folder where the configuration file is stored, located in the plugins/py/ directory
+filename: filename, located in plugins/py/<folder>/ directory, no need to add the file suffix ".json"
 ```
 
 ```plaintext
-filename: the name of the file, located in the plugins/py/<folder>/ directory
+folder: folder where the configuration file is stored, located in the plugins/py/ directory, default is filename
 ```
 
 ```plaintext
-encoding: encoding of the file, default is utf-8
+encoding: file encoding, default is utf-8
 ```
 
-Here is the sample code. Suppose your plugin file name is `myplugin.py`
+Here is the sample code, assuming your plugin file name is ``myplugin.py``
 
 ```python
+import mc
+conf_mgr = mc.ConfigManager(__name__)
 # Define the default configuration file
 def_conf = {}
 def_conf['obj_1'] = 3
@@ -114,10 +114,10 @@ def_conf['the_4_obj'] = [{'name': 'this is 1'}, {'name': 'another_obj', 'type': 
 def_conf['i_am_none'] = None
 
 # Create a configuration file, but do nothing if it already exists
-mc.make_conf(__name__, f"{__name__}.json", def_conf)
+conf_mgr.make(def_conf)
 
 # Read the configuration file
-config = mc.read_conf("myplugin", "myplugin.json")
+config = conf_mgr.read()
 
 # Output configuration content
 logout(config['i_am_3'])

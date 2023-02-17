@@ -4,14 +4,15 @@ import threading
 import mc
 
 logger = mc.Logger(__name__)
+conf_mgr = mc.ConfigManager(__name__)
 
 config = {}
 config['tax'] = 1 / 3
 config['reset_time'] = 300
 config['ban_time'] = 600
 
-mc.make_conf("votekick", "votekick.json", config)
-config = mc.read_conf("votekick", "votekick.json")
+conf_mgr.make(config)
+config = conf_mgr.read()
 # 此处可调节票数与在线总玩家的比率，1 / 3 表示三分之一，即表示某玩家被投的票数达到当前在线总人数的三分之一时会被踢出。参考量:2 / 3(三分之二)  1 / 2(二分之一)
 tax = config['tax']
 

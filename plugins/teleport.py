@@ -9,6 +9,7 @@ import threading
 
 
 logger = mc.Logger(__name__)
+conf_mgr = mc.ConfigManager(__name__)
 
 
 home = {}  # key = xuid
@@ -45,8 +46,8 @@ def init():
 
     j = {"config": {"maxHome": MAX_HOME, "waitTime": WAIT_TIME, "lockTime": LOCK_TIME, "tpRange": TP_RANGE, "processTime": PROCESS_TIME, "tpHeight": TP_HEIGH, "stepLenth": STEP_LENTH},
          "home": home, "warp": warp}
-    mc.make_conf("teleport", "teleport.json", j)
-    j = mc.read_conf("teleport", "teleport.json")
+    conf_mgr.make(j)
+    j = conf_mgr.read()
     home = j['home']
     warp = j['warp']
     maxHome = j['config']['maxHome']
@@ -62,7 +63,7 @@ def init():
 def save():
     j = {"config": {"maxHome": maxHome, "waitTime": waitTime, "lockTime": lockTime, "tpRange": tpRange, "processTime": processTime, "tpHeight": tpHeight, "stepLenth": stepLenth},
          "home": home, "warp": warp}
-    mc.save_conf("teleport", "teleport.json", j)
+    conf_mgr.save(j)
 
 
 def reset(player_name):
