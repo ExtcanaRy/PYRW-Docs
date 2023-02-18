@@ -8,8 +8,15 @@
   <meta name="description" content="Description">
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-dark-mode@latest/dist/style.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@3/dist/docsify-themeable/style.min.css"
+    type="text/css">
+
+  <!-- docsify-themeable styles-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css"
+    title="light">
+  <link rel="stylesheet alternative"
+    href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css" title="dark">
+
 </head>
 
 <body>
@@ -30,18 +37,6 @@
       mergeNavbar: true,
       externalLinkTarget: '_self',
       formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}',
-      darkMode: {
-        dark: {
-          background: "#282828",
-          toggleBtnBg: "#c8c8c8",
-          textColor: "#f8f8f8"
-        },
-        light: {
-          background: "white",
-          toggleBtnBg: "var(--theme-color)",
-          textColor: "var(--theme-color)"
-        }
-      },
       search: {
         maxAge: 86400000,
         paths: 'auto',
@@ -50,13 +45,13 @@
         depth: 6,
       },
       pagination: {
-          crossChapter: true,
-          crossChapterText: true,
+        crossChapter: true,
+        crossChapterText: true,
       },
       plugins: [
         EditOnGithubPlugin.create('https://github.com/WillowSauceR/willowsaucer.github.io/blob/main/zh_Hans/'),
-        function(hook, vm) {
-          hook.beforeEach(function(html) {
+        function (hook, vm) {
+          hook.beforeEach(function (html) {
             var url =
               'https://github.com/WillowSauceR/willowsaucer.github.io/blob/main/zh_Hans/' +
               vm.route.file;
@@ -90,10 +85,13 @@
   <!-- 翻页 -->
   <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <!-- 暗色模式支持 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-dark-mode/dist/index.min.js"></script>
-    
+  <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme/dist/docsify-themeable/main.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme/dist/docsify-themeable/index.min.js"></script>
+
   <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-plugin-flexible-alerts/dist/docsify-plugin-flexible-alerts.min.js"></script>
+  <script
+    src="//cdn.jsdelivr.net/npm/docsify-plugin-flexible-alerts/dist/docsify-plugin-flexible-alerts.min.js"></script>
 
 </body>
+
 </html>
