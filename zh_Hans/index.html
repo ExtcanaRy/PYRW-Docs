@@ -18,16 +18,27 @@
   <link rel="stylesheet alternative"
     href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css" title="dark">
 
+  <style>
+    #docsify-darklight-theme {
+      right: 50px;
+    }
+  </style>
+  <style>
+    .sidebar-toggle .sidebar-toggle-button {
+      position: relative;
+      bottom: 0;
+      opacity: 0.5;
+    }
+  </style>
 </head>
 
 <body>
   <div id="app">加载中...</div>
-  <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github/index.js"></script>
   <script>
     window.$docsify = {
       name: 'BDSpyrunnerW 文档',
       repo: 'https://github.com/WillowSauceR/BDSpyrunnerW',
-      themeColor: "#42b983",
+      themeColor: "#16A2E8",
       maxLevel: 5,
       subMaxLevel: 3,
       homepage: 'README.md',
@@ -49,8 +60,17 @@
         crossChapter: true,
         crossChapterText: true,
       },
+      count: {
+        countable: true,
+        position: 'top',
+        margin: '10px',
+        float: 'lfet',
+        fontsize: '0.9em',
+        color: 'rgb(90,90,90)',
+        language: 'chinese',
+        isExpected: true
+      },
       plugins: [
-        EditOnGithubPlugin.create('https://github.com/WillowSauceR/willowsaucer.github.io/blob/main/zh_Hans/'),
         function (hook, vm) {
           hook.beforeEach(function (html) {
             var url =
