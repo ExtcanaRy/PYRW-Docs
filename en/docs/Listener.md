@@ -1,6 +1,6 @@
 # Listener
 
-Event description format.
+Event description format:
 
 ```format
 Listener keyword
@@ -9,13 +9,26 @@ Can intercept
 return data
 ```
 
-## Event Listener
+## Event listener
 
 * Use ``setListener`` to set the listener
 * Use ``removeListener`` to remove the listener
-* The callback function has one and only one parameter and is of type dictionary
+* The callback function has one and only one argument, is of type dictionary, and needs to access data using subscripts, e.g. ``onPlayerAttack``:
 
-The following are all events.
+```python
+def onPlayerAttack(event):
+    actor = event['actor']
+    player = event['player']
+    damage_ptr = event['damage']
+    print(player.name, " == ", event['player'].name)
+```
+
+* When there is only one data return, you can use parameters directly as data without subscript access, e.g. ``onConsoleInput``:
+
+```python
+def onConsoleInput(event):
+    print("Input: ", event)
+```
 
 ## onConsoleInput
 

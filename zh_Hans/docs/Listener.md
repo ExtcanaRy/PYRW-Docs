@@ -11,8 +11,24 @@
 
 ## 事件监听器
 
-* 使用setListener来设置监听器
-* 回调函数有且只有一个参数，类型为字典
+* 使用``setListener``来设置监听器
+* 使用``removeListener``来删除监听器
+* 回调函数有且只有一个参数，类型为字典，需要使用下标访问数据，例如``onPlayerAttack``：
+
+```python
+def onPlayerAttack(event):
+    actor = event['actor']
+    player = event['player']
+    damage_ptr = event['damage']
+    print(player.name, " == ", event['player'].name)
+```
+
+* 在回传数据仅有一个时，可以直接使用参数作为数据，不需要下标访问，例如``onConsoleInput``：
+
+```python
+def onConsoleInput(event):
+    print("Input: ", event)
+```
 
 以下为所有事件：
 

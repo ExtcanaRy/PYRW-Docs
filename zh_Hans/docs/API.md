@@ -32,7 +32,7 @@
 ## reload(name:str)
 
 将模块``name``进行热重载，由于无法为其他模块删除已设置的监听器，故目前只能重载当前模块，常用调用方法：``reload(__name__)``
-在重载前必须使用``removeListener``删除所有已设置的监听器，否则可能引发服务器崩溃！
+在重载前必须使用``removeListener``删除所有已设置的监听器，并且尽可能停止或堵塞启动的子线程/子进程，取消设置的计划任务等，必须处理一切可能在重载后继续运行的代码，否则可能引发服务器崩溃或其他问题！
 
 ## setCommandDescription(cmd:str, description:str，callback:function) -> None
 
