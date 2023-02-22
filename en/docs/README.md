@@ -37,7 +37,7 @@ We can use the setListener function to bind a function to an event, as follows.
 import mc
 
 def onUseItem(e):
-	print(e)
+    print(e)
 mc.setListener('onUseItem',onUseItem)
 ```
 
@@ -53,11 +53,11 @@ Take a look at the following example
 import mc
 
 def onUseItem(e):
-	player = e['player']
-	pos = player.pos
-	msg = f"{p.name} used item at {pos}"
-	print(msg)
-	player.sendTextPacket(msg)
+    player = e['player']
+    pos = player.pos
+    msg = f"{p.name} used item at {pos}"
+    print(msg)
+    player.sendTextPacket(msg)
 mc.setListener('onUseItem', onUseItem)
 ```
 

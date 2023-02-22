@@ -76,7 +76,10 @@ def removeListener(event: str, function: Callable[[object], Optional[bool]]) -> 
 
 
 # API
-def getBDSVerion() -> str:
+def minVersionRequire(major: int, minor: int, micro: int) -> None:
+    return mco.minVersionRequire(major, minor, micro)
+
+def getBDSVersion() -> str:
     return mco.getBDSVersion()
 
 def logout(message: str) -> None:
@@ -103,29 +106,29 @@ def setDamage(dmg:int) -> None:
 def setServerMotd(motd:str):
     return mco.setServerMotd(motd)
 
-def getBlock(x:int, y:int, z:int, did:int) -> dict:
-    return mco.getBlock(x, y, z, did)
+def getBlock(x:int, y:int, z:int, dim:int) -> dict:
+    return mco.getBlock(x, y, z, dim)
 
-def setBlock(name:str, x:int, y:int, z:int, did:int) -> None:
-    return mco.setBlock(name, x, y, z, did)
+def setBlock(name:str, x:int, y:int, z:int, dim:int) -> None:
+    return mco.setBlock(name, x, y, z, dim)
 
-def getStructure(x1:int, y1:int, z1:int, x2:int, y2:int, z2:int, did:int) -> str:
-    return mco.getStructure(x1, y1, z1, x2, y2, z2, did)
+def getStructure(x1:int, y1:int, z1:int, x2:int, y2:int, z2:int, dim:int) -> str:
+    return mco.getStructure(x1, y1, z1, x2, y2, z2, dim)
 
-def setStructure(data:str, x:int, y:int, z:int, did:int) -> None:
-    return mco.setStructure(data, x, y, z, did)
+def setStructure(data:str, x:int, y:int, z:int, dim:int) -> None:
+    return mco.setStructure(data, x, y, z, dim)
 
-def explode(x:float, y:float, z:float, did:int, power:float, destroy:bool, range:float, fire:bool) -> None:
-    return explode(x, y, z, did, power, destroy, range, fire)
+def explode(x:float, y:float, z:float, dim:int, power:float, destroy:bool, range:float, fire:bool) -> None:
+    return explode(x, y, z, dim, power, destroy, range, fire)
 
-def spawnItem(data:str, x:int, y:int, z:int, did:int) -> None:
-    return spawnItem(data, x, y, z, did)
+def spawnItem(data:str, x:int, y:int, z:int, dim:int) -> None:
+    return spawnItem(data, x, y, z, dim)
 
 def isSlimeChunk(x:int, y:int) -> bool:
     return isSlimeChunk(x, y)
 
-def setSignBlockMessage(msg:str, x:int, y:int, z:int, did:int) -> None:
-    return setSignBlockMessage(msg, x, y, z, did)
+def setSignBlockMessage(msg:str, x:int, y:int, z:int, dim:int) -> None:
+    return setSignBlockMessage(msg, x, y, z, dim)
 
 def reload(name: str):
     return mco.reload(name)

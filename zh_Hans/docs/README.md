@@ -12,7 +12,7 @@
 
 ## 开始
 
-如果你已经了满足上面的要求就可以开始写插件了
+如果你已经了满足上面的要求就可以开始编写插件了
 
 ### 1. 创建新文件
 
@@ -37,7 +37,7 @@ BDSpyrunner使用Detours勾住BDS的函数点来实现事件的拦截与监听�
 import mc
 
 def onUseItem(e):
-	print(e)
+    print(e)
 mc.setListener('onUseItem', onUseItem)
 ```
 
@@ -53,11 +53,11 @@ mc.setListener('onUseItem', onUseItem)
 import mc
 
 def onUseItem(e):
-	player = e['player']
-	pos = player.pos
-	msg = f"{p.name}在{pos}使用了物品"
-	print(msg)
-	player.sendTextPacket(msg)
+    player = e['player']
+    pos = player.pos
+    msg = f"{p.name}在{pos}使用了物品"
+    print(msg)
+    player.sendTextPacket(msg)
 mc.setListener('onUseItem', onUseItem)
 ```
 
