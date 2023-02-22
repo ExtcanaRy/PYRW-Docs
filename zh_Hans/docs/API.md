@@ -222,7 +222,7 @@
 
 ### sendCustomForm(data:str, callback:function) -> None
 
-向指定的玩家发送一个自定义表单，回调函数原型为callback(Entity:player,selected_data:str) -> None
+向指定的玩家发送一个自定义表单，回调函数原型为``callback(Entity:player, selected_data:str) -> None``
 例:
 
 ```python
@@ -231,7 +231,7 @@ player.sendCustomForm('{"content":[{"type":"label","text":"这是一个文本标
 
 ### sendSimpleForm(title:str, content:str, buttons:list, images:list, callback:function) -> None
 
-向指定的玩家发送一个简单表单，回调函数原型为callback(Entity:player,selected_item:int) -> None
+向指定的玩家发送一个简单表单，回调函数原型为``callback(Entity:player, selected_item:int) -> None``
 例:
 
 ```python
@@ -240,7 +240,7 @@ player.sendSimpleForm('标题', '内容', ["生存","死亡","求助"], ['','','
 
 ### sendModalForm(title:str, content:str, button1:str, button2:str, callback:function) -> None
 
-向指定的玩家发送一个模式对话框，回调函数原型为callback(Entity:player,selected_item:bool) -> None
+向指定的玩家发送一个模式对话框，回调函数原型为``callback(Entity:player, selected_item:bool) -> None``
 例:
 
 ```python

@@ -13,101 +13,90 @@ config['ban_time'] = 600
 
 conf_mgr.make(config)
 config = conf_mgr.read()
-# 此处可调节票数与在线总玩家的比率，1 / 3 表示三分之一，即表示某玩家被投的票数达到当前在线总人数的三分之一时会被踢出。参考量:2 / 3(三分之二)  1 / 2(二分之一)
+
 tax = config['tax']
+reset_time = config['reset_time']
+ban_time = config['ban_time']
 
-#每次投票持续的时间，超过此时间还没有踢出玩家则重置投票数据，单位:秒
-resetTime = config['reset_time']
-
-#被踢出玩家禁止再次进入服务器的时间，相当于ban一段时间，单位:秒
-banTime = config['ban_time']
-
-#以下数据请勿修改
 formid = 0
-reportedNameList = []
-reporterNameList = []
-banNameList = []
+reported_name_list = []
+reporter_name_list = []
+ban_name_list = []
 label = False
-#获取玩家列表
 
-def getPlayerNameList():
-    global totalPlayer, playerNameList, playerList
-    playerList = []
-    playerNameList = []
-    playerList = mc.getPlayerList()
-    for i in playerList:
-            playerNameList.append(i.name)
-    totalPlayer = len(playerNameList)
+def get_player_name_list():
+    global totalPlayer, player_name_list
+    player_name_list = []
+    for pl in mc.getPlayerList():
+        player_name_list.append(pl.name)
+    totalPlayer = len(player_name_list)
 
-def onCmd(e):
-    global reporter,formid
+def onPlayerCmd(e):
     if e['cmd'] == "/vklist":
-        e['player'].sendTextPacket("已被投票的玩家:" + json.dumps(reportedNameList))
+        e['player'].sendTextPacket("The players who have been voted:" + json.dumps(reported_name_list))
         return False
     if e['cmd'] == "/vk":
-        getPlayerNameList()
+        get_player_name_list()
         reporter = e['player']
-        for i in reporterNameList:
+        for i in reporter_name_list:
             if i == reporter.name:
-                reporter.sendTextPacket("您已投票，请等待下一次投票！")
+                reporter.sendTextPacket("You have voted, please wait for the next round of voting!")
                 return False
-        formid = reporter.sendCustomForm('{"content":[{"default":0,"options":'+json.dumps(playerNameList)+',"type":"dropdown","text":"请选择要投票的玩家"}],"type":"custom_form","title":"投票踢出"}')
+        reporter.sendCustomForm('{"content":[{"default":0,"options":'+json.dumps(player_name_list)+',"type":"dropdown","text":"Please select the player you want to vote for"}],"type":"custom_form","title":"VOTEKICK"}', onSelectForm)
         return False
 
-def onSelect(e):
-    if formid != e['formid']:
-        return False
-    elif e['selected'] == "null":
-        return False
-    #提醒玩家已投票
-    reporter.sendTextPacket("投票成功！")
-    reporterNameList.append(reporter.name)
-    reporter.sendTextPacket("已投票玩家:" + json.dumps(reporterNameList))
-    #设置标识，只允许第一个投票的玩家创建投票
+def onSelectForm(player, selected):
     global label
+    global reset_time
+    if selected == "null":
+        return False
+    selected = json.loads(selected)[0]
+    player.sendTextPacket("Voting success!")
+    reporter_name_list.append(player.name)
+    player.sendTextPacket("Players who have voted: " + json.dumps(reporter_name_list))
     if label:
         return False
-    global resetTime
-    reporter.sendTextPacket("您已创建投票踢出，有效时长" + str(resetTime / 60) + "分钟！" )
+    player.sendTextPacket(f"You have created a vote to kick out, valid for {reset_time / 60} minutes")
     label = True
-    #使用多线程延迟重置投票数据
-    t = threading.Timer(resetTime, reportOver)
+    t = threading.Timer(reset_time, vote_finished)
     t.setDaemon(True)
     t.start()
 
-    selected = int(e['selected'][1:-1])
-    reportedNameList.append(playerNameList[selected])
-    mostAppearPlayerName = max(set(reportedNameList), key=reportedNameList.count)
-    mostAppearPlayerNum = reportedNameList.count(mostAppearPlayerName)
-    if mostAppearPlayerNum >= totalPlayer * tax and mostAppearPlayerNum >= 3:
-        mc.runcmd("kick " + mostAppearPlayerName + " 您已被投票踢出，请等待" + str(banTime / 60) + "分钟后再进入服务器")
-        #不知道为什么，这里tellraw用不了中文
-        mc.runcmd('tellraw @a {\"rawtext\":[{\"text\":' + '\"VOTEKICK:' + mostAppearPlayerName + ' has been kick by report，the number of report:' + str(mostAppearPlayerNum) + '\"}]}')
-        logger.info(f"{mostAppearPlayerName} 已经被投票踢出，票数: {str(mostAppearPlayerNum)}")
-        banNameList.append(mostAppearPlayerName)
-        #使用多线程延迟重置封禁数据
-        t = threading.Timer(banTime, banOver)
+    reported_name_list.append(player_name_list[selected])
+    most_appear_player_name = max(set(reported_name_list), key=reported_name_list.count)
+    most_appear_player_count = reported_name_list.count(most_appear_player_name)
+    if most_appear_player_count >= totalPlayer * tax and most_appear_player_count >= 3:
+        for pl in mc.getPlayerList():
+            if pl.name == most_appear_player_name:
+                pl.disconnect(f"You have been voted to kick out, please wait for {ban_time / 60} minutes!")
+        for pl in mc.getPlayerList():
+            pl.sendTextPacket(f"[VOTEKICK] {most_appear_player_name} has been kick by report, the number of {most_appear_player_count}")
+        logger.info(f"{most_appear_player_name} has been kicked out of the vote, the number of votes: {most_appear_player_count}")
+        ban_name_list.append(most_appear_player_name)
+        t = threading.Timer(ban_time, cancle_ban)
         t.setDaemon(True)
         t.start()
-        reportOver()
+        vote_finished()
 
-def ban(e):
-    for playerName in banNameList:
-        if e.name == playerName:
-            mc.runcmd(f"kick {playerName} 您已被投票踢出，请等待 {str(banTime / 60)} 分钟后再进入服务器")
-mc.setListener('onJoin',ban)
+def ban(player):
+    for player_name in ban_name_list:
+        if player.name == player_name:
+            player.disconnect(f"You have been voted to kick out, please wait for {ban_time / 60} minutes!")
 
-def banOver():
-    banNameList.remove(banNameList[0])
+def cancle_ban():
+    ban_name_list.remove(ban_name_list[0])
 
-def reportOver():
-    global label,reporterNameList,reportedNameList
+def vote_finished():
+    global label,reporter_name_list,reported_name_list
     label = False
-    reporterNameList = []
-    reportedNameList = []
-    mc.runcmd('tellraw @a {"rawtext":[{"text":"VOTEKICK：上一轮的投票已结束！"}]}')
-mc.setListener('onPlayerCmd', onCmd)
-mc.setListener('onFormSelected', onSelect)
-mc.setCommandDescription('vk', f'投票踢出，票数到达在线人数的{str(tax * 100)[0:3]}%%时将会踢出')
-mc.setCommandDescription('vklist','已被投票的玩家')
+    reporter_name_list = []
+    reported_name_list = []
+    for pl in mc.getPlayerList():
+        pl.sendTextPacket(f"[VOTEKICK] The last round of voting has ended!")
+
+mc.setListener('onJoin', ban)
+mc.setListener('onPlayerCmd', onPlayerCmd)
+mc.setCommandDescription('vk', f'Vote kickout, votes will be kicked out when the number of votes reaches {str(tax * 100)[0:3]}%% of the number of people online')
+mc.setCommandDescription('vklist','View the players who have been voted')
+
 logger.info("Loaded! Author: WillowSauceR")

@@ -222,7 +222,8 @@ Remove player scoreboard sidebar
 
 ### sendCustomForm(data:str, callback:function) -> None
 
-Send a custom form to the specified player, the callback function prototype is callback(Entity:player,selected_data:str) -> None
+Send a custom form to the specified player, the callback function prototype is
+``callback(Entity:player, selected_data:str) -> None``
 Example:
 
 ```python
@@ -231,7 +232,8 @@ player.sendCustomForm('{"content":[{"type": "label", "text": "This is a text lab
 
 ### sendSimpleForm(title:str, content:str, buttons:list, images:list, callback:function) -> None
 
-Send a simple form to the specified player, callback function prototype is callback(Entity:player,selected_item:int) -> None
+Send a simple form to the specified player, callback function prototype is
+``callback(Entity:player, selected_item:int) -> None``
 
 Example:
 
@@ -241,7 +243,8 @@ player.sendSimpleForm('title', 'content', ["survive", "die", "help"], ['', '', '
 
 ### sendModalForm(title:str, content:str, button1:str, button2:str, callback:function) -> None
 
-Send a modal dialog to the specified player, the callback function prototype is callback(Entity:player,selected_item:bool) -> None
+Send a modal dialog to the specified player, the callback function prototype is
+``callback(Entity:player, selected_item:bool) -> None``
 
 Example:
 
