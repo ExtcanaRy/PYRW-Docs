@@ -1,12 +1,12 @@
 # BDSpyrunnerW 文档
 
-欢迎来到 `BDSpyrunnerW Docs`！
+欢迎来到``BDSpyrunnerW 文档``！
 
 此文档将帮助你开发适用于BDSpyrunnerW的插件。
 
 ## 要求
 
-1. 阅读了README并且成功安装了pyr。
+1. 阅读了README并且成功安装了pyrw。
 2. 掌握Python3的相关知识，可前往[菜鸟教程](https://www.runoob.com/python3/python3-tutorial.html)学习。
 3. 有一颗善于钻研的心。
 
@@ -16,9 +16,9 @@
 
 ### 1. 创建新文件
 
-注意：你所创建的任何 `Python`文件都要使用 `UTF-8`编码，否则在加载时可能会出现错误，其他文件如 `json`，我们也推荐使用 `UTF-8`编码
+注意：你所创建的任何``Python``文件都要使用``UTF-8``编码，否则在加载时可能会出现错误，其他文件如``json``，我们也推荐使用``UTF-8``编码
 
-在 `plugins/py`目录下创建 `myplugin.py`，键入以下内容:
+在``plugins/py``目录下创建``myplugin.py``，键入以下内容:
 
 ```py
 import mc
@@ -61,14 +61,14 @@ def onUseItem(e):
 mc.setListener('onUseItem', onUseItem)
 ```
 
-将文件保存为 `UTF-8`格式以支持中文
+将文件保存为``UTF-8``格式以支持多语言
 启动BDS，进入游戏使用物品，你将在控制台看到输出
-实际上 `player`是Entity类的一个对象，`name`和 `pos`则是它的属性
-`sendTextPacket`是它的成员函数。
+实际上``player``是Entity类的一个对象，``name``和``pos``则是它的属性
+``sendTextPacket``是它的成员函数。
 
 ### 4. 控制台调试
 
-在服务器后台输入 `pydebug`即可进入控制台调试模式，在这个模式下，你可以键入 `Python`语句进行执行，再次键入 `pydebug`以返回服务器控制台
+在服务器后台输入``pydebug``即可进入控制台调试模式，在这个模式下，你可以键入``Python``语句进行执行，再次键入``pydebug``以返回服务器控制台
 
 以下是一段示例
 

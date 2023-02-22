@@ -6,7 +6,7 @@ This document will help you develop plugins for BDSpyrunnerW.
 
 ## Requirements
 
-1. have read the README and have successfully installed pyr.
+1. have read the README and have successfully installed pyrw.
 2. Knowledge of Python3, go to [Official Website](https://www.python.org/about/gettingstarted/) to learn it.
 3. have a good heart for research.
 
@@ -16,9 +16,9 @@ If you have met the above requirements, you can start writing the plugin
 
 ### 1. Create a new file
 
-Note: Any `Python` files you create should be in `UTF-8` encoding, otherwise you may get errors when loading them, other files such as `json`, we also recommend using `UTF-8` encoding
+Note: Any ``Python`` files you create should be in ``UTF-8`` encoding, otherwise you may get errors when loading them, other files such as ``json``, we also recommend using ``UTF-8`` encoding
 
-Create `myplugin.py` in the `plugins/py` directory and type the following:
+Create ``myplugin.py`` in the ``plugins/py`` directory and type the following:
 
 ```py
 import mc
@@ -61,14 +61,14 @@ def onUseItem(e):
 mc.setListener('onUseItem', onUseItem)
 ```
 
-Save the file in ``UTF-8`` format to support Chinese
+Save files as ``UTF-8`` format to support multiple languages
 Start BDS, enter the game and use the item, you will see the output in the console
-Actually `player` is an object of Entity class, `name` and `pos` are its properties.
-`sendTextPacket` is its member function.
+Actually ``player`` is an object of Entity class, ``name`` and ``pos`` are its properties.
+``sendTextPacket`` is its member function.
 
 ### 4. Console debugging
 
-Type `pydebug` in the server backend to enter console debugging mode, where you can type `Python` statements for execution and type `pydebug` again to return to the server console
+Type ``pydebug`` in the server backend to enter console debugging mode, where you can type ``Python`` statements for execution and type ``pydebug`` again to return to the server console
 
 Here is an example
 
@@ -85,9 +85,9 @@ pydebug
 
 ### 5. Hot Reload Plugin
 
-Hot reloading is a very meaningful feature for developers and can save a lot of time. Not only can we reload all plugins with the command ``pyreload`` from the console, but we can also set up a separate reload command for our own plugins. Here's how hot reloads are used.
+Hot reloading is a very meaningful feature for developers and can save a lot of time. Not only can we reload all plugins with the command``pyreload`` from the console, but we can also set up a separate reload command for our own plugins. Here's how hot reloads are used.
 
-We create a file called ``reloader.py`` and write the following code in it.
+We create a file called``reloader.py`` and write the following code in it.
 
 ```python
 import mc
@@ -111,7 +111,7 @@ mc.setListener("onConsoleInput", onConsoleInput)
 mc.setListener("onConsoleOutput", onConsoleOutput)
 ```
 
-Then type the command ``list`` in the server console and you will see something like this.
+Then type the command``list`` in the server console and you will see something like this.
 
 ```plaintext
 list
@@ -124,9 +124,9 @@ There are 0/10 players online:
 
 At this point we go to the plugin and change the code.
 
-* Comment ``mc.setListener("onConsoleOutput", onConsoleOutput)``
-* Comment ``mc.removeListener("onConsoleOutput", onConsoleOutput)``
-* Replace ``logger.debug`` with ``logger.error``
+* Comment``mc.setListener("onConsoleOutput", onConsoleOutput)``
+* Comment``mc.removeListener("onConsoleOutput", onConsoleOutput)``
+* Replace``logger.debug`` with``logger.error``
 
 Here is the code after the change.
 
@@ -152,7 +152,7 @@ mc.setListener("onConsoleInput", onConsoleInput)
 # mc.setListener("onConsoleOutput", onConsoleOutput)
 ```
 
-After saving the file, type ``reloader reload`` in the console and you will see something that looks like this
+After saving the file, type``reloader reload`` in the console and you will see something that looks like this
 
 ```plaintext
 reloader reload
@@ -160,7 +160,7 @@ reloader reload
 [2023-02-17 04:21:18:194 INFO][BDSpyrunnerW] Reloading reloader
 ```
 
-Type ``list`` again and you will see something that looks like the following.
+Type``list`` again and you will see something that looks like the following.
 
 ```plaintext
 list
@@ -168,9 +168,9 @@ list
 There are 0/10 players online:
 ```
 
-You can notice that the output of ``Output`` disappears and the log output level of ``reloader`` changes from ``DEBUG`` to ``ERROR``, which means the plugin hot reload was successful.
+You can notice that the output of``Output`` disappears and the log output level of``reloader`` changes from``DEBUG`` to``ERROR``, which means the plugin hot reload was successful.
 
-You can also use the ``FileMonitor`` class provided in the ``mc.py`` file module to perform hot reloading when the contents of a file change, as shown in the following example
+You can also use the``FileMonitor`` class provided in the``mc.py`` file module to perform hot reloading when the contents of a file change, as shown in the following example
 
 ```python
 import mc
