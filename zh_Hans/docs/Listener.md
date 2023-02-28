@@ -441,3 +441,13 @@ def onConsoleInput(event):
 * ``player`` - 玩家
 * ``text`` - 文本内容
 * ``position`` - 坐标
+
+## onLiquidSpread
+
+* 液体流动监听
+* 拦截可否：是
+* 回传数据：
+* ``src_name`` - 源方块名称
+* ``src_pos`` - 源方块坐标
+* ``dst_name`` - 将要流动到的方块名称
+* ``src_pos`` - 将要流动到的方块坐标

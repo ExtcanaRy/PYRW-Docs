@@ -527,3 +527,15 @@ def onConsoleInput(event):
 * ``player`` - player
 * ``text`` - text content
 * ``position`` - coordinates
+
+## onLiquidSpread
+
+* Liquid flow listener
+* Can intercept: Yes
+* Return data:
+
+
+* ``src_name`` - name of the source block
+* ``src_pos`` - coordinate of the source block
+* ``dst_name`` - name of the block to be flowed to
+* ``src_pos`` - coordinate of the block to be flowed to
