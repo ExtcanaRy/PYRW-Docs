@@ -236,9 +236,13 @@ player.sendSimpleForm('标题', '内容', ["生存","死亡","求助"], ['','','
 
 ### sendModalForm(title:str, content:str, button1:str, button2:str, callback:function) -> None
 
-向指定的玩家发送一个模式对话框，回调函数原型为``callback(Entity:player, selected_item:bool) -> None``
+向指定的玩家发送一个模式对话框，回调函数原型为``callback(Entity:player, selected_item:str) -> None``
 例:
 
 ```python
 player.sendModalForm('标题', '内容', '按钮1', '按钮2', cb)
 ```
+
+返回的``selected_item``:
+``按钮1``: "true"
+``按钮2``: "false"

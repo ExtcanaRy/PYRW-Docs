@@ -240,10 +240,14 @@ player.sendSimpleForm('title', 'content', ["survive", "die", "help"], ['', '', '
 ### sendModalForm(title:str, content:str, button1:str, button2:str, callback:function) -> None
 
 Send a modal dialog to the specified player, the callback function prototype is
-``callback(Entity:player, selected_item:bool) -> None``
+``callback(Entity:player, selected_item:str) -> None``
 
 Example:
 
 ```python
 player.sendModalForm('title', 'content', 'button1', 'button2', cb)
 ```
+
+return ``selected_item``:
+``button1``: "true"
+``button2``: "false"
