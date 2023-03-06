@@ -175,17 +175,13 @@
 
 获取玩家在名为scoreboard的计分板的分数
 
-### setScore(scoreboard:str, count:int) -> None
+### modifyScore(scoreboard:str, count:int, mode:int) -> None
 
-设置玩家在名为scoreboard的计分板的分数
-
-### addScore(scoreboard:str, count:int) -> None
-
-增加玩家在名为scoreboard的计分板的分数
-
-### reduceScore(scoreboard:str, count:int) -> None
-
-减少玩家在名为scoreboard的计分板的分数
+修在玩家在名为``scoreboard``的计分板的分数
+``arg: mode``:
+``0``: 设置
+``1``: 增加
+``2``: 减少
 
 ### addLevel(level:int) -> None
 

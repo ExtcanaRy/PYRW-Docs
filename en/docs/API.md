@@ -175,17 +175,13 @@ Transferring players to the designated server
 
 Get the player's score on the scoreboard called scoreboard
 
-### setScore(scoreboard:str, count:int) -> None
+### modifyScore(scoreboard:str, count:int, mode:int) -> None
 
-Set the player's score on the scoreboard called scoreboard
-
-### addScore(scoreboard:str, count:int) -> None
-
-Increase the player's score on the scoreboard called scoreboard
-
-### reduceScore(scoreboard:str, count:int) -> None
-
-Reduce the player's score on the scoreboard called scoreboard
+Set the player's score on the scoreboard called ``scoreboard``
+``arg: mode``
+``0``: set
+``1``: add
+``2``: reduce
 
 ### addLevel(level:int) -> None
 
