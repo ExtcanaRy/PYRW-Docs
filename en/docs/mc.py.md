@@ -188,6 +188,35 @@ When using an empty-handed attack on a creature within the server, the creature 
 11:45:14 INFO [ATK][onPlayerAttack] SenpaiHomo: 1.0 -> 100.0 (114514001919810)
 ```
 
+When the pointer type is ``c_char_p``, the data is obtained and processed in a slightly different way, using the ``get`` method to obtain data of type ``bytes``, and the ``set`` method to set the value also requires passing in data of type ``bytes``, consider using ``.encode()`` and ``.decode ()`` to complete the conversion between ``str`` and ``bytes``, e.g. the following code modifies a chat message:
+
+```python
+import mc
+import ctypes
+
+def on_player_chat(event):
+    player = event['player']
+    name_ptr = mc.Pointer(event['name_ptr'], ctypes.c_char_p)
+    msg_ptr = mc.Pointer(event['msg_ptr'], ctypes.c_char_p)
+
+    player_dimension = player.did
+    player_pos = ",".join([f"{int(num)}" for num in player.pos])
+
+    msg = msg_ptr.get().decode()
+    name_mod = ""
+    msg_mod = f"[{player_dimension}][{player_pos}] <{player.name}> {msg}"
+
+    name_ptr.set(name_mod.encode())
+    msg_ptr.set(msg_mod.encode())
+
+mc.setListener('onChatPkt', on_player_chat)
+```
+
+When the player sends a ``test`` message, then the chat box will display something similar to the following:
+```plaintext
+[0][11, 45, 14] <SenpaiHomo> test
+```
+
 #### 6. File monitoring
 
 Sometimes we need to monitor the file content changes and perform the appropriate actions after that, the ``FileMonitor`` class provides this function and can be used for hot reloading of plugins or configuration files and so on.

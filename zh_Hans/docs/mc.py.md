@@ -180,12 +180,41 @@ def onPlayerAttack(event):
 mc.setListener("onPlayerAttack", onPlayerAttack)
 ```
 
-在初始化 ``mc.Pointer``时，需要传入指针和指针类型，``BDS``中的伤害值为 ``float``类型，因此传入 ``ctypes.c_float``。内存修改立即生效，因此在调用 ``set``成员函数后，不论是在 ``C++``还是 ``Python``中访问该内存，获得的值都是修改后的。这是该方法的基本原理。
+在初始化``mc.Pointer``时，需要传入指针和指针类型，``BDS``中的伤害值为``float``类型，因此传入``ctypes.c_float``。内存修改立即生效，因此在调用``set``成员函数后，不论是在``C++``还是``Python``中访问该内存，获得的值都是修改后的。这是该方法的基本原理。
 
 在服务器内使用空手攻击生物，一般生物会被直接击杀，控制台会打印类似于如下内容
 
 ```plaintext
 11:45:14 INFO [ATK][onPlayerAttack] SenpaiHomo: 1.0 -> 100.0 (114514001919810)
+```
+
+在指针类型为``c_char_p``时，获取和处理数据的方式稍有不同，使用``get``方法获取到的是``bytes``类型的数据，使用``set``方法设置值时也同样需要传入``bytes``类型的数据，考虑使用``.encode()``和``.decode()``完成``str``和``bytes``之间的转换，例如以下代码修改聊天消息：
+
+```python
+import mc
+import ctypes
+
+def on_player_chat(event):
+    player = event['player']
+    name_ptr = mc.Pointer(event['name_ptr'], ctypes.c_char_p)
+    msg_ptr = mc.Pointer(event['msg_ptr'], ctypes.c_char_p)
+
+    player_dimension = player.did
+    player_pos = ", ".join([f"{int(num)}" for num in player.pos])
+
+    msg = msg_ptr.get().decode()
+    name_mod = ""
+    msg_mod = f"[{player_dimension}][{player_pos}] <{player.name}> {msg}"
+
+    name_ptr.set(name_mod.encode())
+    msg_ptr.set(msg_mod.encode())
+
+mc.setListener('onChatPkt', on_player_chat)
+```
+
+当玩家发送``test``消息后，则会在聊天框显示类似于如下内容：
+```plaintext
+[0][11, 45, 14] <SenpaiHomo> test
 ```
 
 #### 6.文件监控

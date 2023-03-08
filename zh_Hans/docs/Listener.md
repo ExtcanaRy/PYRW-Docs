@@ -451,3 +451,13 @@ def onConsoleInput(event):
 * ``src_pos`` - 源方块坐标
 * ``dst_name`` - 将要流动到的方块名称
 * ``src_pos`` - 将要流动到的方块坐标
+
+## onChatPkt
+
+* 聊天框发包监听
+* 拦截可否：否
+* 回传数据：
+* ``player`` - 玩家
+* ``name_ptr: pointer.c_char_p`` - 玩家名称，设置为空字符串则显示不显示玩家名
+* ``msg_ptr: pointer.c_char_p`` - 消息
+* ``xuid`` - 玩家xuid
