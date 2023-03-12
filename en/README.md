@@ -12,7 +12,7 @@ Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/B
 ## How to use
 
 1. Download ``BDSpyrunnerW.dll``, ``mc.py`` and ``BDSpyrunnerW.pdb`` from [Release](https://github.com/WillowSauceR/BDSpyrunnerW/releases/latest). pdb files are not required, but are useful for feedback in case of crashes.
-2. Make sure you have [LiteLoader](https://github.com/LiteLDev/LiteLoaderBDS) or [BDXCore](https://github.com/jfishing/BDXCore) installed
+2. Make sure you have [LiteLoader](https://github.com/LiteLDev/LiteLoaderBDS) or [BDXCore](https://github.com/jfishing/BDXCore) installed. Alternatively, you can use [Xenos](https://github.com/DarthTon/Xenos/releases/latest) to inject this plugin into BDS for loading, ``Type`` select ``New``, ``Process`` select ``bedrock_server. exe``, click the ``Add`` button and select ``BDSpyrunnerW.dll``, finally click the ``Inject`` button for start server and load plugin.
 3. Download and install [Python3.7.9](https://www.python.org/ftp/python/3.7.9/python-3.7.9-amd64.exe), check ``Add Python to Path`` when installing
 4. Put ``BDSpyrunnerW.dll`` and ``BDSpyrunnerW.pdb`` into the folders you use to store plugins, such as ``plugins``, ``bdxcore_mod``
 5. Put ``mc.py`` into the ``plugins/py/`` folder
