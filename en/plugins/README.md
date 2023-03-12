@@ -1,6 +1,6 @@
 # List of Plugins
 
-Plugins that have been adapted for `BDSpyrunnerW` are included here
+Plugins that have been adapted for `BDSpyrunnerW` are included here, All plugins should be put into the ``plugins/py/`` folder for loading
 
 # Install plugin dependencies
 
