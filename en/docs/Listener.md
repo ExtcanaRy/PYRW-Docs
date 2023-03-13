@@ -154,6 +154,18 @@ def onConsoleInput(event):
 * ``blockname`` - the name of the block
 * ``player`` - player
 
+## onDestroyedBlock
+
+* Destroyed block listener
+* Can intercept: No
+* Return data:
+
+
+* ``position`` - the location of the manipulated block
+* ``blockid`` - block ID
+* ``blockname`` - the name of the block
+* ``player`` - player
+
 ## onOpenChest
 
 * OpenChest listener

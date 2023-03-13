@@ -134,6 +134,16 @@ def onConsoleInput(event):
 * ``blockname`` - 方块名称
 * ``player`` - 玩家
 
+## onDestroyedBlock
+
+* 已破坏方块监听
+* 拦截可否：否
+* 回传数据：
+* ``position`` - 操作方块所在位置
+* ``blockid`` - 方块ID
+* ``blockname`` - 方块名称
+* ``player`` - 玩家
+
 ## onOpenChest
 
 * 开箱监听
