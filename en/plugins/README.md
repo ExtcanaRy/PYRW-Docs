@@ -6,11 +6,13 @@ Plugins that have been adapted for `BDSpyrunnerW` are included here, All plugins
 
 For the dependencies mentioned in the plugin introduction page, please follow these steps to install them.
 
+Note: If you install the Python runtime environment using method one mentioned in the tutorial, you should open the terminal in the ``plugins/py/env/`` folder in the server directory, or make sure the working directory is located there.
+
 1. Open your favorite terminal, such as cmd or Powershell
 2. [optional/one-time] Using the official pip source in China is very slow, here we recommend using the Tsinghua source to improve the download speed, type
 
 ```powershell
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+python.exe -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 3.[optional/one-time] To upgrade your pip, type
@@ -19,7 +21,7 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 python.exe -m pip install --upgrade pip
 ```
 
-4. To install dependency modules, type `pip install <dependency>`, e.g. if I want to install `numpy ` and `chardet` dependencies, then use the command `pip install numpy chardet`
+4. To install dependency modules, type `python.exe -m pip install <dependency>`, e.g. if I want to install `numpy ` and `chardet` dependencies, then use the command `python.exe -m pip install numpy chardet`
 
 # Download Plugins
 

@@ -142,7 +142,7 @@ class Logger:
     
     def log(self, *content, info: str = ""):
         level = inspect.currentframe().f_back.f_code.co_name.upper()
-        if os.path.exists("BDXCORE.dll") and not os.path.exists("bedrock_server_mod.exe"):
+        if not os.path.exists("bedrock_server_mod.exe"):
             date = datetime.now().strftime("[%Y-%m-%d %H:%M:%S:%f")[:-3]
             level += "]"
         else:

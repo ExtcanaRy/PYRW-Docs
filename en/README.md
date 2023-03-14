@@ -13,13 +13,27 @@ Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/B
 
 1. Download ``BDSpyrunnerW.dll``, ``mc.py`` and ``BDSpyrunnerW.pdb`` from [Release](https://github.com/WillowSauceR/BDSpyrunnerW/releases/latest). pdb files are not required, but are useful for feedback in case of crashes.
 2. Make sure you have [LiteLoader](https://github.com/LiteLDev/LiteLoaderBDS) or [BDXCore](https://github.com/jfishing/BDXCore) installed. Alternatively, you can use [Xenos](https://github.com/DarthTon/Xenos/releases/latest) to inject this plugin into BDS for loading, ``Type`` select ``New``, ``Process`` select ``bedrock_server. exe``, click the ``Add`` button and select ``BDSpyrunnerW.dll``, finally click the ``Inject`` button for start server and load plugin.
-3. Download and install [Python3.7.9](https://www.python.org/ftp/python/3.7.9/python-3.7.9-amd64.exe), check ``Add Python to Path`` when installing
-4. Put ``BDSpyrunnerW.dll`` and ``BDSpyrunnerW.pdb`` into the folders you use to store plugins, such as ``plugins``, ``bdxcore_mod``
-5. Put ``mc.py`` into the ``plugins/py/`` folder
+3. (Method 1) (Recommended) Download the one-click installation environment package from [here](https://pyr.jfishing.love/plugins/setup_pyrw_runtime.zip), unzip it to the server folder after downloading, your server folder should look roughly like this after the unzip is complete.
+   ```Folder Structure
+   ├─behavior_packs
+   ├─config
+   ├─definitions
+   ├─plugins
+   ├─resource_packs
+   ├─bedrock_server.exe
+   ├─install_py_env.bat
+   ├─python39._pth
+   ├─server.properties
+   ......
+   ```
+   Then double-click ``install_py_env.bat`` to install it. When the message ``Successfully install the Python runtime environment`` appears in the console, the environment has been installed. If not, please contact us and give us feedback on the problem.
+   (Method 2) Download and install [Python 3.9.13](https://www.python.org/ftp/python/3.9.13/python-3.9.13-amd64.exe), and check ``Add Python to Path`` when installing.
+4. Put ``BDSpyrunnerW.dll`` and ``BDSpyrunnerW.pdb`` into the folder you use to store plugins, such as ``plugins``, ``bdxcore_mod``
+5. Put ``mc.py`` into the ``plugins/py`` folder
 
 ### Available commands
 
-* ``pyreload``: hot reload all plugins
+* ``pyreload <module>``: hot reload (all) plugins
 
 ## Plugin list
 
