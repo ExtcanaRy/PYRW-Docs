@@ -13,21 +13,29 @@
 
 1. 下载 [Release](https://github.com/WillowSauceR/BDSpyrunnerW/releases/latest) 中的``BDSpyrunnerW.dll``、``mc.py``和``BDSpyrunnerW.pdb``，pdb文件不是必须的，但是在崩溃时用于反馈会给我们带来很大便利。如果你因为网络问题打不开Release页面，可以尝试由``fgit.ml``提供的加速镜像站（[链接](https://hub.fgit.ml/WillowSauceR/BDSpyrunnerW/releases/latest "点我转跳")），内容是一致的，感谢他们做出的贡献！
 2. 确保您已经安装了[LiteLoader](https://github.com/LiteLDev/LiteLoaderBDS)或[BDXCore](https://github.com/jfishing/BDXCore)。或者，您也可以使用[Xenos](https://github.com/DarthTon/Xenos/releases/latest)将本插件注入到BDS进行加载，``Type``选择``New``，``Process``选择``bedrock_server.exe``，点击``Add``按钮并选择``BDSpyrunnerW.dll``，最后点击``Inject``按钮进行开服加载插件。
-3. (方法一)(推荐) 在[此处](https://pyr.jfishing.love/plugins/setup_pyrw_runtime.zip)下载一键安装环境包，下载完成后解压到服务端文件夹，你的服务端文件夹在解压完成后应该大致是这样的：
-   ```文件夹结构
-   ├─behavior_packs
-   ├─config
-   ├─definitions
-   ├─plugins
-   ├─resource_packs
-   ├─bedrock_server.exe
-   ├─install_py_env.bat
-   ├─python39._pth
-   ├─server.properties
-   ......
-   ```
-   然后双击``install_py_env.bat``进行安装，当控制台中出现``Successfully install the Python runtime environment``消息时，说明环境已完成安装。如果没有，请联系我们并反馈问题。
-   (方法二) 下载安装[Python3.9.13](https://www.python.org/ftp/python/3.9.13/python-3.9.13-amd64.exe)，安装时勾选 ``Add Python to Path``
+3. * (方法一)(推荐) 在[此处](https://pyr.jfishing.love/plugins/setup_pyrw_runtime.zip)下载一键安装环境包，下载完成后解压到服务端文件夹，你的服务端文件夹在解压完成后应该大致是这样的：
+      ```文件夹结构
+      ├─behavior_packs
+      ├─config
+      ├─definitions
+      ├─plugins
+      ├─resource_packs
+      ├─bedrock_server.exe
+      ├─install_py_env.bat
+      ├─server.properties
+      ......
+      ```
+      然后双击``install_py_env.bat``进行安装，当控制台中出现``Successfully install the Python runtime environment``消息时，说明环境已完成安装。如果没有，请联系我们并反馈问题。
+   * (方法二)(推荐) 在[此处](https://pyr.jfishing.love/plugins/pyrw_runtime.zip)下载环境包，下载完成后直接解压到服务端文件夹，你的服务端文件夹在解压完成后应该大致是这样的：
+     ```文件夹结构
+     ├─behavior_packs
+     ├─config
+     ├─definitions
+     ├─plugins
+     ├─python39.dll
+     ......
+     ```
+   * (方法三) 下载安装[Python3.9.13](https://www.python.org/ftp/python/3.9.13/python-3.9.13-amd64.exe)，安装时勾选 ``Add Python to Path``
 4. 将``BDSpyrunnerW.dll``和``BDSpyrunnerW.pdb``放入您用于存放插件的文件夹，如``plugins``、``bdxcore_mod``
 5. 将``mc.py``放入``plugins/py``文件夹
 
