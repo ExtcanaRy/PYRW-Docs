@@ -31,6 +31,10 @@
 4. 将``BDSpyrunnerW.dll``和``BDSpyrunnerW.pdb``放入您用于存放插件的文件夹，如``plugins``、``bdxcore_mod``
 5. 将``mc.py``放入``plugins/py``文件夹
 
+### 更新版本
+
+更新到新版本前请手动将BDS目录中的``bedrock_server_sym.txt``和``bedrock_server_sym_cache.bin``删除
+
 ### 可用命令
 
 * ``pyreload <module>``: 热重载(所有)插件
