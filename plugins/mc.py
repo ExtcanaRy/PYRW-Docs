@@ -82,6 +82,9 @@ def minVersionRequire(major: int, minor: int, micro: int) -> None:
 def getBDSVersion() -> str:
     return mco.getBDSVersion()
 
+def getServerProtocolVersion() -> int:
+    return mco.getServerProtocolVersion()
+
 def logout(message: str) -> None:
     return mco.logout(message)
 
