@@ -19,6 +19,10 @@ If the current BDSpyrunnerW version does not meet the minimum incoming function 
 
 Get the version number of BDS
 
+### getServerProtocolVersion() -> int
+
+Get the communication protocol version number of BDS
+
 ### logout(msg:str) -> None
 
 Standard output stream sends output messages to the console (interceptable)

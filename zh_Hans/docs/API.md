@@ -19,6 +19,10 @@
 
 获取BDS的版本号
 
+### getServerProtocolVersion() -> int
+
+获取BDS的通讯协议版本号
+
 ### logout(msg:str) -> None
 
 标准输出流向控制台发送输出消息(可拦截)
