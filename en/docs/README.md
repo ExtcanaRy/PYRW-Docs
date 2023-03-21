@@ -30,7 +30,7 @@ After saving, start BDS and you will see the details of the mc module
 
 ### 2. Listening to in-game events
 
-BDSpyrunner uses Detours to hook the BDS function points to intercept and listen for events.
+BDSpyrunner uses MinHook to hook the BDS function points to intercept and listen for events.
 We can use the setListener function to bind a function to an event, as follows.
 
 ```py

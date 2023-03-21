@@ -30,7 +30,7 @@ help(mc)
 
 ### 2. 监听游戏内事件
 
-BDSpyrunner使用Detours勾住BDS的函数点来实现事件的拦截与监听，
+BDSpyrunner使用MinHook勾住BDS的函数点来实现事件的拦截与监听，
 我们可以使用setListener函数来将一个函数与某个事件绑定起来，如下：
 
 ```py
