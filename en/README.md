@@ -40,10 +40,6 @@ Here is the official website of [BDSpyrunnerW](https://github.com/WillowSauceR/B
 4. Put ``BDSpyrunnerW.dll`` and ``BDSpyrunnerW.pdb`` into the folder you use to store plugins, such as ``plugins``, ``bdxcore_mod``
 5. Put ``mc.py`` into the ``plugins/py`` folder
 
-### Update
-
-Please manually remove ``bedrock_server_sym.txt`` and ``bedrock_server_sym_cache.bin`` from the BDS directory before updating to the new version
-
 ### Available commands
 
 * ``pyreload <module>``: hot reload (all) plugins
