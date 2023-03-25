@@ -163,6 +163,18 @@ Simulates the player sending command packets, i.e. executing commands for the pl
 
 Simulates the player sending a text packet, type = 0 is the original text, equivalent to the command tellraw, type = 1 is the chat text, equivalent to the player speaking
 
+## sendPlaySoundPacket(sound_name:str, x:float, y:float, z:float, volume:float = 1.0, pitch:float = 1.0)
+
+Sends a sound packet to the player to play a sound with similar parameters to the ``/playsound`` command. [Command Usage](https://minecraft.fandom.com/wiki/Commands/playsound)
+Example:
+
+```python
+pos = player.pos
+player.sendPlaySoundPacket("ambient.weather.thunder", pos[0], pos[1], pos[2])
+```
+
+This will cause the player to hear a thunderclap
+
 ### resendAllChunks() -> None
 
 Resending the player client's map blocks may cause brightness rendering problems

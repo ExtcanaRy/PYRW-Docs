@@ -163,6 +163,18 @@
 
 模拟玩家发送文本包，type = 0为原始文本，相当于指令tellraw，type = 1为聊天文本，相当于玩家说话
 
+### sendPlaySoundPacket(sound_name:str, x:float, y:float, z:float, volume:float = 1.0, pitch:float = 1.0)
+
+向玩家发送声音包以播放声音，参数与``/playsound``命令相近。[命令用法](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/playsound)
+示例：
+
+```python
+pos = player.pos
+player.sendPlaySoundPacket("ambient.weather.thunder", pos[0], pos[1], pos[2])
+```
+
+这将会使玩家听到一阵雷声
+
 ### resendAllChunks() -> None
 
 重新发送玩家客户端的地图区块，可能造成亮度渲染问题
