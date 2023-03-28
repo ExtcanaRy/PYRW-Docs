@@ -563,3 +563,12 @@ def onConsoleInput(event):
 * ``name_ptr: pointer.c_char_p`` - player name, set to empty string to show no player name
 * ``msg_ptr: pointer.c_char_p`` - message
 * ``xuid`` - player xuid
+
+## onTick
+
+* The time moment trigger listener, under normal circumstances, will trigger 20 times per second
+* Can intercept: No
+* Return data:
+
+
+* ``null`` - empty string

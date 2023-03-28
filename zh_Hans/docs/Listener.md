@@ -471,3 +471,10 @@ def onConsoleInput(event):
 * ``name_ptr: pointer.c_char_p`` - 玩家名称，设置为空字符串则显示不显示玩家名
 * ``msg_ptr: pointer.c_char_p`` - 消息
 * ``xuid`` - 玩家xuid
+
+## onTick
+
+* 时间刻触发监听，正常情况下，每秒会触发20次
+* 拦截可否：否
+* 回传数据：
+* ``null`` - 空字符串
