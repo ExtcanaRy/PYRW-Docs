@@ -10,7 +10,13 @@
 
 ## 配置
 
-插件在加载时会创建一个文件夹 `plugins/PyrWNbsPlayer`，你只需要将 NBS 文件放入其中即可
+你需要先安装一个依赖包 `pynbs`，步骤参考 [这里](https://pyr.jfishing.love/zh_Hans/#/plugins/README?id=%e5%ae%89%e8%a3%85%e6%8f%92%e4%bb%b6%e4%be%9d%e8%b5%96)
+
+```shell
+python.exe -m pip install pynbs
+```
+
+安装完依赖之后就可以加载插件了，之后插件会自动创建一个文件夹 `plugins/PyrWNbsPlayer`，你只需要将 NBS 文件放入其中即可
 
 ## 指令
 
