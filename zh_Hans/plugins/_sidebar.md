@@ -1,10 +1,10 @@
-<!-- markdownlint-disable MD041 -->
+<!-- markdownlint-disable MD004 MD041 -->
 
 - [插件列表](README.md)
 
-- [teleport](teleport.md '传送插件')
-- [Backups](Backups.md '地图备份插件')
-- [Blockstatistics](Blockstatistics.md '挖掘统计插件')
+* [teleport](teleport.md '传送插件')
+* [Backups](Backups.md '地图备份插件')
+* [Blockstatistics](Blockstatistics.md '挖掘统计插件')
 
 - [ban](ban.md '黑名单插件')
 - [BehaviorLog](BehaviorLog.md '行为日志插件')
