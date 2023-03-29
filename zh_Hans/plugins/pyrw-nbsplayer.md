@@ -4,6 +4,10 @@
 
 简易 NBS 音乐播放器
 
+## 下载
+
+[这里](https://github.com/WillowSauceR/willowsaucer.github.io/blob/main/plugins/pyrw-nbsplayer.py)
+
 ## 配置
 
 插件在加载时会创建一个文件夹 `plugins/PyrWNbsPlayer`，你只需要将 NBS 文件放入其中即可
