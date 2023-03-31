@@ -461,6 +461,7 @@ def onConsoleInput(event):
 * ``src_pos`` - 源方块坐标
 * ``dst_name`` - 将要流动到的方块名称
 * ``src_pos`` - 将要流动到的方块坐标
+* ``dimensionid`` - 维度ID
 
 ## onChatPkt
 

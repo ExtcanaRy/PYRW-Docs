@@ -551,6 +551,7 @@ def onConsoleInput(event):
 * ``src_pos`` - coordinate of the source block
 * ``dst_name`` - name of the block to be flowed to
 * ``src_pos`` - coordinate of the block to be flowed to
+* ``dimensionid`` - dimension ID
 
 ## onChatPkt
 
