@@ -11,9 +11,9 @@
 
 ## Download
 
-[main](https://pyr.jfishing.love/plugins/pland.py "click me to download")
+[main](https://extcanary.github.io/PYRW-Docs/plugins/pland.py "click me to download")
 
-[submodule](https://pyr.jfishing.love/plugins/landAPI.py "click me to download")
+[submodule](https://extcanary.github.io/PYRW-Docs/plugins/landAPI.py "click me to download")
 
 ## Configuration file
 

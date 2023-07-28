@@ -6,7 +6,7 @@
 
 # 下载
 
-[这里](https://pyr.jfishing.love/plugins/teleport.py "点我下载")
+[这里](https://extcanary.github.io/PYRW-Docs/plugins/teleport.py "点我下载")
 
 # 配置文件项目
 

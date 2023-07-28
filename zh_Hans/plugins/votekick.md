@@ -6,7 +6,7 @@
 
 # 下载
 
-[这里](https://pyr.jfishing.love/plugins/votekick.py "点我下载")
+[这里](https://extcanary.github.io/PYRW-Docs/plugins/votekick.py "点我下载")
 
 # 配置文件
 

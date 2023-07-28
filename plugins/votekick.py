@@ -99,4 +99,4 @@ mc.setListener('onPlayerCmd', onPlayerCmd)
 mc.setCommandDescription('vk', f'Vote kickout, votes will be kicked out when the number of votes reaches {str(tax * 100)[0:3]}%% of the number of people online')
 mc.setCommandDescription('vklist','View the players who have been voted')
 
-logger.info("Loaded! Author: WillowSauceR")
+logger.info("Loaded! Author: ExtcanaRy")

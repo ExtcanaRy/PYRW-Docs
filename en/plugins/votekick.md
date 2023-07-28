@@ -6,7 +6,7 @@ Let players vote to kick out players when the administrator is not online
 
 # Download
 
-[here](https://pyr.jfishing.love/plugins/votekick.py "click me to download")
+[here](https://extcanary.github.io/PYRW-Docs/plugins/votekick.py "click me to download")
 
 # Configuration file
 

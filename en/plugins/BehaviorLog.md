@@ -6,7 +6,7 @@ This plugin logs player activity and prints chat logs to the server console.
 
 # Download
 
-[here](https://pyr.jfishing.love/plugins/BehaviorLog.py "click me to download")
+[here](https://extcanary.github.io/PYRW-Docs/plugins/BehaviorLog.py "click me to download")
 
 # Data
 

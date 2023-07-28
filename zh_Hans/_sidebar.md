@@ -1,2 +1,2 @@
 - [简体中文](/ "BDSpyrunnerW 文档")
-- [English](https://pyr.jfishing.love/en/ "BDSpyrunnerW Docs")
+- [English](https://extcanary.github.io/PYRW-Docs/en/ "BDSpyrunnerW Docs")

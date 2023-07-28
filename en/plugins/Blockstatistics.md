@@ -6,7 +6,7 @@ Blockstatistics!
 
 # Download
 
-[here](https://pyr.jfishing.love/plugins/Blockstatistics.py "click me to download")
+[here](https://extcanary.github.io/PYRW-Docs/plugins/Blockstatistics.py "click me to download")
 
 # Features
 

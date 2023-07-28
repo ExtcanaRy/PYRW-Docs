@@ -6,7 +6,7 @@ Chat output plugin, this plugin can be the player's chat instructions printed on
 
 ## Download
 
-[here](https://pyr.jfishing.love/plugins/chatlog.py "click me to download")
+[here](https://extcanary.github.io/PYRW-Docs/plugins/chatlog.py "click me to download")
 
 ## Data
 

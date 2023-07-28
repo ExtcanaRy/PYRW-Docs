@@ -6,7 +6,7 @@ This plugin is used to automate hot backups, supports scheduled tasks and specif
 
 ## Download
 
-[here](https://pyr.jfishing.love/plugins/Backups.py "click me to download")
+[here](https://extcanary.github.io/PYRW-Docs/plugins/Backups.py "click me to download")
 
 ## Dependency modules
 

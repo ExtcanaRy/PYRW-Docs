@@ -6,11 +6,11 @@
 
 ## 下载
 
-[这里](https://github.com/WillowSauceR/willowsaucer.github.io/blob/main/plugins/pyrw-nbsplayer.py)
+[这里](https://github.com/ExtcanaRy/ExtcanaRy.github.io/blob/main/plugins/pyrw-nbsplayer.py)
 
 ## 配置
 
-你需要先安装一个依赖包 `pynbs`，步骤参考 [这里](https://pyr.jfishing.love/zh_Hans/#/plugins/README?id=%e5%ae%89%e8%a3%85%e6%8f%92%e4%bb%b6%e4%be%9d%e8%b5%96)
+你需要先安装一个依赖包 `pynbs`，步骤参考 [这里](https://extcanary.github.io/PYRW-Docs/zh_Hans/#/plugins/README?id=%e5%ae%89%e8%a3%85%e6%8f%92%e4%bb%b6%e4%be%9d%e8%b5%96)
 
 ```shell
 python.exe -m pip install pynbs

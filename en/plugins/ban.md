@@ -6,7 +6,7 @@ Blacklist plugin that supports banning players for a specified time and reason
 
 ## Download
 
-[here](https://pyr.jfishing.love/plugins/ban.py "click me to download")
+[here](https://extcanary.github.io/PYRW-Docs/plugins/ban.py "click me to download")
 
 ## Data
 

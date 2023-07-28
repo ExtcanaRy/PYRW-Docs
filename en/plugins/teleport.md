@@ -6,7 +6,7 @@ This plugin is a teleport family bucket, providing home, tpa, tpah, warp and oth
 
 # Download
 
-[here](https://pyr.jfishing.love/plugins/teleport.py "click me to download")
+[here](https://extcanary.github.io/PYRW-Docs/plugins/teleport.py "click me to download")
 
 # configuration file
 

@@ -6,7 +6,7 @@
 
 ## 下载
 
-[这里](https://pyr.jfishing.love/plugins/Backups.py "点我下载")
+[这里](https://extcanary.github.io/PYRW-Docs/plugins/Backups.py "点我下载")
 
 ## 依赖模块
 

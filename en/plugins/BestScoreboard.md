@@ -6,7 +6,7 @@ hide scoreboard for offline players
 
 # Download
 
-[here](https://pyr.jfishing.love/plugins/BestScoreboard.py "click me to download")
+[here](https://extcanary.github.io/PYRW-Docs/plugins/BestScoreboard.py "click me to download")
 
 # Configuration file
 

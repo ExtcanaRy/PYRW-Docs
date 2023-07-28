@@ -11,9 +11,9 @@
 
 ## 下载
 
-[主体](https://pyr.jfishing.love/plugins/pland.py "点我下载")
+[主体](https://extcanary.github.io/PYRW-Docs/plugins/pland.py "点我下载")
 
-[子模块](https://pyr.jfishing.love/plugins/landAPI.py "点我下载")
+[子模块](https://extcanary.github.io/PYRW-Docs/plugins/landAPI.py "点我下载")
 
 ## 配置文件
 

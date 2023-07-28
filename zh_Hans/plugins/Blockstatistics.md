@@ -6,7 +6,7 @@
 
 # 下载
 
-[这里](https://pyr.jfishing.love/plugins/Blockstatistics.py "点我下载")
+[这里](https://extcanary.github.io/PYRW-Docs/plugins/Blockstatistics.py "点我下载")
 
 # 特性
 
