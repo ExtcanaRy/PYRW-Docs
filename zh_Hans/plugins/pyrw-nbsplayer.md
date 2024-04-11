@@ -6,7 +6,7 @@
 
 ## 下载
 
-[这里](https://github.com/ExtcanaRy/ExtcanaRy.github.io/blob/main/plugins/pyrw-nbsplayer.py)
+[这里](https://extcanary.github.io/PYRW-Docs/plugins/pyrw-nbsplayer.py)
 
 ## 配置
 
